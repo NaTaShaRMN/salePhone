@@ -11,10 +11,12 @@
 |
 */
 
-Route::get('/', function () {
-    return view('frontend.index');
-});
+Route::get('/', 'FrontEndController@index');
 
-Route::get('/index', function () {
-    return view('frontend.index');
-});
+Route::get('/index', 'FrontEndController@index');
+
+Route::get('/store', 'FrontEndController@store');
+
+Route::get('/product', 'FrontEndController@product');
+
+Route::get('/checkout', 'FrontEndController@checkout');
