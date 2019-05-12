@@ -32,6 +32,14 @@ class Product extends Model
     {
         return $this->hasOne('App\StorageM');
     }
+    public function orderdetail()
+    {
+        return $this->belongsToMany('App\Orderdetail');
+    }
+    public function comments()
+    {
+        return $this->hasMany('App\Comment');
+    }
 
 
 }
