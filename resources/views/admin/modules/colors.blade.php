@@ -124,7 +124,7 @@ a {
 </style>
 <div class="animated fadeIn" ng-app="appme" ng-controller="colorController">
   
-  <div class="row">
+  <div class="row" ng-init="csrf = '{{csrf_token()}}'">
   <!--   <div class="col-md-12">
       <div class="card">
         <div class="card-header">
@@ -165,10 +165,10 @@ a {
       <div class="card">
         <div class="card-header">
           <strong class="card-title">Màu sắc</strong>
-          <button class="btn btn-default" ng-click="taomoi()" style="float: right;"><i class="fa fa-plus-square-o" style="font-style: 15px"></i></button>
+          <button class="btn btn-default" ng-click="newColor()" style="float: right;"><i class="fa fa-plus-square-o" style="font-style: 15px"></i></button>
         </div>
         <div class="card-body">
-          <table id="table-danhmuc" ng-table='danhmuc' class="table table-striped table-bordered">
+          <table id="table-colors" ng-table='colors' class="table table-striped table-bordered">
             <!-- <tdead>
               <tr>
                 <td>#</td>
@@ -187,16 +187,16 @@ a {
             <col width="10%" />
             <col width="10%" />
           </colgroup>
-              <tr ng-repeat="data in $data" ng-init="data.show=true"> 
+              <tr ng-repeat="data in $data" ng-init="data.show=true;"> 
                 <td>
                         {%$index+ 1%}
                 </td>
-                <td title="'Màu sắc'" filter="{ tendanhmuc: 'text'}" sortable="'tendanhmuc'">
-                    <div ng-show="data.show && data.new" >
-                       {%data.tendanhmuc%}
+                <td title="'Màu sắc'" filter="{ color: 'text'}" sortable="'color'">
+                    <div ng-show="data.show && (data.new || data.new == null)" >
+                       {%data.color%}
                     </div>
-                    <div  ng-hide="data.show && data.new" >
-                        <input type="text" ng-model="data.tendanhmuc" class="form-control">
+                    <div  ng-hide="data.show && (data.new || data.new == null)" >
+                        <input type="text" ng-model="data.color" class="form-control">
                     </div>
                 </td>
                 <td title="'Id'" filter="{ id: 'number'}" sortable="'id'">
@@ -213,7 +213,7 @@ a {
                         </select>
                     </div>
                 </td> -->
-                <td ><i ng-click="change(data)" style="cursor: pointer;font-size: 25px" class="menu-icon " ng-class="{'ti-save-alt':!(data.show && data.new),'ti-pencil':data.show && data.new}"></i></td>
+                <td ><i ng-click="change(data)" style="cursor: pointer;font-size: 25px" class="menu-icon " ng-class="{'ti-save-alt':!(data.show && (data.new || data.new == null)),'ti-pencil':data.show && (data.new || data.new == null)}"></i></td>
                 <td><i ng-click="delete(data)" style="cursor: pointer;font-size: 25px" class="menu-icon ti-trash"></i></td>
               </tr>
             

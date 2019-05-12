@@ -4,59 +4,52 @@ var app = angular.module('appme', ["ngTable"] ,function($interpolateProvider) {
 });
 
 app.controller('colorController',['$scope','$http','NgTableParams', function colorController($scope,$http,NgTableParams){
-	// $scope.danhmuc = new NgTableParams({}, { dataset: [{}]});
-	$scope.dataRes= [];
-	// $http.get('admin/loaidanhmuc_i').then((req)=>{
-	// 	$scope.dataRes=req.data;
-	// 	$scope.datas = new NgTableParams({}, { dataset: $scope.dataRes});
-	// });
+	$scope.datas= [];
+	$http.get('admin/color_information').then((req) => {
+		$scope.datas = req.data;
+		$scope.colors = new NgTableParams({}, { dataset: $scope.datas});
+	});
 	$scope.reset = ()=>{
 		$scope.tenLoaiDanhMuc='';
 	}
-	$scope.taomoi = ()=>{
-		// $http.post('admin/loaidanhmuc',{
-		// 	_token: $scope.csrf,
-		// 	ten: $scope.tenLoaiDanhMuc
-		// },{header : {'Content-Type' : 'application/json; charset=UTF-8'}})
-		// .then((req)=>{
-		// 	console.log(req.data);
-		// 	req.data.sodanhmuc=0;
-		// 	$scope.dataRes.unshift(req.data);
-		// 	$scope.datas = new NgTableParams({}, { dataset: $scope.dataRes});
-		// 	$scope.tenLoaiDanhMuc='';	
-		// })
-		
-		$scope.dataRes.unshift({tendanhmuc:'',id: '',sosanpham: '0',showTen: '',new:false});
-		$scope.danhmuc = new NgTableParams({}, { dataset: $scope.dataRes});
-		$scope.tenLoaiDanhMuc='';
-		console.log('ádasdsa',$scope.danhmuc,$scope.dataRes);
+	$scope.newColor = ()=>{
+		$scope.datas.unshift({color:'',id: 'NULL',new:false});
+		$scope.colors = new NgTableParams({}, { dataset: $scope.datas});
 	}
 	$scope.change = (data)=>{
 		if(data.new == false) {
+			 $http.post('admin/color',{
+				_token: $scope.csrf,
+				color: data.color
+			},{header : {'Content-Type' : 'application/json; charset=UTF-8'}})
+			.then( (req) => {
+				console.log(req.data);
+				if( req.data ){
+					data.id = req.data.id;
+				}
+			})
 			data.new = true;
 		}else{
+			if(!data.show){
+				// console.log(data.id);
+				$http.post('admin/color_edit',{
+					_token: $scope.csrf,
+					id: data.id,
+					color: data.color
+				}).then((req)=>{
+					data.color = req.data.color;
+				})
+			}
 			data.show = !data.show;
 		}
 		
-		// if(!data.show){
-		// 	// console.log(data.id);
-		// 	$http.post('admin/loaidanhmuc_e',{
-		// 		_token: $scope.csrf,
-		// 		id: data.id,
-		// 		ten: data.tenloaidanhmuc
-		// 	}).then((req)=>{
-		// 		console.log(req);
-		// 	})
-		// }
-		// data.show = !data.show;
 	}
 	$scope.delete = (data)=>{
-		var index =  $scope.dataRes.indexOf(data);
-
+		var index = $scope.datas.indexOf(data);
 		if(index >= 0 ){
-			$scope.dataRes.splice(index,1);
-			$scope.datas = new NgTableParams({}, { dataset: $scope.dataRes});
-			$http.post('admin/loaidanhmuc_d',{
+			$scope.datas.splice(index,1);
+			$scope.colors = new NgTableParams({}, { dataset: $scope.datas});
+			$http.post('admin/color_delete',{
 				_token : $scope.csrf,
 				id: data.id
 			}).then((req)=>{

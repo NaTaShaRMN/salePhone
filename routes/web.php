@@ -80,5 +80,16 @@ Route::group(['prefix'=>'admin','middleware'=>'admin'],
 		});
 
 		// =========================================
+
+		// colors
+		Route::post('color','AdminController@color');
+
+		Route::get('color_information','AdminController@colorInformation');
+
+		Route::post('color_edit','AdminController@colorEdit');
+
+		Route::post('color_delete','AdminController@colorDelete');
+		// end colors
+
 	}
 );
