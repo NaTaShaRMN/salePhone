@@ -11,12 +11,74 @@
 |
 */
 
-Route::get('/', 'FrontEndController@index');
+Route::get('/', 'UserController@index');
 
-Route::get('/index', 'FrontEndController@index');
+Route::get('/index', 'UserController@index');
 
-Route::get('/store', 'FrontEndController@store');
+Route::get('/store', 'UserController@store');
 
-Route::get('/product', 'FrontEndController@product');
+Route::get('/product', 'UserController@product');
 
-Route::get('/checkout', 'FrontEndController@checkout');
+Route::get('/checkout', 'UserController@checkout');
+
+Route::get('/login','AccountController@loginView');
+
+Route::post('/login','AccountController@postLogin')->name('login');
+
+Route::group(['prefix'=>'admin','middleware'=>'admin'],
+	function(){
+		Route::get('/',function(){
+		return view('admin.index');
+		});
+		Route::get('/index',function(){
+			return view('admin.index');
+		});
+
+		Route::get('information/colors',function(){
+			return view('admin.colors');
+		});
+
+		Route::get('information/displays',function(){
+			return view('admin.displays');
+		});
+
+		Route::get('information/storage',function(){
+			return view('admin.storage');
+		});
+
+		Route::get('information/operating_system',function(){
+			return view('admin.opoperating_system');
+		});
+
+		Route::get('/brands',function(){
+			return view('admin.brands');
+		});
+
+		Route::get('/products',function(){
+			return view('admin.products');
+		});
+
+		
+		Route::get('/orders',function(){
+			return view('admin.orders');
+		});
+
+		Route::get('/orderdetails',function(){
+			return view('admin.orderdetails');
+		});
+
+		Route::get('/users',function(){
+			return view('admin.users');
+		});
+
+		Route::get('/comments',function(){
+			return view('admin.comments');
+		});
+
+		Route::get('/slides',function(){
+			return view('admin.slides');
+		});
+
+		// =========================================
+	}
+);
