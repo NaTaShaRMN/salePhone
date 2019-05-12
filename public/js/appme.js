@@ -59,6 +59,164 @@ app.controller('colorController',['$scope','$http','NgTableParams', function col
 	}
 }])
 
+app.controller('displayController',['$scope','$http','NgTableParams', function displayController($scope,$http,NgTableParams){
+	$scope.datas= [];
+	$http.get('admin/display_information').then((req) => {
+		$scope.datas = req.data;
+		$scope.displays = new NgTableParams({}, { dataset: $scope.datas});
+	});
+	$scope.new = ()=>{
+		$scope.datas.unshift({size:'',id: 'NULL',new:false});
+		$scope.displays = new NgTableParams({}, { dataset: $scope.datas});
+	}
+	$scope.change = (data)=>{
+		if(data.new == false) {
+			 $http.post('admin/display',{
+				_token: $scope.csrf,
+				size: data.size
+			},{header : {'Content-Type' : 'application/json; charset=UTF-8'}})
+			.then( (req) => {
+				console.log(req.data);
+				if( req.data ){
+					data.id = req.data.id;
+				}
+			})
+			data.new = true;
+		}else{
+			if(!data.show){
+				// console.log(data.id);
+				$http.post('admin/display_edit',{
+					_token: $scope.csrf,
+					id: data.id,
+					size: data.size
+				}).then((req)=>{
+					data.color = req.data.color;
+				})
+			}
+			data.show = !data.show;
+		}
+		
+	}
+	$scope.delete = (data)=>{
+		var index = $scope.datas.indexOf(data);
+		if(index >= 0 ){
+			$scope.datas.splice(index,1);
+			$scope.displays = new NgTableParams({}, { dataset: $scope.datas});
+			$http.post('admin/display_delete',{
+				_token : $scope.csrf,
+				id: data.id
+			}).then((req)=>{
+				console.log(req);
+			})
+		}
+	}
+}])
+
+app.controller('storageController',['$scope','$http','NgTableParams', function storageController($scope,$http,NgTableParams){
+	$scope.datas= [];
+	$http.get('admin/storage_information').then((req) => {
+		$scope.datas = req.data;
+		$scope.storages = new NgTableParams({}, { dataset: $scope.datas});
+	});
+	$scope.new = ()=>{
+		$scope.datas.unshift({size:'',id: 'NULL',new:false});
+		$scope.storages = new NgTableParams({}, { dataset: $scope.datas});
+	}
+	$scope.change = (data)=>{
+		if(data.new == false) {
+			 $http.post('admin/storage',{
+				_token: $scope.csrf,
+				size: data.size
+			},{header : {'Content-Type' : 'application/json; charset=UTF-8'}})
+			.then( (req) => {
+				console.log(req.data);
+				if( req.data ){
+					data.id = req.data.id;
+				}
+			})
+			data.new = true;
+		}else{
+			if(!data.show){
+				// console.log(data.id);
+				$http.post('admin/storage_edit',{
+					_token: $scope.csrf,
+					id: data.id,
+					size: data.size
+				}).then((req)=>{
+					data.color = req.data.color;
+				})
+			}
+			data.show = !data.show;
+		}
+		
+	}
+	$scope.delete = (data)=>{
+		var index = $scope.datas.indexOf(data);
+		if(index >= 0 ){
+			$scope.datas.splice(index,1);
+			$scope.storages = new NgTableParams({}, { dataset: $scope.datas});
+			$http.post('admin/storage_delete',{
+				_token : $scope.csrf,
+				id: data.id
+			}).then((req)=>{
+				console.log(req);
+			})
+		}
+	}
+}])
+
+app.controller('operatingSystemController',['$scope','$http','NgTableParams', function operatingSystemController($scope,$http,NgTableParams){
+	$scope.datas= [];
+	$http.get('admin/opoperating_systems_information').then((req) => {
+		$scope.datas = req.data;
+		$scope.op = new NgTableParams({}, { dataset: $scope.datas});
+	});
+	$scope.new = ()=>{
+		$scope.datas.unshift({name:'',id: 'NULL',new:false});
+		$scope.op = new NgTableParams({}, { dataset: $scope.datas});
+	}
+	$scope.change = (data)=>{
+		if(data.new == false) {
+			 $http.post('admin/opoperating_systems',{
+				_token: $scope.csrf,
+				name: data.name
+			},{header : {'Content-Type' : 'application/json; charset=UTF-8'}})
+			.then( (req) => {
+				console.log(req.data);
+				if( req.data ){
+					data.id = req.data.id;
+				}
+			})
+			data.new = true;
+		}else{
+			if(!data.show){
+				// console.log(data.id);
+				$http.post('admin/opoperating_systems_edit',{
+					_token: $scope.csrf,
+					id: data.id,
+					name: data.name
+				}).then((req)=>{
+					data.color = req.data.color;
+				})
+			}
+			data.show = !data.show;
+		}
+		
+	}
+	$scope.delete = (data)=>{
+		var index = $scope.datas.indexOf(data);
+		if(index >= 0 ){
+			$scope.datas.splice(index,1);
+			$scope.op = new NgTableParams({}, { dataset: $scope.datas});
+			$http.post('admin/opoperating_systems_delete',{
+				_token : $scope.csrf,
+				id: data.id
+			}).then((req)=>{
+				console.log(req);
+			})
+		}
+	}
+}])
 // app.controller('danhmucController', ['$scope','$http','$q','NgTableParams', function loaidanhmucController($scope,$http,$q,NgTableParams){
 // 	$scope.loaidanhmuc = [];
 // 	$scope.danhmucRes = [];

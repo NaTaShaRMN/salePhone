@@ -42,12 +42,12 @@ Route::group(['prefix'=>'admin','middleware'=>'admin'],
 			return view('admin.displays');
 		});
 
-		Route::get('information/storage',function(){
-			return view('admin.storage');
+		Route::get('information/storages',function(){
+			return view('admin.storages');
 		});
 
-		Route::get('information/operating_system',function(){
-			return view('admin.opoperating_system');
+		Route::get('information/operating_systems',function(){
+			return view('admin.opoperating_systems');
 		});
 
 		Route::get('/brands',function(){
@@ -91,5 +91,34 @@ Route::group(['prefix'=>'admin','middleware'=>'admin'],
 		Route::post('color_delete','AdminController@colorDelete');
 		// end colors
 
+		// displays
+		Route::post('display','AdminController@display');
+
+		Route::get('display_information','AdminController@displayInformation');
+
+		Route::post('display_edit','AdminController@displayEdit');
+
+		Route::post('display_delete','AdminController@displayDelete');
+		// end displays
+
+		// stogares
+		Route::post('storage','AdminController@storage');
+
+		Route::get('storage_information','AdminController@storageInformation');
+
+		Route::post('storage_edit','AdminController@storageEdit');
+
+		Route::post('storage_delete','AdminController@storageDelete');
+		// end stogares
+
+		// stogares
+		Route::post('opoperating_systems','AdminController@opoperating_system');
+
+		Route::get('opoperating_systems_information','AdminController@opoperating_systemInformation');
+
+		Route::post('opoperating_systems_edit','AdminController@opoperating_systemEdit');
+
+		Route::post('opoperating_systems_delete','AdminController@opoperating_systemDelete');
+		// end stogares
 	}
 );

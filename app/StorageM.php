@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Storage extends Model
+class StorageM extends Model
 {
     //
     protected $table = "storages";

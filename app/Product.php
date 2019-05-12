@@ -30,7 +30,7 @@ class Product extends Model
     }
     public function storage()
     {
-        return $this->hasOne('App\Storage');
+        return $this->hasOne('App\StorageM');
     }
 
 

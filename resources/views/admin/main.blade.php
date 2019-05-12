@@ -118,8 +118,8 @@
                         <ul class="sub-menu children dropdown-menu">
                             <li><i class="fa fa-puzzle-piece"></i><a href="{{URL::to('admin/information/colors')}}">Màu sắc</a></li>
                             <li><i class="fa fa-id-badge"></i><a href="{{URL::to('admin/information/displays')}}">Màn hình</a></li>
-                            <li><i class="fa fa-bars"></i><a href="{{URL::to('admin/information/storage')}}">Bộ nhớ</a></li>
-                            <li><i class="fa fa-bars"></i><a href="{{URL::to('admin/information/operating_system')}}">Hệ điều hành</a></li>
+                            <li><i class="fa fa-bars"></i><a href="{{URL::to('admin/information/storages')}}">Bộ nhớ</a></li>
+                            <li><i class="fa fa-bars"></i><a href="{{URL::to('admin/information/operating_systems')}}">Hệ điều hành</a></li>
                         </ul>
                     </li>
                     <h3 class="menu-title">Quản lý hàng hóa</h3><!-- /.menu-title -->
