@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateOrderDertails extends Migration
+class CreateFkColorsProducts extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,12 @@ class CreateOrderDertails extends Migration
      */
     public function up()
     {
-        Schema::create('order_dertails', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->integer('order_id')->unsigned();
-            $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade')->onUpdate('cascade');
+        Schema::create('fk_colors_products', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('color_id')->unsigned();
+            $table->foreign('color_id')->references('id')->on('colors')->onDelete('cascade')->onUpdate('cascade');
             $table->integer('product_id')->unsigned();
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade')->onUpdate('cascade');
-            $table->bigInteger('priced');
-            $table->bigInteger('quantity');
             $table->timestamps();
         });
     }
@@ -32,6 +30,6 @@ class CreateOrderDertails extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('order_dertails');
+        Schema::dropIfExists('fk_colors_products');
     }
 }

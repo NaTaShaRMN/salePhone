@@ -3,10 +3,16 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\DB;
 use App\Color;
 use App\Display;
 use App\StorageM;
 use App\Operating_System;
+use App\Brand;
+use App\Product;
+use App\Image;
+use App\Fk_color_product;
 
 class AdminController extends Controller
 {
@@ -165,4 +171,104 @@ class AdminController extends Controller
    		$op->delete();
    		return 1;
    	}
+
+   	// end op 
+
+      //brand
+   	public function brand(Request $request)
+   	{
+   		$brand = new Brand();
+   		if($request->name != '' && trim($request->name) != ''){
+   			$brand->name = $request->name;
+   			$brand->save();
+   			return $brand;
+   		}else {
+   			return null;
+   		}
+   	}
+
+   	public function brandInformation()
+   	{
+		// $products =  DB::table('products');
+		// return Brand::find(1)->product()->get();
+		$brands = Brand::all();
+      foreach ($brands as $value) {
+         $value['product'] = $value->product()->get()->count();
+         }
+      return $brands;
+   	}
+
+   	public function brandEdit(Request $request)
+   	{
+   		$brand = Brand::find($request->id);
+   		if($request->name != '' && trim($request->name) != ''){
+   			$brand->name = $request->name;
+   			$brand->save();
+   			return $size;
+   		}else {
+   			return $size;
+   		}
+   	}	
+
+   	public function brandDelete(Request $request)
+   	{
+   		$brand = Brand::find($request->id);
+   		$brand->delete();
+   		return 1;
+   	}
+
+      //product
+
+      public function product(Request $request)
+      {
+         $product = new Product();  
+
+         $product->name = $request->name;
+         $product->price = $request->price;
+         $product->sale = $request->sale;
+         $product->brand_id = $request->brand_id;
+         $product->display_id = $request->display_id;
+         $product->storage_id = $request->storage_id;
+         $product->operating_system_id = $request->op_id;
+         $product->description = $request->description;
+         $product->quantity = $request->quantity;
+
+         $product->save();
+         foreach ($request->file('imagefile') as $image) {
+            $img = new Image();
+            $img->product_id = $product->id;
+            $img->link = $image->store('public');
+            $img->save();
+         }
+
+         $fk = new Fk_color_product();
+         $fk->color_id = $request->color_id;
+         $fk->product_id = $product->id;
+         $fk->save();
+
+         return $product;
+      }
+
+      public function productInformation()
+      {
+         return Product::all(); 
+      }
+      public function productEdit(Request $request)
+      {
+         $brand = Product::find($request->id);
+         if($request->name != '' && trim($request->name) != ''){
+            $brand->name = $request->name;
+            $brand->save();
+            return $size;
+         }else {
+            return $size;
+         }
+      }  
+
+      public function productDelete(Request $request)
+      {
+         $brand = Product::find($request->id);
+         $brand->delete();
+         return 1;
+      }
 }

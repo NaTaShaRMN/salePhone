@@ -15,8 +15,8 @@ class CreateComments extends Migration
     {
         Schema::create('comments', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('product')->unsigned();
-            $table->foreign('product')->references('id')->on('products')->onDelete('cascade')->onUpdate('cascade');
+            $table->integer('product_id')->unsigned();
+            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade')->onUpdate('cascade');
             $table->text('comment')->nullable();
             $table->string('email');
             $table->string('name');
