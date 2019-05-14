@@ -5,7 +5,7 @@ Quản lý thông tin
 @endsection
 
 @section('title_content')
-Màu sắc
+MÀU SẮC
 @endsection
 
 @section('content')

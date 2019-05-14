@@ -141,10 +141,10 @@ a {
             <col width="10%" />
           </colgroup>
               <tr ng-repeat="data in $data" ng-init="data.show=true;"> 
-                <td>
+                <td style="text-align:center">
                         {%$index+ 1%}
                 </td>
-                <td title="'Kích cỡ'" filter="{ size: 'text'}" sortable="'size'">
+                <td title="'Kích cỡ'" style="text-align:center" filter="{ size: 'text'}" sortable="'size'">
                     <div ng-show="data.show && (data.new || data.new == null)" >
                        {%data.size%}
                     </div>
@@ -152,7 +152,7 @@ a {
                         <input type="text" ng-model="data.size" class="form-control">
                     </div>
                 </td>
-                <td title="'Id'" filter="{ id: 'number'}" sortable="'id'">
+                <td title="'Id'" style="text-align:center"  filter="{ id: 'number'}" sortable="'id'">
                     {%data.id%}
                 </td>
                 <!-- <td title="'Loại danh mục'" filter="{ showTen: 'text'}" sortable="'showTen'">
@@ -166,8 +166,8 @@ a {
                         </select>
                     </div>
                 </td> -->
-                <td ><i ng-click="change(data)" style="cursor: pointer;font-size: 25px" class="menu-icon " ng-class="{'ti-save-alt':!(data.show && (data.new || data.new == null)),'ti-pencil':data.show && (data.new || data.new == null)}"></i></td>
-                <td><i ng-click="delete(data)" style="cursor: pointer;font-size: 25px" class="menu-icon ti-trash"></i></td>
+                <td style="text-align:center;color:red" ><i ng-click="change(data)" style="cursor: pointer;font-size: 25px" class="menu-icon " ng-class="{'ti-save-alt':!(data.show && (data.new || data.new == null)),'ti-pencil':data.show && (data.new || data.new == null)}"></i></td>
+                <td style="text-align:center;color:red"><i ng-click="delete(data)" style="cursor: pointer;font-size: 25px" class="menu-icon ti-trash"></i></td>
               </tr>
             
           </table>

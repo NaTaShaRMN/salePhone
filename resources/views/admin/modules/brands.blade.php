@@ -142,10 +142,10 @@ a {
             <col width="10%" />
           </colgroup>
               <tr ng-repeat="data in $data" ng-init="data.show=true;"> 
-                <td>
+                <td style="text-align:center">
                         {%$index+ 1%}
                 </td>
-                <td title="'Kích cỡ'" filter="{ name: 'text'}" sortable="'name'">
+                <td title="'Kích cỡ'" style="text-align:center" filter="{ name: 'text'}" sortable="'name'">
                     <div ng-show="data.show && (data.new || data.new == null)" >
                        {%data.name%}
                     </div>
@@ -153,10 +153,10 @@ a {
                         <input type="text" ng-model="data.name" class="form-control" >
                     </div>
                 </td>
-                <td title="'Id'" filter="{ id: 'number'}" sortable="'id'">
+                <td title="'Id'" style="text-align:center" filter="{ id: 'number'}" sortable="'id'">
                     {%data.id%}
                 </td>
-                <td title="'Số sản phảm'" filter="{ product: 'number'}" sortable="'product'">
+                <td title="'Số sản phẩm'" style="text-align:center" filter="{ product: 'number'}" sortable="'product'">
                     {%data.product%}
                 </td>
                 <!-- <td title="'Loại danh mục'" filter="{ showTen: 'text'}" sortable="'showTen'">
@@ -170,8 +170,8 @@ a {
                         </select>
                     </div>
                 </td> -->
-                <td ><i ng-click="change(data)" style="cursor: pointer;font-size: 25px" class="menu-icon " ng-class="{'ti-save-alt':!(data.show && (data.new || data.new == null)),'ti-pencil':data.show && (data.new || data.new == null)}"></i></td>
-                <td><i ng-click="delete(data)" style="cursor: pointer;font-size: 25px" class="menu-icon ti-trash"></i></td>
+                <td style="text-align:center;color:red"><i ng-click="change(data)" style="cursor: pointer;font-size: 25px" class="menu-icon " ng-class="{'ti-save-alt':!(data.show && (data.new || data.new == null)),'ti-pencil':data.show && (data.new || data.new == null)}"></i></td>
+                <td style="text-align:center;color:red"><i ng-click="delete(data)" style="cursor: pointer;font-size: 25px" class="menu-icon ti-trash"></i></td>
               </tr>
             
           </table>
