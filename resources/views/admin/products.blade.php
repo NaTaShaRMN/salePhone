@@ -14,6 +14,7 @@ Sản phẩm
 
 @section('script')
 
+<script src="js/angularjs-dropdown-multiselect.js"></script>
 
 <script src="js/appme.js"></script>
 

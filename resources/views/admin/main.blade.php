@@ -13,6 +13,8 @@
 
     <link rel="apple-touch-icon" href="apple-icon.png">
     <link rel="shortcut icon" href="favicon.ico">
+    
+    <!-- <link rel="stylesheet" href="css/appv1.css"> -->
 
     <link rel="stylesheet" href="assets/css/normalize.css">
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
@@ -34,35 +36,12 @@
     <!-- <link rel="stylesheet" href="css/bootstrap.min.css"> -->
 
     <style>
-        .page-heading {
-    margin: 20px 0;
-    color: #666;
-    -webkit-font-smoothing: antialiased;
-    font-family: "Segoe UI Light", "Arial", serif;
-    font-weight: 600;
-    letter-spacing: 0.05em;
-}
-
-#my-dropzone .message {
-    font-family: "Segoe UI Light", "Arial", serif;
-    font-weight: 600;
-    color: #0087F7;
-    font-size: 1.5em;
-    letter-spacing: 0.05em;
-}
-
-.dropzone {
-    border: 2px dashed #0087F7;
-    background: white;
-    border-radius: 5px;
-    min-height: 300px;
-    padding: 90px 0;
-    vertical-align: baseline;
-}
-
-.demoTable td:last-child {
-  min-width: 90px;
-}
+    .dropdown-menu a {
+        margin-left: 15px;
+        color: black;
+        cursor: pointer;
+        font-weight: 700;
+    }
 
 /** Editable table
 ------------------------- */
