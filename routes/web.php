@@ -111,7 +111,7 @@ Route::group(['prefix'=>'admin','middleware'=>'admin'],
 		Route::post('storage_delete','AdminController@storageDelete');
 		// end stogares
 
-		// stogares
+		// opoperating_system
 		Route::post('opoperating_systems','AdminController@opoperating_system');
 
 		Route::get('opoperating_systems_information','AdminController@opoperating_systemInformation');
@@ -119,6 +119,26 @@ Route::group(['prefix'=>'admin','middleware'=>'admin'],
 		Route::post('opoperating_systems_edit','AdminController@opoperating_systemEdit');
 
 		Route::post('opoperating_systems_delete','AdminController@opoperating_systemDelete');
-		// end stogares
+		// end opoperating_system
+
+		// brand
+		Route::post('brand','AdminController@brand');
+
+		Route::get('brand_information','AdminController@brandInformation');
+
+		Route::post('brand_edit','AdminController@brandEdit');
+
+		Route::post('brand_delete','AdminController@brandDelete');
+		// end brand
+
+		// product
+		Route::post('product','AdminController@product');
+
+		Route::get('product_information','AdminController@productInformation');
+
+		Route::post('product_edit','AdminController@productEdit');
+
+		Route::post('product_delete','AdminController@productDelete');
+		// end product
 	}
 );

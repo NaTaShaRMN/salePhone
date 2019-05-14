@@ -4,11 +4,14 @@ var app = angular.module('appme', ["ngTable"] ,function($interpolateProvider) {
 });
 
 app.controller('colorController',['$scope','$http','NgTableParams', function colorController($scope,$http,NgTableParams){
-	$scope.datas= [];
-	$http.get('admin/color_information').then((req) => {
-		$scope.datas = req.data;
-		$scope.colors = new NgTableParams({}, { dataset: $scope.datas});
-	});
+	
+	this.$onInit = function() {
+		$scope.datas= [];
+		$http.get('admin/color_information').then((req) => {
+			$scope.datas = req.data;
+			$scope.colors = new NgTableParams({}, { dataset: $scope.datas});
+		});	
+	}
 	$scope.reset = ()=>{
 		$scope.tenLoaiDanhMuc='';
 	}
@@ -30,6 +33,7 @@ app.controller('colorController',['$scope','$http','NgTableParams', function col
 			})
 			data.new = true;
 		}else{
+			
 			if(!data.show){
 				// console.log(data.id);
 				$http.post('admin/color_edit',{
@@ -60,11 +64,13 @@ app.controller('colorController',['$scope','$http','NgTableParams', function col
 }])
 
 app.controller('displayController',['$scope','$http','NgTableParams', function displayController($scope,$http,NgTableParams){
-	$scope.datas= [];
-	$http.get('admin/display_information').then((req) => {
-		$scope.datas = req.data;
-		$scope.displays = new NgTableParams({}, { dataset: $scope.datas});
-	});
+	this.$onInit = function() {
+		$scope.datas= [];
+		$http.get('admin/display_information').then((req) => {
+			$scope.datas = req.data;
+			$scope.displays = new NgTableParams({}, { dataset: $scope.datas});
+		});
+	}
 	$scope.new = ()=>{
 		$scope.datas.unshift({size:'',id: 'NULL',new:false});
 		$scope.displays = new NgTableParams({}, { dataset: $scope.datas});
@@ -113,11 +119,13 @@ app.controller('displayController',['$scope','$http','NgTableParams', function d
 }])
 
 app.controller('storageController',['$scope','$http','NgTableParams', function storageController($scope,$http,NgTableParams){
+	this.$onInit = function() {
 	$scope.datas= [];
 	$http.get('admin/storage_information').then((req) => {
 		$scope.datas = req.data;
 		$scope.storages = new NgTableParams({}, { dataset: $scope.datas});
 	});
+	}
 	$scope.new = ()=>{
 		$scope.datas.unshift({size:'',id: 'NULL',new:false});
 		$scope.storages = new NgTableParams({}, { dataset: $scope.datas});
@@ -166,11 +174,13 @@ app.controller('storageController',['$scope','$http','NgTableParams', function s
 }])
 
 app.controller('operatingSystemController',['$scope','$http','NgTableParams', function operatingSystemController($scope,$http,NgTableParams){
+	this.$onInit = function() {
 	$scope.datas= [];
 	$http.get('admin/opoperating_systems_information').then((req) => {
 		$scope.datas = req.data;
 		$scope.op = new NgTableParams({}, { dataset: $scope.datas});
 	});
+	}
 	$scope.new = ()=>{
 		$scope.datas.unshift({name:'',id: 'NULL',new:false});
 		$scope.op = new NgTableParams({}, { dataset: $scope.datas});
@@ -217,6 +227,185 @@ app.controller('operatingSystemController',['$scope','$http','NgTableParams', fu
 		}
 	}
 }])
+
+app.controller('brandController',['$scope','$http','NgTableParams', function brandController($scope,$http,NgTableParams){
+	this.$onInit = function() {
+	$scope.datas= [];
+	$http.get('admin/brand_information').then((req) => {
+		$scope.datas = req.data;
+		$scope.brand = new NgTableParams({}, { dataset: $scope.datas});
+	});
+	}
+	$scope.new = ()=>{
+		$scope.datas.unshift({name:'',id: 'NULL',product: '0',new:false});
+		$scope.brand = new NgTableParams({}, { dataset: $scope.datas});
+	}
+	$scope.change = (data)=>{
+		if(data.new == false) {
+			 $http.post('admin/brand',{
+				_token: $scope.csrf,
+				name: data.name
+			},{header : {'Content-Type' : 'application/json; charset=UTF-8'}})
+			.then( (req) => {
+				console.log(req.data);
+				if( req.data ){
+					data.id = req.data.id;
+				}
+			})
+			data.new = true;
+		}else{
+			if(!data.show){
+				// console.log(data.id);
+				$http.post('admin/brand_edit',{
+					_token: $scope.csrf,
+					id: data.id,
+					name: data.name
+				}).then((req)=>{
+					data.color = req.data.color;
+				})
+			}
+			data.show = !data.show;
+		}
+		
+	}
+	$scope.delete = (data)=>{
+		var index = $scope.datas.indexOf(data);
+		if(index >= 0 ){
+			$scope.datas.splice(index,1);
+			$scope.brand = new NgTableParams({}, { dataset: $scope.datas});
+			$http.post('admin/brand_delete',{
+				_token : $scope.csrf,
+				id: data.id
+			}).then((req)=>{
+				console.log(req);
+			})
+		}
+	}
+}])
+
+app.controller('productController',['$scope','$http','NgTableParams', function productController($scope,$http,NgTableParams){
+	var formData = new FormData();
+	this.$onInit = function() {
+		$scope.datas= [];
+		// $http.get('admin/').then((req) => {
+		// 	$scope.colors = req.data;
+		// 	console.log($scope.colors);
+		// });
+		$http.get('admin/color_information').then((req) => {
+			$scope.colors = req.data;
+			console.log($scope.colors);
+		});
+
+		$http.get('admin/display_information').then((req) => {
+			$scope.displays = req.data;
+		});
+
+		$http.get('admin/brand_information').then((req) => {
+			$scope.brands = req.data;
+		});
+
+		$http.get('admin/opoperating_systems_information').then((req) => {
+			$scope.ops = req.data;
+		});
+
+		$http.get('admin/storage_information').then((req) => {
+			$scope.storages = req.data;
+		});
+		$scope.name = '';
+		$scope.price = 0;
+		$scope.sale = 0;
+		$scope.quantity = 0;
+	}
+
+	
+	$scope.new = ()=>{
+		if(!($scope.name && $scope.color && $scope.brand && $scope.display && $scope.storage)){
+			return;
+		}
+		formData.append('_token',$scope.csrf);
+		formData.append('name',$scope.name);
+		formData.append('color_id',$scope.color.id);
+		formData.append('display_id',$scope.display.id);
+		formData.append('storage_id',$scope.storage.id);
+		formData.append('brand_id',$scope.brand.id);
+		formData.append('op_id',$scope.op.id);
+		formData.append('price',$scope.price);
+		formData.append('sale',$scope.sale);
+		formData.append('quantity',$scope.quantity);
+		formData.append('description',$scope.description);
+		var request = {
+	        method: 'POST',
+	        url: '/admin/product',
+	        data: formData,
+	        headers: {
+	            'Content-Type': undefined
+	        }
+	    };
+	    $http(request).then( req => {
+	    	console.log(req.data);
+	    });
+		// $scope.datas.unshift({name:'',id: 'NULL',product: '0',new:false});
+		// $scope.brand = new NgTableParams({}, { dataset: $scope.datas});
+	}
+
+	$scope.change = (data)=>{
+		if(data.new == false) {
+			 $http.post('admin/product',{
+				_token: $scope.csrf,
+				name: data.name
+			},{header : {'Content-Type' : 'application/json; charset=UTF-8'}})
+			.then( (req) => {
+				console.log(req.data);
+				if( req.data ){
+					data.id = req.data.id;
+				}
+			})
+			data.new = true;
+		}else{
+			if(!data.show){
+				// console.log(data.id);
+				$http.post('admin/product_edit',{
+					_token: $scope.csrf,
+					id: data.id,
+					name: data.name
+				}).then((req)=>{
+					data.color = req.data.color;
+				})
+			}
+			data.show = !data.show;
+		}
+	}
+	$scope.delete = (data)=>{
+		var index = $scope.datas.indexOf(data);
+		if(index >= 0 ){
+			$scope.datas.splice(index,1);
+			$scope.brand = new NgTableParams({}, { dataset: $scope.datas});
+			$http.post('admin/product_delete',{
+				_token : $scope.csrf,
+				id: data.id
+			}).then((req)=>{
+				console.log(req);
+			})
+		}
+	}
+	$scope.setTheFiles = function ($files) {
+        angular.forEach($files, function (value, key) {
+            formData.append('imagefile[]', value);
+        });
+    };
+}]);
+
+app.directive('ngFiles', ['$parse', function ($parse) {
+    function file_links(scope, element, attrs) {
+        var onChange = $parse(attrs.ngFiles);
+        element.on('change', function (event) {
+            onChange(scope, {$files: event.target.files});
+        });
+    }
+    return {
+        link: file_links
+    }
+}]);
 // app.controller('danhmucController', ['$scope','$http','$q','NgTableParams', function loaidanhmucController($scope,$http,$q,NgTableParams){
 // 	$scope.loaidanhmuc = [];
 // 	$scope.danhmucRes = [];
