@@ -5,7 +5,7 @@ Quản lý thông tin
 @endsection
 
 @section('title_content')
-Nhãn hiệu
+NHÃN HIỆU
 @endsection
 
 @section('content')

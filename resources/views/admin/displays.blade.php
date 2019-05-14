@@ -5,7 +5,7 @@ Quản lý thông tin
 @endsection
 
 @section('title_content')
-Kích cỡ màn hình
+KÍCH CỠ MÀN HÌNH
 @endsection
 
 @section('content')

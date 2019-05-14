@@ -5,7 +5,7 @@ Quản lý thông tin
 @endsection
 
 @section('title_content')
-Sản phẩm
+SẢN PHẨM
 @endsection
 
 @section('content')

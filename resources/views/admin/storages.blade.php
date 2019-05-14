@@ -5,7 +5,7 @@ Quản lý thông tin
 @endsection
 
 @section('title_content')
-Bộ nhớ trong
+BỘ NHỚ TRONG
 @endsection
 
 @section('content')
