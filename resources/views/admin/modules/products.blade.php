@@ -175,11 +175,14 @@ a {
               <label for="" class=" form-control-label">
                  <b>Màu sắc</b>
               </label>
-              <select class="form-control " 
+              <!-- <select class="form-control " 
               ng-options="option.color for option in colors track by option.id"
               ng-model="color">
               <option value="">Chọn màu sắc</option>
-              </select>
+              </select> -->
+              <div ng-dropdown-multiselect="" options="colors" selected-model="color" extra-settings="colorSetting"></div>
+              <!-- <div ng-dropdown-multiselect="" options="example6data" selected-model="example6model" extra-settings="example6settings"></div> -->
+              
             </div>
 			
 			<div class="col-sm-3 form-group">
@@ -255,29 +258,114 @@ a {
           <table id="table-product" ng-table='product' class="table table-striped table-bordered">
           <colgroup>
             <col width="5%" />
-            <col width="30%" />
-            <col width="25%" />
-            <col width="20%" />
+            <col width="15%" />
+            <col width="5%" />
+            <col width="5%" />
+            <col width="5%" />
+            <col width="5%" />
             <col width="10%" />
             <col width="10%" />
+            <col width="10%" />
+            <col width="10%" />
+            <col width="10%" />
+            <col width="5%" />
+            <col width="5%" />
           </colgroup>
               <tr ng-repeat="data in $data" ng-init="data.show=true;"> 
                 <td>
                         {%$index+ 1%}
                 </td>
-                <td title="'Kích cỡ'" filter="{ name: 'text'}" sortable="'name'">
-                    <div ng-show="data.show && (data.new || data.new == null)" >
+                <td title="'Tên sản phẩm'" filter="{ name: 'text'}" sortable="'name'">
+                    <div ng-show="data.show " >
                        {%data.name%}
                     </div>
-                    <div  ng-hide="data.show && (data.new || data.new == null)" >
+                    <div  ng-hide="data.show " >
                         <input type="text" ng-model="data.name" class="form-control" >
                     </div>
                 </td>
                 <td title="'Id'" filter="{ id: 'number'}" sortable="'id'">
-                    {%data.id%}
+                       {%data.id%}
                 </td>
-                <td title="'Số sản phảm'" filter="{ product: 'number'}" sortable="'product'">
-                    {%data.product%}
+                <td title="'Giá'" filter="{ price: 'number'}" sortable="'price'">
+                    <div ng-show="data.show " >
+                       {%data.price%}
+                    </div>
+                    <div  ng-hide="data.show" >
+                        <input type="number" ng-model="data.price" class="form-control" >
+                    </div>
+                </td>
+
+                <td title="'Sale'" filter="{ sale: 'number'}" sortable="'sale'">
+                    <div ng-show="data.show " >
+                       {%data.sale%}
+                    </div>
+                    <div  ng-hide="data.show" >
+                        <input type="number" ng-model="data.sale" class="form-control" >
+                    </div>
+                </td>
+                
+                <td title="'Số lượng'" filter="{ quantity: 'number'}" sortable="'quantity'">
+                    <div ng-show="data.show " >
+                       {%data.quantity%}
+                    </div>
+                    <div  ng-hide="data.show" >
+                        <input type="number" ng-model="data.quantity" class="form-control" >
+                    </div>
+                </td>
+                
+                <td title="'Nhãn hiệu'" filter="{ brand: 'text'}" sortable="'brand'">
+                    <div ng-show="data.show " >
+                       {%data.brand%}
+                    </div>
+                    <div  ng-hide="data.show" >
+                        <input type="text" ng-model="data.brand" class="form-control" >
+                    </div>
+                </td>
+
+                <td title="'Màn hình'" filter="{ display: 'text'}" sortable="'display'">
+                    <div ng-show="data.show " >
+                       {%data.display%}
+                    </div>
+                    <div  ng-hide="data.show" >
+                        <input type="text" ng-model="data.display" class="form-control" >
+                    </div>
+                </td>
+
+                <td title="'Bộ nhớ'" filter="{ storage: 'text'}" sortable="'storage'">
+                    <div ng-show="data.show " >
+                       {%data.storage%}
+                    </div>
+                    <div  ng-hide="data.show" >
+                        <input type="text" ng-model="data.storage" class="form-control" >
+                    </div>
+                </td>
+
+                <td title="'HĐH'" filter="{ operating_system: 'text'}" sortable="'operating_system'">
+                    <div ng-show="data.show " >
+                       {%data.operating_system%}
+                    </div>
+                    <div  ng-hide="data.show" >
+                        <input type="text" ng-model="data.operating_system" class="form-control" >
+                    </div>
+                </td>
+                  
+                <td title="'Màu sắc'" filter="disabled" sortable="'colors'">
+                    <div ng-show="data.show " >
+                       <!-- {%data.colors%} -->
+                       <div ng-repeat="color in data.colors">{%color.color%}</div>
+                    </div>
+                    <div  ng-hide="data.show" >
+                        <input type="text" ng-model="data.color" class="form-control" >
+                    </div>
+                </td>
+
+                <td title="'Mô tả'" filter="{ description: 'text'}" sortable="'description'">
+                    <div ng-show="data.show " >
+                       {%data.description%}
+                    </div>
+                    <div  ng-hide="data.show" >
+                        <input type="text" ng-model="data.description" class="form-control" >
+                    </div>
                 </td>
                 <!-- <td title="'Loại danh mục'" filter="{ showTen: 'text'}" sortable="'showTen'">
                     <div ng-show="data.show" >
@@ -290,7 +378,7 @@ a {
                         </select>
                     </div>
                 </td> -->
-                <td ><i ng-click="change(data)" style="cursor: pointer;font-size: 25px" class="menu-icon " ng-class="{'ti-save-alt':!(data.show && (data.new || data.new == null)),'ti-pencil':data.show && (data.new || data.new == null)}"></i></td>
+                <td ><i ng-click="change(data)" style="cursor: pointer;font-size: 25px" class="menu-icon " ng-class="{'ti-save-alt':!(data.show ),'ti-pencil':data.show }"></i></td>
                 <td><i ng-click="delete(data)" style="cursor: pointer;font-size: 25px" class="menu-icon ti-trash"></i></td>
               </tr>
             

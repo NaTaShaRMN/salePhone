@@ -234,24 +234,80 @@ class AdminController extends Controller
          $product->quantity = $request->quantity;
 
          $product->save();
-         foreach ($request->file('imagefile') as $image) {
-            $img = new Image();
-            $img->product_id = $product->id;
-            $img->link = $image->store('public');
-            $img->save();
+         if($request->file('imagefile')!== null){
+            foreach ($request->file('imagefile') as $image) {
+               $img = new Image();
+               $img->product_id = $product->id;
+               $img->link = $image->store('public');
+               $img->save();
+            }
          }
+         $colors = explode(',' , $request->colors);
+         // return var_dump($colors);
 
-         $fk = new Fk_color_product();
-         $fk->color_id = $request->color_id;
-         $fk->product_id = $product->id;
-         $fk->save();
-
+         foreach ($colors as $id) {
+            $fk = new Fk_color_product();
+            $fk->color_id = $id;
+            $fk->product_id = $product->id;
+            $fk->save();   
+         }
          return $product;
       }
 
       public function productInformation()
       {
-         return Product::all(); 
+         // return Product::all(); 
+         $product = Product::all();
+         foreach ($product as $value) {
+               $value->brand = DB::table('brands')
+                              ->select('brands.name')
+                              ->where('id',$value->brand_id)
+                              ->get(); 
+               $value->brand = $value->brand[0]->name;
+               $value->display = DB::table('displays')
+                                 ->select('displays.size')
+                                 ->where('id',$value->display_id)
+                                 ->get(); 
+               $value->display = $value->display[0]->size;
+               $value->storage = DB::table('storages')
+                                 ->select('storages.size')
+                                 ->where('id',$value->storage_id)
+                                 ->get();
+               $value->storage = $value->storage[0]->size;
+
+               $value->operating_system = DB::table('operating_systems')
+                              ->select('operating_systems.name')
+                              ->where('id',$value->operating_system_id)
+                              ->get(); 
+
+               $value->operating_system = $value->operating_system[0]->name;
+
+               $imgs = array();
+               $link = DB::table('products')
+                     ->select('images.link')
+                     ->join('images', 'products.id', '=', 'images.product_id')
+                     ->where('products.id',$value->id)
+                     ->get();
+               // $link = json_decode($link,true);
+               // foreach ($link as $img) {
+               //   $imgs[] = $img['link'];
+               // }
+               // var_dump($link);
+               // return $link;
+               $value->links = $link;
+
+               $cl = DB::table('products')
+                     ->select('colors.color')
+                     ->join('fk_colors_products', 'products.id', '=', 'fk_colors_products.product_id')
+                     ->join('colors', 'colors.id', '=', 'fk_colors_products.color_id')
+                     ->where('products.id',$value->id)
+                     ->get();
+               // // $cl = json_decode($link,true);
+               //       var_dump($cl);
+               // return $cl;
+               $value->colors = $cl;
+            }
+         return $product;
       }
       public function productEdit(Request $request)
       {

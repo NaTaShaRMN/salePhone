@@ -10,6 +10,6 @@ class Color extends Model
     protected $table = "colors";
     public function product()
     {
-        return $this->belongsToMany('App\Product');
+        return $this->belongsToMany('App\Fk_color_product');
     }
 }

@@ -1,4 +1,4 @@
-var app = angular.module('appme', ["ngTable"] ,function($interpolateProvider) {
+var app = angular.module('appme', ["ngTable","angularjs-dropdown-multiselect"] ,function($interpolateProvider) {
 	$interpolateProvider.startSymbol('{%');
 	$interpolateProvider.endSymbol('%}');
 });
@@ -287,13 +287,17 @@ app.controller('productController',['$scope','$http','NgTableParams', function p
 	var formData = new FormData();
 	this.$onInit = function() {
 		$scope.datas= [];
-		// $http.get('admin/').then((req) => {
-		// 	$scope.colors = req.data;
-		// 	console.log($scope.colors);
-		// });
+		$http.get('admin/product_information').then((req) => {
+			$scope.datas = req.data;
+	    	$scope.product = new NgTableParams({}, { dataset: $scope.datas});
+			console.log($scope.datas);
+		});
 		$http.get('admin/color_information').then((req) => {
+			req.data.map( color => {
+				color.label = color.color;
+			})
 			$scope.colors = req.data;
-			console.log($scope.colors);
+			// console.log($scope.colors);
 		});
 
 		$http.get('admin/display_information').then((req) => {
@@ -315,6 +319,9 @@ app.controller('productController',['$scope','$http','NgTableParams', function p
 		$scope.price = 0;
 		$scope.sale = 0;
 		$scope.quantity = 0;
+
+		$scope.color = []; 
+		$scope.colorSetting = {};
 	}
 
 	
@@ -322,9 +329,15 @@ app.controller('productController',['$scope','$http','NgTableParams', function p
 		if(!($scope.name && $scope.color && $scope.brand && $scope.display && $scope.storage)){
 			return;
 		}
+		var colorArray = [];
+		$scope.color.map(color => {
+			// formData.append('colors[]', color.id);
+			colorArray.push(color.id);
+		})
+		// console.log(colorArray);
 		formData.append('_token',$scope.csrf);
 		formData.append('name',$scope.name);
-		formData.append('color_id',$scope.color.id);
+		formData.append('colors',colorArray);
 		formData.append('display_id',$scope.display.id);
 		formData.append('storage_id',$scope.storage.id);
 		formData.append('brand_id',$scope.brand.id);
@@ -341,8 +354,21 @@ app.controller('productController',['$scope','$http','NgTableParams', function p
 	            'Content-Type': undefined
 	        }
 	    };
-	    $http(request).then( req => {
-	    	console.log(req.data);
+	    $http(request).then( function success(res){
+	    	formData = new FormData();
+	    	$scope.name = '';
+	    	$scope.price = 0;
+			$scope.sale = 0;
+			$scope.quantity = 0;
+	    	$scope.color = [];
+	    	$scope.display = {};
+	    	$scope.storage = {};
+	    	$scope.brand = {};
+	    	$scope.op = {};
+	    	$scope.description = '';
+
+	    	$scope.datas.unshift(res.data);
+	    	$scope.product = new NgTableParams({}, { dataset: $scope.datas});
 	    });
 		// $scope.datas.unshift({name:'',id: 'NULL',product: '0',new:false});
 		// $scope.brand = new NgTableParams({}, { dataset: $scope.datas});
