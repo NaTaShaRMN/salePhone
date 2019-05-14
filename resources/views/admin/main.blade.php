@@ -273,7 +273,7 @@
     <script src="js/angular-aria.min.js"></script>
     <script src="js/angular-messages.min.js"></script>
     <script src="js/angular-route.min.js"></script>
-
+    <script src="js/angularjs-dropdown-multiselect.js"></script>
     @yield('script')
     
 
