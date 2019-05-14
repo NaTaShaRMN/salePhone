@@ -239,6 +239,7 @@ class AdminController extends Controller
                $img = new Image();
                $img->product_id = $product->id;
                $img->link = $image->store('public');
+               $img->link = str_replace('public/','',$img->link);
                $img->save();
             }
          }
@@ -251,6 +252,46 @@ class AdminController extends Controller
             $fk->product_id = $product->id;
             $fk->save();   
          }
+
+         $product->brand = DB::table('brands')
+                        ->select('brands.name')
+                        ->where('id',$product->brand_id)
+                        ->get(); 
+         $product->brand = $product->brand[0]->name;
+         $product->display = DB::table('displays')
+                           ->select('displays.size')
+                           ->where('id',$product->display_id)
+                           ->get(); 
+         $product->display = $product->display[0]->size;
+         $product->storage = DB::table('storages')
+                           ->select('storages.size')
+                           ->where('id',$product->storage_id)
+                           ->get();
+         $product->storage = $product->storage[0]->size;
+
+         $product->operating_system = DB::table('operating_systems')
+                        ->select('operating_systems.name')
+                        ->where('id',$product->operating_system_id)
+                        ->get(); 
+
+         $product->operating_system = $product->operating_system[0]->name;
+         $imgs = array();
+         $link = DB::table('products')
+               ->select('images.link')
+               ->join('images', 'products.id', '=', 'images.product_id')
+               ->where('products.id',$product->id)
+               ->get();
+         $product->links = $link;
+
+         $cl = DB::table('products')
+               ->select('colors.color')
+               ->join('fk_colors_products', 'products.id', '=', 'fk_colors_products.product_id')
+               ->join('colors', 'colors.id', '=', 'fk_colors_products.color_id')
+               ->where('products.id',$product->id)
+               ->get();
+         $product->colors = $cl;
+
+
          return $product;
       }
 
@@ -281,19 +322,12 @@ class AdminController extends Controller
                               ->get(); 
 
                $value->operating_system = $value->operating_system[0]->name;
-
                $imgs = array();
                $link = DB::table('products')
                      ->select('images.link')
                      ->join('images', 'products.id', '=', 'images.product_id')
                      ->where('products.id',$value->id)
                      ->get();
-               // $link = json_decode($link,true);
-               // foreach ($link as $img) {
-               //   $imgs[] = $img['link'];
-               // }
-               // var_dump($link);
-               // return $link;
                $value->links = $link;
 
                $cl = DB::table('products')
@@ -302,9 +336,6 @@ class AdminController extends Controller
                      ->join('colors', 'colors.id', '=', 'fk_colors_products.color_id')
                      ->where('products.id',$value->id)
                      ->get();
-               // // $cl = json_decode($link,true);
-               //       var_dump($cl);
-               // return $cl;
                $value->colors = $cl;
             }
          return $product;

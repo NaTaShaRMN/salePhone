@@ -258,7 +258,7 @@ a {
           <table id="table-product" ng-table='product' class="table table-striped table-bordered">
           <colgroup>
             <col width="5%" />
-            <col width="15%" />
+            <col width="10%" />
             <col width="5%" />
             <col width="5%" />
             <col width="5%" />
@@ -268,6 +268,7 @@ a {
             <col width="10%" />
             <col width="10%" />
             <col width="10%" />
+            <col width="5%" />
             <col width="5%" />
             <col width="5%" />
           </colgroup>
@@ -365,6 +366,15 @@ a {
                     </div>
                     <div  ng-hide="data.show" >
                         <input type="text" ng-model="data.description" class="form-control" >
+                    </div>
+                </td>
+
+                <td title="'Link ảnh'" filter="disabled" sortable="'links'">
+                    <div ng-show="data.show " >
+                       <div ng-repeat="link in data.links"><a href="/storage/{%link.link%}" target="_blank">{%link.link%}</a></div>
+                    </div>
+                    <div  ng-hide="data.show" >
+                        <input type="text" ng-model="data.links" class="form-control" >
                     </div>
                 </td>
                 <!-- <td title="'Loại danh mục'" filter="{ showTen: 'text'}" sortable="'showTen'">
