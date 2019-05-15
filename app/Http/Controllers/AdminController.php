@@ -12,7 +12,11 @@ use App\Operating_System;
 use App\Brand;
 use App\Product;
 use App\Image;
+use App\Order;
+use App\User;
+use App\Orderdetail;
 use App\Fk_color_product;
+use App\Comment;
 
 class AdminController extends Controller
 {
@@ -408,7 +412,7 @@ class AdminController extends Controller
                ->where('products.id',$product->id)
                ->get();
          $product->links = $link;
-         
+
          return $product;
       }  
 
@@ -436,4 +440,46 @@ class AdminController extends Controller
          return 1;
 
       }
+
+      //end product
+
+      public function orderInformation(){
+         $orders = Order::all();
+         foreach ($orders as $value) {
+            $value->user_name = User::find($value->user_id)->username;
+         }
+         return $orders;
+      }
+
+      //emd order
+
+      public function orderdetailInformation(){
+         $orderdetails = Orderdetail::all();
+         foreach ($orderdetails as $value) {
+            $value->product_name = Product::find($value->id)->name;
+         }
+         return $orderdetails;
+      }
+
+      // end orderdetails
+
+      public function userInformation(){
+         $orderdetails = Orderdetail::all();
+         foreach ($orderdetails as $value) {
+            $value->product_name = Product::find($value->id)->name;
+         }
+         return $orderdetails;
+      }
+
+      //comment
+      public function commentInformation(){
+         return Comment::all();
+      }
+
+      public function commentDelete(Request->$request){
+         Comment::find($request->id)->delete();
+         return 1;
+      }
+
+      //comment
 }

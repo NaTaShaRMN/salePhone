@@ -128,6 +128,9 @@
 
                      <h3 class="menu-title">Quản lý website</h3><!-- /.menu-title -->
                      <li>
+                        <a href="{{URL::to('admin/images')}}"> <i class="menu-icon ti-layout"></i>Quản lý hình ảnh </a>
+                    </li>
+                     <li>
                         <a href="{{URL::to('admin/slides')}}"> <i class="menu-icon ti-layout"></i>Quản lý slide </a>
                     </li>
                 </ul>

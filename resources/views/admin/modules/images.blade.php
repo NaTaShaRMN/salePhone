@@ -122,7 +122,7 @@ a {
     box-shadow: inset 0 3px 5px rgba(0,0,0,0.125);
 }
 </style>
-<div class="animated fadeIn" ng-app="appme" ng-controller="brandController">
+<div class="animated fadeIn" ng-app="appme" ng-controller="imageController">
   
   <div class="row" ng-init="csrf = '{{csrf_token()}}'">
     <div class="col-md-12">
@@ -132,7 +132,7 @@ a {
           <button class="btn btn-default" ng-click="new()" style="float: right;"><i class="fa fa-plus-square-o" style="font-style: 15px"></i></button>
         </div>
         <div class="card-body">
-          <table id="table-brand" ng-table='brand' class="table table-striped table-bordered">
+          <table id="table-image" ng-table='image' class="table table-striped table-bordered">
           <colgroup>
             <col width="5%" />
             <col width="30%" />
@@ -145,20 +145,26 @@ a {
                 <td style="text-align:center">
                         {%$index+ 1%}
                 </td>
-                <td title="'Kích cỡ'" style="text-align:center" filter="{ name: 'text'}" sortable="'name'">
+                <td title="'Ảnh'" style="text-align:center" filter="{ link: 'text'}" sortable="'link'">
                     <div ng-show="data.show && (data.new || data.new == null)" >
-                       {%data.name%}
+                       {%data.link%}
                     </div>
                     <div  ng-hide="data.show && (data.new || data.new == null)" >
-                        <input type="text" ng-model="data.name" class="form-control" >
+                        <input type="text" ng-model="data.link" class="form-control" >
                     </div>
                 </td>
                 <td title="'Id'" style="text-align:center" filter="{ id: 'number'}" sortable="'id'">
                     {%data.id%}
                 </td>
-                <td title="'Số sản phẩm'" style="text-align:center" filter="{ product: 'number'}" sortable="'product'">
-                    {%data.product%}
+                <td title="'Mã Sp'" style="text-align:center" filter="{ product_id: 'number'}" sortable="'product_id'">
+                    <div ng-show="data.show && (data.new || data.new == null)" >
+						 {%data.product_id%}
+                    </div>
+					<div  ng-hide="data.show && (data.new || data.new == null)" >
+                        <input type="text" ng-model="data.link" class="form-control" >
+                    </div>
                 </td>
+
                 <!-- <td title="'Loại danh mục'" filter="{ showTen: 'text'}" sortable="'showTen'">
                     <div ng-show="data.show" >
                         {%data.showTen%}

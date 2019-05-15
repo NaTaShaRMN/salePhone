@@ -75,6 +75,10 @@ Route::group(['prefix'=>'admin','middleware'=>'admin'],
 			return view('admin.comments');
 		});
 
+		Route::get('/images',function(){
+			return view('admin.images');
+		});
+
 		Route::get('/slides',function(){
 			return view('admin.slides');
 		});
@@ -140,5 +144,57 @@ Route::group(['prefix'=>'admin','middleware'=>'admin'],
 
 		Route::post('product_delete','AdminController@productDelete');
 		// end product
+
+		// order
+		Route::post('order','AdminController@order');
+
+		Route::get('order_information','AdminController@orderInformation');
+
+		Route::post('order_edit','AdminController@orderEdit');
+
+		Route::post('order_delete','AdminController@orderDelete');
+		// end order
+
+		// orderdetail
+		Route::post('orderdetail','AdminController@orderdetail');
+
+		Route::get('orderdetail_information','AdminController@orderdetailInformation');
+
+		Route::post('orderdetail_edit','AdminController@orderdetailEdit');
+
+		Route::post('orderdetail_delete','AdminController@orderdetailDelete');
+		// end orderdetail
+
+		// user
+		Route::post('user','AdminController@user');
+
+		Route::get('user_information','AdminController@userInformation');
+
+		Route::post('user_edit','AdminController@userEdit');
+
+		Route::post('user_delete','AdminController@userDelete');
+		// user
+
+		// comment
+		// Route::post('comment','AdminController@comment');
+
+		Route::get('comment_information','AdminController@commentInformation');
+
+		// Route::post('comment_edit','AdminController@commentEdit');
+
+		Route::post('comment_delete','AdminController@commentDelete');
+		// comment
+
+		
+		// image
+			// Route::post('user','AdminController@user');
+
+			Route::get('image_information','AdminController@imageInformation');
+
+			Route::post('user_edit','AdminController@userEdit');
+
+			Route::post('user_delete','AdminController@userDelete');
+		// image
+
 	}
 );

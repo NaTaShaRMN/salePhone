@@ -122,22 +122,24 @@ a {
     box-shadow: inset 0 3px 5px rgba(0,0,0,0.125);
 }
 </style>
-<div class="animated fadeIn" ng-app="appme" ng-controller="brandController">
+<div class="animated fadeIn" ng-app="appme" ng-controller="commentController">
   
   <div class="row" ng-init="csrf = '{{csrf_token()}}'">
     <div class="col-md-12">
       <div class="card">
         <div class="card-header">
-          <strong class="card-title">Nhãn hiệu</strong>
+          <strong class="card-title">Bộ nhớ trong</strong>
           <button class="btn btn-default" ng-click="new()" style="float: right;"><i class="fa fa-plus-square-o" style="font-style: 15px"></i></button>
         </div>
         <div class="card-body">
-          <table id="table-brand" ng-table='brand' class="table table-striped table-bordered">
+          <table id="table-comment" ng-table='comment' class="table table-striped table-bordered">
           <colgroup>
             <col width="5%" />
-            <col width="30%" />
+            <col width="10%" />
             <col width="25%" />
             <col width="20%" />
+            <col width="10%" />
+            <col width="10%" />
             <col width="10%" />
             <col width="10%" />
           </colgroup>
@@ -145,19 +147,28 @@ a {
                 <td style="text-align:center">
                         {%$index+ 1%}
                 </td>
-                <td title="'Kích cỡ'" style="text-align:center" filter="{ name: 'text'}" sortable="'name'">
+                <td title="'Mã SP'" style="text-align:center" filter="{ product_id: 'number'}" sortable="'product_id'">
                     <div ng-show="data.show && (data.new || data.new == null)" >
-                       {%data.name%}
+                       {%data.product_id%}
                     </div>
                     <div  ng-hide="data.show && (data.new || data.new == null)" >
-                        <input type="text" ng-model="data.name" class="form-control" >
+                        <input type="text" ng-model="data.product_id" class="form-control" >
                     </div>
                 </td>
                 <td title="'Id'" style="text-align:center" filter="{ id: 'number'}" sortable="'id'">
                     {%data.id%}
                 </td>
-                <td title="'Số sản phẩm'" style="text-align:center" filter="{ product: 'number'}" sortable="'product'">
-                    {%data.product%}
+                <td title="'Bình luận'" style="text-align:center" filter="{ comment: 'number'}" sortable="'comment'">
+                    {%data.comment%}
+                </td>
+                <td title="'Email'" style="text-align:center" filter="{ email: 'text'}" sortable="'email'">
+                    {%data.email%}
+                </td>
+                <td title="'Tên'" style="text-align:center" filter="{ name: 'text'}" sortable="'name'">
+                    {%data.name%}
+                </td>
+                <td title="'Ngày'" style="text-align:center" filter="disabled" sortable="'create_at'">
+                    {%data.create_at%}
                 </td>
                 <!-- <td title="'Loại danh mục'" filter="{ showTen: 'text'}" sortable="'showTen'">
                     <div ng-show="data.show" >
