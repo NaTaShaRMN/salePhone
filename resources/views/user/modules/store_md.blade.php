@@ -72,7 +72,7 @@
 							
 							@foreach($topSelling_product as $product)
 							<div class="product-widget">
-								<a href=""><div class="product-img">
+							<a href="{{URL::to('product',$product->id)}}"><div class="product-img">
 									<img src="./storage/{{$product->link}}" alt="">
 								</div>
 								<a>
@@ -133,7 +133,7 @@
 									</div>
 									<div class="product-body">
 										<p class="product-category">Category</p>
-										<h3 class="product-name"><a href="#">{{$product->name}}</a></h3>
+										<h3 class="product-name"><a href="{{URL::to('product',$product->id)}}">{{$product->name}}</a></h3>
 										<h4 class="product-price">{{$product->price}}đ<del class="product-old-price"></del></h4>
 										<div class="product-rating">
 											<i class="fa fa-star"></i>

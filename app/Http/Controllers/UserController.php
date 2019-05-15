@@ -68,6 +68,8 @@ class UserController extends Controller
       $product = DB::table('products')
       ->join('images','products.id','=','images.product_id')
       ->where('products.id','=',$id)->first();
+      $brand = DB::table('brands')
+      ->where('id','=',$product->brand_id)->first();
       $relate_product = DB::table('products')
       ->join('images','products.id','=','images.product_id')
       ->where('products.brand_id','=',$product->brand_id)
@@ -75,7 +77,7 @@ class UserController extends Controller
       ->limit(4)
       ->get();
       
-      return view('user/product',compact('product','relate_product'));
+      return view('user/product',compact('product','relate_product','brand'));
    }
 
    public function checkout()

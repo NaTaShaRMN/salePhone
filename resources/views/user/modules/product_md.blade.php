@@ -7,7 +7,7 @@
 					<div class="col-md-12">
 						<ul class="breadcrumb-tree">
 							<li><a href="#">Home</a></li>
-							<li><a href="{{URL::to('store',$product->brand_id)}}">{{$product->name}}</a></li>
+							<li><a href="{{URL::to('store',$brand->id)}}">{{$brand->name}}</a></li>
 							<li class="active">{{$product->name}}</li>
 						</ul>
 					</div>
