@@ -222,7 +222,7 @@ a {
               <label for="image_file" class=" form-control-label">
                 Ảnh đại diện
               </label>
-              <input type="file" ng-files="setTheFiles($files)" id="imagefile" class="form-control" multiple>
+              <input type="file" ng-files="setTheFiles($files)" class="form-control imagefile" multiple>
               </div>
 
             <div class="form-group col-sm-12">
@@ -385,14 +385,14 @@ a {
                     </div>
                 </td>
 
-                <!-- <td title="'Link ảnh'" filter="disabled" sortable="'links'" >
+                <td title="'Link ảnh'" filter="disabled" sortable="'links'" >
                     <div ng-show="data.show " >
                        <div ng-repeat="link in data.links"><a href="/storage/{%link.link%}" target="_blank">{%link.link%}</a></div>
                     </div>
                     <div  ng-hide="data.show" >
-                        <input type="text" ng-model="data.links" class="form-control" >
+                        <input type="file" ng-files="setTheFiles($files)" class="form-control imagefile" multiple>
                     </div>
-                </td> -->
+                </td>
                 <td ><i ng-click="change(data)" style="cursor: pointer;font-size: 25px" class="menu-icon " ng-class="{'ti-save-alt':!(data.show ),'ti-pencil':data.show }"></i></td>
                 <td><i ng-click="delete(data)" style="cursor: pointer;font-size: 25px" class="menu-icon ti-trash"></i></td>
               </tr>

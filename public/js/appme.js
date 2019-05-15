@@ -360,11 +360,12 @@ app.controller('productController',['$scope','$http','NgTableParams', function p
 	    	$scope.price = 0;
 			$scope.sale = 0;
 			$scope.quantity = 0;
-	    	$scope.color = [];
-	    	$scope.display = {};
-	    	$scope.storage = {};
-	    	$scope.brand = {};
-	    	$scope.op = {};
+	    	// $scope.color = [];
+	    	// $scope.display = {};
+	    	// $scope.storage = {};
+	    	// $scope.brand = {};
+	    	// $scope.op = {};
+	    	document.getElementsByClassName('imagefile').value = '';
 	    	$scope.description = '';
 	    	res.data.color_id = colorArray;
 	    	$scope.datas.unshift(res.data);
@@ -414,7 +415,10 @@ app.controller('productController',['$scope','$http','NgTableParams', function p
 			    };
 			    $http(request).then( function success(res){
 			    	formData = new FormData();
+	    			document.getElementsByClassName('imagefile').value = '';
 			    	data.colors = res.data.colors;
+			    	data.links = res.data.links;
+			    	console.log(data);
 			    	console.log(res.data);
 			    });
 				// console.log(data.id);

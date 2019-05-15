@@ -353,6 +353,25 @@ class AdminController extends Controller
          if(isset($request->op_id)){
             $product->operating_system_id = $request->op_id;
          }
+         if($request->file('imagefile')!== null){
+            $deleteImg =  DB::table('images')
+                        // ->select('colors.color')
+                        ->where('images.product_id',$request->id)
+                        ->get();
+            foreach ($deleteImg as $value) {
+               Storage::delete('public/'.$value->link);
+               Image::find($value->id)->delete();
+            }
+
+            foreach ($request->file('imagefile') as $image) {
+               $img = new Image();
+               $img->product_id = $product->id;
+               $img->link = $image->store('public');
+               $img->link = str_replace('public/','',$img->link);
+               $img->save();
+            }
+         }
+
          if($request->colors !== null){
             $delete =  DB::table('fk_colors_products')
                      // ->select('colors.color')
@@ -382,6 +401,14 @@ class AdminController extends Controller
                ->where('products.id',$product->id)
                ->get();
          $product->colors = $cl;
+
+         $link = DB::table('products')
+               // ->select('images.link')
+               ->join('images', 'products.id', '=', 'images.product_id')
+               ->where('products.id',$product->id)
+               ->get();
+         $product->links = $link;
+         
          return $product;
       }  
 
