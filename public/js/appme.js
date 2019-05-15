@@ -430,9 +430,10 @@ app.controller('productController',['$scope','$http','NgTableParams', function p
 	}
 	$scope.delete = (data)=>{
 		var index = $scope.datas.indexOf(data);
+		console.log(index);
 		if(index >= 0 ){
 			$scope.datas.splice(index,1);
-			$scope.brand = new NgTableParams({}, { dataset: $scope.datas});
+			$scope.product = new NgTableParams({}, { dataset: $scope.datas});
 			$http.post('admin/product_delete',{
 				_token : $scope.csrf,
 				id: data.id

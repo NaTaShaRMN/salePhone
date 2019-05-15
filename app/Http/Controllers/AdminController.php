@@ -387,8 +387,26 @@ class AdminController extends Controller
 
       public function productDelete(Request $request)
       {
-         $brand = Product::find($request->id);
-         $brand->delete();
+         $delete =  DB::table('fk_colors_products')
+                     // ->select('colors.color')
+                     ->where('fk_colors_products.product_id',$request->id)
+                     ->get();
+         foreach ($delete as $value) {
+            Fk_color_product::find($value->id)->delete();
+         }
+
+         $deleteImg =  DB::table('images')
+                     // ->select('colors.color')
+                     ->where('images.product_id',$request->id)
+                     ->get();
+         foreach ($deleteImg as $value) {
+            Storage::delete('public/'.$value->link);
+            Image::find($value->id)->delete();
+         }
+
+         $product = Product::find($request->id);
+         $product->delete();
          return 1;
+
       }
 }
