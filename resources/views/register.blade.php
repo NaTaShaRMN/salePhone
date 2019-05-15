@@ -41,7 +41,7 @@
                     </a>
                 </div>
                 <div class="login-form">
-                    <form method="POST" action="{{ route('login') }}">
+                    <form method="POST" action="{{ route('register') }}">
                         @csrf
                         @if($errors->has('errorLogin'))
                         <div class="alert alert-danger">
@@ -49,32 +49,46 @@
                                 {{$errors->first('errorLogin')}}</strong>
                         </div>
                         @endif
+
                         <div class="form-group">
                             <label>Email</label>
                             <input type="email" name="email" class="form-control" placeholder="Email" required autofocus>
                         </div>
+                        @if($errors->has('email'))
+                        <p style="color: red"><b>{{$errors->first('email')}}</b></p>
+                        @endif
+                        @if($errors->has('errorComfirmEmail'))
+                        <p style="color: red"><b>{{$errors->first('errorComfirmEmail')}}</b></p>
+                        @endif
+                        <div class="form-group">
+                            <label>Họ tên</label>
+                            <input type="text" name="name" class="form-control" placeholder="Tên người dùng" required autofocus>
+                        </div>
+                        
                         <div class="form-group">
                             <label>Mật khẩu</label>
-                            <input type="password" name="password" class="form-control" placeholder="Mật khẩu" required>
+                            <input type="password" name="password" class="form-control" placeholder="Mật khẩu" required autofocus>
                         </div>
-                        <div class="checkbox">
-                            <label>
-                                <input  type="checkbox" name="remember" id="remember" > Lưu đăng nhập
-                            </label>
-                            <label class="pull-right">
-                                <a href="#">Quên mật khẩu?</a>
-                            </label>
-
+                        @if($errors->has('password'))
+                        <p style="color: red"><b>{{$errors->first('password')}}</b></p>
+                        @endif
+                        @if($errors->has('errorPassword'))
+                        <p style="color: red"><b>{{$errors->first('errorPassword')}}</b></p>
+                        @endif
+                        <div class="form-group">
+                            <label>Nhập lại mật khẩu</label>
+                            <input type="password" name="re_password" class="form-control" placeholder="Nhập lại mật khẩu" required autofocus>
                         </div>
-                        <button type="submit" class="btn btn-success btn-flat m-b-30 m-t-30">Đăng nhập</button>
-                        <div class="social-login-content">
-                            <div class="social-button">
-                                <button type="button" class="btn social facebook btn-flat btn-addon mb-3"><i class="ti-facebook"></i>Sign in with facebook</button>
-                                <button type="button" class="btn social twitter btn-flat btn-addon mt-2"><i class="ti-twitter"></i>Sign in with twitter</button>
-                            </div>
+                        <div class="form-group">
+                            <label>Số điện thoại</label>
+                            <input type="text" name="phone" class="form-control" placeholder="Số điện thoại" required autofocus>
                         </div>
+                        @if($errors->has('phone'))
+                        <p style="color: red"><b>{{$errors->first('phone')}}</b></p>
+                        @endif
+                        <button type="submit" class="btn btn-success btn-flat m-b-30 m-t-30">Đăng ký</button>
                         <div class="register-link m-t-15 text-center">
-                            <p>Bạn chưa có tài khoản <a href="/register"> Đăng kí</a></p>
+                            <p>Bạn đã có tài khoản <a href="/login"> Đăng nhập</a></p>
                         </div>
                     </form>
                 </div>

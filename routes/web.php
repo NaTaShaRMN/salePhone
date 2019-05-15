@@ -21,9 +21,24 @@ Route::get('/product', 'UserController@product');
 
 Route::get('/checkout', 'UserController@checkout');
 
-Route::get('/login','AccountController@loginView');
+Route::get('/login','AccountController@getLogin');
 
 Route::post('/login','AccountController@postLogin')->name('login');
+
+Route::get('/register', 'AccountController@getRegister');
+
+Route::post('/register', 'AccountController@postRegister')->name('register');
+
+Route::get('confirm', function(){
+	return view('confirm_email');
+});
+
+Route::get('confirmuser/{code}', 'RegisterController@confirmUser');
+
+Route::get('/logout',function(){
+	Auth::logout();
+	return redirect('/');
+});
 
 Route::group(['prefix'=>'admin','middleware'=>'admin'],
 	function(){
@@ -185,15 +200,15 @@ Route::group(['prefix'=>'admin','middleware'=>'admin'],
 		Route::post('comment_delete','AdminController@commentDelete');
 		// comment
 
-		
+
 		// image
-			// Route::post('user','AdminController@user');
+		// Route::post('user','AdminController@user');
 
-			Route::get('image_information','AdminController@imageInformation');
+		Route::get('image_information','AdminController@imageInformation');
 
-			Route::post('user_edit','AdminController@userEdit');
+		Route::post('user_edit','AdminController@userEdit');
 
-			Route::post('user_delete','AdminController@userDelete');
+		Route::post('user_delete','AdminController@userDelete');
 		// image
 
 	}
