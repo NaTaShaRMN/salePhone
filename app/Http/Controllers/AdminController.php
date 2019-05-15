@@ -477,7 +477,7 @@ class AdminController extends Controller
          return Comment::all();
       }
 
-      public function commentDelete(Request->$request){
+      public function commentDelete(Request $request){
          Comment::find($request->id)->delete();
          return 1;
       }
