@@ -208,7 +208,7 @@
         <div class="breadcrumbs">
             <div class="col-sm-4">
                 <div class="page-header float-left">
-                    <div class="page-title">
+                    <div class="page-title" style="font-size:30px">
                         <h1>@yield('title_content')</h1>
                     </div>
                 </div>

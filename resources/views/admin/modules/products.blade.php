@@ -128,7 +128,7 @@ a {
     <div class="col-md-12">
       <div class="card">
         <div class="card-header">
-          <strong class="card-title">Thêm mới sản phẩm</strong>
+          <strong class="card-title" style="font-size:25px;color:darkblue">THÊM MỚI SẢN PHẨM</strong>
         </div>
         <div class="card-body">
           <form ng-init="csrf='{{csrf_token()}}'" enctype="multipart/form-data">
@@ -219,7 +219,7 @@ a {
             </div>
 
 			     <div class="form-group col-sm-3">
-              <label for="image_file" class=" form-control-label">
+              <label style="font-weight:bold" for="image_file" class=" form-control-label">
                 Ảnh đại diện
               </label>
               <input type="file" ng-files="setTheFiles($files)" class="form-control imagefile" multiple>
@@ -229,7 +229,7 @@ a {
               <label for="id6" class=" form-control-label">
                  <b>Mô tả</b>
               </label>
-              <textarea name="" id="id6" cols="30" rows="5" ng-model="description" class="form-control"></textarea>
+              <textarea name="" id="id6" cols="30" rows="5" ng-model="description" class="form-control" placeholder="Description..."></textarea>
               <!-- <input type="text" id="id6" ng-model='tenDanhMuc' placeholder="Tên danh mục" class="form-control"> -->
             </div>
 
@@ -392,9 +392,15 @@ a {
                     <div  ng-hide="data.show" >
                         <input type="file" ng-files="setTheFiles($files)" class="form-control imagefile" multiple>
                     </div>
+<<<<<<< Updated upstream
                 </td>
                 <td ><i ng-click="change(data)" style="cursor: pointer;font-size: 25px" class="menu-icon " ng-class="{'ti-save-alt':!(data.show ),'ti-pencil':data.show }"></i></td>
                 <td><i ng-click="delete(data)" style="cursor: pointer;font-size: 25px" class="menu-icon ti-trash"></i></td>
+=======
+                </td> -->
+                <td style="color:darkblue"><i ng-click="change(data)" style="cursor: pointer;font-size: 30px" class="menu-icon " ng-class="{'ti-save-alt':!(data.show ),'ti-pencil':data.show }"></i></td>
+                <td style="color:darkblue"><i ng-click="delete(data)" style="cursor: pointer;font-size: 30px" class="menu-icon ti-trash"></i></td>
+>>>>>>> Stashed changes
               </tr>
             
           </table>

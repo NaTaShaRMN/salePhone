@@ -7,25 +7,25 @@
 					<div class="row">
 						<div class="col-md-3 col-xs-6">
 							<div class="footer">
-								<h3 class="footer-title">About Us</h3>
-								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut.</p>
+								<h3 class="footer-title">Liên lạc với chúng tôi</h3>
+								<p>Chủ tịch Nguyễn Anh Tuấn</p>
 								<ul class="footer-links">
-									<li><a href="#"><i class="fa fa-map-marker"></i>1734 Stonecoal Road</a></li>
-									<li><a href="#"><i class="fa fa-phone"></i>+021-95-51-84</a></li>
-									<li><a href="#"><i class="fa fa-envelope-o"></i>email@email.com</a></li>
+									<li><a href="https://www.youtube.com/watch?v=dGm6_u4ULss"><i class="fa fa-map-marker"></i>Đại học Công Nghệ (UET)</a></li>
+									<li><a href="https://www.youtube.com/watch?v=dGm6_u4ULss"><i class="fa fa-phone"></i>0987654321</a></li>
+									<li><a href="https://www.youtube.com/watch?v=dGm6_u4ULss"><i class="fa fa-envelope-o"></i>yasuo20gg@gmail.com</a></li>
 								</ul>
 							</div>
 						</div>
 
 						<div class="col-md-3 col-xs-6">
 							<div class="footer">
-								<h3 class="footer-title">Categories</h3>
+								<h3 class="footer-title">Thể Loại</h3>
 								<ul class="footer-links">
 									<li><a href="#">Hot deals</a></li>
-									<li><a href="#">Laptops</a></li>
-									<li><a href="#">Smartphones</a></li>
-									<li><a href="#">Cameras</a></li>
-									<li><a href="#">Accessories</a></li>
+									<li><a href="#">iPhone </a></li>
+									<li><a href="#">Samsung</a></li>
+									<li><a href="#">Oppo</a></li>
+									<li><a href="#">Xiaomi</a></li>
 								</ul>
 							</div>
 						</div>
@@ -34,26 +34,26 @@
 
 						<div class="col-md-3 col-xs-6">
 							<div class="footer">
-								<h3 class="footer-title">Information</h3>
+								<h3 class="footer-title">Thông Tin</h3>
 								<ul class="footer-links">
-									<li><a href="#">About Us</a></li>
-									<li><a href="#">Contact Us</a></li>
-									<li><a href="#">Privacy Policy</a></li>
-									<li><a href="#">Orders and Returns</a></li>
-									<li><a href="#">Terms & Conditions</a></li>
+									<li><a href="#">Về chúng tôi</a></li>
+									<li><a href="#">Liên lạc</a></li>
+									<li><a href="#">Chính sách bảo mật</a></li>
+									<li><a href="#">Đơn hàng và gửi trả</a></li>
+									<li><a href="#">Chính sách và điều khoản</a></li>
 								</ul>
 							</div>
 						</div>
 
 						<div class="col-md-3 col-xs-6">
 							<div class="footer">
-								<h3 class="footer-title">Service</h3>
+								<h3 class="footer-title">Dịch vụ</h3>
 								<ul class="footer-links">
-									<li><a href="#">My Account</a></li>
-									<li><a href="#">View Cart</a></li>
-									<li><a href="#">Wishlist</a></li>
-									<li><a href="#">Track My Order</a></li>
-									<li><a href="#">Help</a></li>
+									<li><a href="#">Tài khoản</a></li>
+									<li><a href="#">Xem giỏ hàng</a></li>
+									<li><a href="#">Ưa thích</a></li>
+									<li><a href="#">Kiểm tra đơn hàng</a></li>
+									<li><a href="#">Trợ giúp</a></li>
 								</ul>
 							</div>
 						</div>
