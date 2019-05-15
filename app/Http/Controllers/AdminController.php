@@ -23,6 +23,7 @@ class AdminController extends Controller
 	public function __construct()
 	{
     	$this->middleware('admin');
+      date_default_timezone_set('Asia/Ho_Chi_Minh');
 	}
     //
    	public function color(Request $request)
@@ -476,7 +477,7 @@ class AdminController extends Controller
          return Comment::all();
       }
 
-      public function commentDelete(Request->$request){
+      public function commentDelete(Request $request){
          Comment::find($request->id)->delete();
          return 1;
       }

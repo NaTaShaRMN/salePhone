@@ -41,41 +41,19 @@
                     </a>
                 </div>
                 <div class="login-form">
-                    <form method="POST" action="{{ route('login') }}">
+                    <form method="POST" action="{{ route('forget') }}">
                         @csrf
-                        @if($errors->has('errorLogin'))
+                        @if($errors->has('errorComfirmEmail'))
                         <div class="alert alert-danger">
                             <strong style="display: block; text-align: center;">
-                                {{$errors->first('errorLogin')}}</strong>
+                                {{$errors->first('errorComfirmEmail')}}</strong>
                         </div>
                         @endif
                         <div class="form-group">
                             <label>Email</label>
                             <input type="email" name="email" class="form-control" placeholder="Email" required autofocus>
                         </div>
-                        <div class="form-group">
-                            <label>Mật khẩu</label>
-                            <input type="password" name="password" class="form-control" placeholder="Mật khẩu" required>
-                        </div>
-                        <div class="checkbox">
-                            <label>
-                                <input  type="checkbox" name="remember" id="remember" > Lưu đăng nhập
-                            </label>
-                            <label class="pull-right">
-                                <a href="/forget_password">Quên mật khẩu?</a>
-                            </label>
-
-                        </div>
-                        <button type="submit" class="btn btn-success btn-flat m-b-30 m-t-30">Đăng nhập</button>
-                        <div class="social-login-content">
-                            <div class="social-button">
-                                <button type="button" class="btn social facebook btn-flat btn-addon mb-3"><i class="ti-facebook"></i>Sign in with facebook</button>
-                                <button type="button" class="btn social twitter btn-flat btn-addon mt-2"><i class="ti-twitter"></i>Sign in with twitter</button>
-                            </div>
-                        </div>
-                        <div class="register-link m-t-15 text-center">
-                            <p>Bạn chưa có tài khoản <a href="/register"> Đăng kí</a></p>
-                        </div>
+                        <button type="submit" class="btn btn-success btn-flat m-b-30 m-t-30">Lấy lại mật khẩu</button>
                     </form>
                 </div>
             </div>

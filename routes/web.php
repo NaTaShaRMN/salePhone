@@ -29,11 +29,16 @@ Route::get('/register', 'AccountController@getRegister');
 
 Route::post('/register', 'AccountController@postRegister')->name('register');
 
+Route::get('/forget_password','AccountController@getForgetPassword');
+Route::post('/forget_password','AccountController@postForgetPassword')->name('forget');
+
+Route::post('/password_reset','AccountController@postReset')->name('reset');
+
 Route::get('confirm', function(){
 	return view('confirm_email');
 });
 
-Route::get('confirmuser/{code}', 'RegisterController@confirmUser');
+Route::get('confirmuser/{code}', 'AccountController@confirmUser');
 
 Route::get('/logout',function(){
 	Auth::logout();
