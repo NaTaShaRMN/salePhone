@@ -5,7 +5,7 @@
 				<!-- row -->
 				<div class="row">
 					<div class="col-md-12">
-						<h3 class="breadcrumb-header">Checkout</h3>
+						<h3 class="breadcrumb-header">Kiểm tra đơn hàng</h3>
 						<ul class="breadcrumb-tree">
 							<li><a href="#">Home</a></li>
 							<li class="active">Checkout</li>
@@ -29,7 +29,7 @@
 						<!-- Billing Details -->
 						<div class="billing-details">
 							<div class="section-title">
-								<h3 class="title">Billing address</h3>
+								<h3 class="title">Hóa đơn</h3>
 							</div>
 							<div class="form-group">
 								<input class="input" type="text" name="first-name" placeholder="First Name">

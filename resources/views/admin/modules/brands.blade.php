@@ -128,7 +128,11 @@ a {
     <div class="col-md-12">
       <div class="card">
         <div class="card-header">
+<<<<<<< Updated upstream
           <strong class="card-title">Nhãn hiệu</strong>
+=======
+          <strong class="card-title" style="font-size:25px">QUẢN LÍ NHÃN HIỆU</strong>
+>>>>>>> Stashed changes
           <button class="btn btn-default" ng-click="new()" style="float: right;"><i class="fa fa-plus-square-o" style="font-style: 15px"></i></button>
         </div>
         <div class="card-body">
@@ -145,7 +149,7 @@ a {
                 <td style="text-align:center">
                         {%$index+ 1%}
                 </td>
-                <td title="'Kích cỡ'" style="text-align:center" filter="{ name: 'text'}" sortable="'name'">
+                <td title="'Tên nhãn hiệu'" style="text-align:center" filter="{ name: 'text'}" sortable="'name'">
                     <div ng-show="data.show && (data.new || data.new == null)" >
                        {%data.name%}
                     </div>

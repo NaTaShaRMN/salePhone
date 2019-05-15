@@ -52,7 +52,7 @@ class AdminController extends Controller
    		}else {
    			return $color;
    		}
-   	}	
+   	}
 
    	public function colorDelete(Request $request)
    	{
@@ -196,9 +196,9 @@ class AdminController extends Controller
 		// $products =  DB::table('products');
 		// return Brand::find(1)->product()->get();
 		$brands = Brand::all();
-      foreach ($brands as $value) {
-         $value['product'] = $value->product()->get()->count();
-         }
+	      // foreach ($brands as $value) {
+	      //    $value['product'] = $value->product()->get()->count();
+	      //    }
       return $brands;
    	}
 
