@@ -366,7 +366,7 @@ app.controller('productController',['$scope','$http','NgTableParams', function p
 	    	$scope.brand = {};
 	    	$scope.op = {};
 	    	$scope.description = '';
-
+	    	res.data.color_id = colorArray;
 	    	$scope.datas.unshift(res.data);
 	    	$scope.product = new NgTableParams({}, { dataset: $scope.datas});
 	    });
@@ -375,31 +375,58 @@ app.controller('productController',['$scope','$http','NgTableParams', function p
 	}
 
 	$scope.change = (data)=>{
-		if(data.new == false) {
-			 $http.post('admin/product',{
-				_token: $scope.csrf,
-				name: data.name
-			},{header : {'Content-Type' : 'application/json; charset=UTF-8'}})
-			.then( (req) => {
-				console.log(req.data);
-				if( req.data ){
-					data.id = req.data.id;
-				}
-			})
-			data.new = true;
-		}else{
 			if(!data.show){
+				formData.append('_token',$scope.csrf);
+				if(data.brand_sl){
+					formData.append('brand_id',data.brand_sl.id);
+				}
+				if(data.display_sl){
+					formData.append('display_id',data.display_sl.id);
+				}
+				if(data.storage_sl){
+					formData.append('storage_id',data.storage_sl.id);
+				}
+				if(data.operating_system_sl){
+					formData.append('op_id',data.operating_system_sl.id);
+				}
+
+				var colorArray = [];
+				data.color_sl.map(color => {
+					// formData.append('colors[]', color.id);
+					colorArray.push(color.id);
+				});
+				formData.append('colors',colorArray);
+
+				formData.append('price',data.price);
+				formData.append('sale',data.sale);
+				formData.append('quantity',data.quantity);
+				formData.append('description',data.description);
+				formData.append('name',data.name);
+				formData.append('id',data.id);
+
+				var request = {
+			        method: 'POST',
+			        url: '/admin/product_edit',
+			        data: formData,
+			        headers: {
+			            'Content-Type': undefined
+			        }
+			    };
+			    $http(request).then( function success(res){
+			    	formData = new FormData();
+			    	data.colors = res.data.colors;
+			    	console.log(res.data);
+			    });
 				// console.log(data.id);
-				$http.post('admin/product_edit',{
-					_token: $scope.csrf,
-					id: data.id,
-					name: data.name
-				}).then((req)=>{
-					data.color = req.data.color;
-				})
+				// $http.post('admin/product_edit',{
+				// 	_token: $scope.csrf,
+				// 	id: data.id,
+				// 	name: data.name
+				// }).then((req)=>{
+				// 	data.color = req.data.color;
+				// })
 			}
 			data.show = !data.show;
-		}
 	}
 	$scope.delete = (data)=>{
 		var index = $scope.datas.indexOf(data);

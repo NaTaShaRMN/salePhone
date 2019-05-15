@@ -257,17 +257,18 @@ a {
         <div class="card-body">
           <table id="table-product" ng-table='product' class="table table-striped table-bordered">
           <colgroup>
+            <col width="3%" />
+            <col width="10%" />
+            <col width="3%" />
+            <col width="4%" />
+            <col width="5%" />
             <col width="5%" />
             <col width="10%" />
+            <col width="10%" />
+            <col width="10%" />
+            <col width="10%" />
+            <col width="10%" />
             <col width="5%" />
-            <col width="5%" />
-            <col width="5%" />
-            <col width="5%" />
-            <col width="10%" />
-            <col width="10%" />
-            <col width="10%" />
-            <col width="10%" />
-            <col width="10%" />
             <col width="5%" />
             <col width="5%" />
             <col width="5%" />
@@ -319,7 +320,11 @@ a {
                        {%data.brand%}
                     </div>
                     <div  ng-hide="data.show" >
-                        <input type="text" ng-model="data.brand" class="form-control" >
+                        <select class="form-control " 
+                          ng-options="option.name for option in brands track by option.id"
+                          ng-model="data.brand_sl">
+                        <option value=""><b>{%data.brand%}<b></option>
+                        </select>
                     </div>
                 </td>
 
@@ -328,7 +333,11 @@ a {
                        {%data.display%}
                     </div>
                     <div  ng-hide="data.show" >
-                        <input type="text" ng-model="data.display" class="form-control" >
+                        <select class="form-control " 
+                          ng-options="option.size for option in displays track by option.id"
+                          ng-model="data.display_sl">
+                        <option value=""><b>{%data.display%}<b></option>
+                        </select>
                     </div>
                 </td>
 
@@ -337,7 +346,11 @@ a {
                        {%data.storage%}
                     </div>
                     <div  ng-hide="data.show" >
-                        <input type="text" ng-model="data.storage" class="form-control" >
+                        <select class="form-control " 
+                          ng-options="option.size for option in storages track by option.id"
+                          ng-model="data.storage_sl">
+                        <option value=""><b>{%data.storage%}</b></option>
+                        </select>
                     </div>
                 </td>
 
@@ -346,17 +359,20 @@ a {
                        {%data.operating_system%}
                     </div>
                     <div  ng-hide="data.show" >
-                        <input type="text" ng-model="data.operating_system" class="form-control" >
+                        <select class="form-control " 
+                          ng-options="option.name for option in ops track by option.id"
+                          ng-model="data.operating_system_sl">
+                        <option value=""><b>{%data.operating_system%}<b></option>
+                        </select>
                     </div>
                 </td>
                   
-                <td title="'Màu sắc'" filter="disabled" sortable="'colors'">
+                <td title="'Màu sắc'" filter="disabled" sortable="'colors'" ng-init="data.color_sl = []">
                     <div ng-show="data.show " >
-                       <!-- {%data.colors%} -->
                        <div ng-repeat="color in data.colors">{%color.color%}</div>
                     </div>
                     <div  ng-hide="data.show" >
-                        <input type="text" ng-model="data.color" class="form-control" >
+                        <div ng-dropdown-multiselect="" options="colors" selected-model="data.color_sl" extra-settings="colorSetting"></div>
                     </div>
                 </td>
 
@@ -369,23 +385,12 @@ a {
                     </div>
                 </td>
 
-                <td title="'Link ảnh'" filter="disabled" sortable="'links'">
+                <!-- <td title="'Link ảnh'" filter="disabled" sortable="'links'" >
                     <div ng-show="data.show " >
                        <div ng-repeat="link in data.links"><a href="/storage/{%link.link%}" target="_blank">{%link.link%}</a></div>
                     </div>
                     <div  ng-hide="data.show" >
                         <input type="text" ng-model="data.links" class="form-control" >
-                    </div>
-                </td>
-                <!-- <td title="'Loại danh mục'" filter="{ showTen: 'text'}" sortable="'showTen'">
-                    <div ng-show="data.show" >
-                        {%data.showTen%}
-                    </div>
-                    <div  ng-hide="data.show" >
-                        <select class="form-control" 
-                        ng-options="option.tenloaidanhmuc for option in loaidanhmuc track by option.id"
-                        ng-model="data.loaidanhmuc_id">
-                        </select>
                     </div>
                 </td> -->
                 <td ><i ng-click="change(data)" style="cursor: pointer;font-size: 25px" class="menu-icon " ng-class="{'ti-save-alt':!(data.show ),'ti-pencil':data.show }"></i></td>
