@@ -15,9 +15,9 @@ Route::get('/', 'UserController@index');
 
 Route::get('/index', 'UserController@index');
 
-Route::get('/store', 'UserController@store');
+Route::get('/store/{type}', 'UserController@store');
 
-Route::get('/product', 'UserController@product');
+Route::get('/product/{id}', 'UserController@product');
 
 Route::get('/checkout', 'UserController@checkout');
 
