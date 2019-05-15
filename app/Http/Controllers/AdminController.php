@@ -465,13 +465,17 @@ class AdminController extends Controller
       // end orderdetails
 
       public function userInformation(){
-         $orderdetails = Orderdetail::all();
-         foreach ($orderdetails as $value) {
-            $value->product_name = Product::find($value->id)->name;
-         }
-         return $orderdetails;
+         return User::all();
       }
 
+      public function userEdit(Request $request){
+         $user = User::find($request->id);
+         if(isset($request->level)){
+            $user->level = $request->level;
+         }
+         $user->save();
+         return $user->level;
+      }
       //comment
       public function commentInformation(){
          return Comment::all();
