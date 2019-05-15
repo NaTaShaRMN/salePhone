@@ -136,9 +136,10 @@ a {
           <colgroup>
             <col width="5%" />
             <col width="25%" />
-            <col width="25%" />
-            <col width="5%" />
             <col width="20%" />
+            <col width="5%" />
+            <col width="10%" />
+            <col width="15%" />
             <col width="10%" />
             <col width="10%" />
           </colgroup>
@@ -147,32 +148,36 @@ a {
                         {%$index+ 1%}
                 </td>
                 <td title="'Têm'" style="text-align:center" filter="{ name: 'text'}" sortable="'name'">
-                    <div ng-show="data.show && (data.new || data.new == null)" >
+                    <div >
                        {%data.name%}
-                    </div>
-                    <div  ng-hide="data.show && (data.new || data.new == null)" >
-                        <input type="text" ng-model="data.name" class="form-control" >
                     </div>
                 </td>
                 <td title="'Email'" style="text-align:center" filter="{ email: 'text'}" sortable="'email'">
-                    <div ng-show="data.show && (data.new || data.new == null)" >
+                    <div >
                        {%data.email%}
-                    </div>
-                    <div  ng-hide="data.show && (data.new || data.new == null)" >
-                        <input type="text" ng-model="data.email" class="form-control" >
                     </div>
                 </td>
                 <td title="'Id'" style="text-align:center" filter="{ id: 'number'}" sortable="'id'">
                     {%data.id%}
                 </td>
+                <td title="'Số ĐT'" style="text-align:center" filter="{ phone: 'text'}" sortable="'phone'">
+                    {%data.phone%}
+                </td>
                 <td title="'Chức vụ'" style="text-align:center" filter="{ level: 'number'}" sortable="'level'">
-                    <div ng-show="data.show && (data.new || data.new == null)" >
-                       <div ng-if="data.level == 2">Admin</div>
-                       <div ng-if="data.level == 1">Người dùng</div>
-                       <div ng-if="data.level == 2">Chưa xác nhận</div>
+                    <div ng-show="data.show">
+                       <div ng-show="data.level == 2">Admin</div>
+                       <div ng-show="data.level == 1">Người dùng</div>
+                       <div ng-show="data.level == 0">Chưa xác nhận</div>
                     </div>
-                    <div  ng-hide="data.show && (data.new || data.new == null)" >
-                        <input type="text" ng-model="data.level" class="form-control" >
+                    <div  ng-hide="data.show " >
+                        <select class="form-control" ng-model="data.level_sl" >
+                            <option value="">
+                               Thay đổi
+                            </option>
+                            <option value="2" >Admin</option>
+                            <option value="1" >Người dùng</option>
+                            <option value="0" >Chưa xác nhận</option>
+                        </select>
                     </div>
                 </td>
                 <!-- <td title="'Loại danh mục'" filter="{ showTen: 'text'}" sortable="'showTen'">
@@ -186,7 +191,7 @@ a {
                         </select>
                     </div>
                 </td> -->
-                <td style="text-align:center;color:red"><i ng-click="change(data)" style="cursor: pointer;font-size: 25px" class="menu-icon " ng-class="{'ti-save-alt':!(data.show && (data.new || data.new == null)),'ti-pencil':data.show && (data.new || data.new == null)}"></i></td>
+                <td style="text-align:center;color:red"><i ng-click="change(data)" style="cursor: pointer;font-size: 25px" class="menu-icon " ng-class="{'ti-save-alt':!(data.show ),'ti-pencil':data.show }"></i></td>
                 <td style="text-align:center;color:red"><i ng-click="delete(data)" style="cursor: pointer;font-size: 25px" class="menu-icon ti-trash"></i></td>
               </tr>
             

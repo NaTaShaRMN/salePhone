@@ -481,37 +481,23 @@ app.controller('userController',['$scope','$http','NgTableParams', function user
 		$scope.user = new NgTableParams({}, { dataset: $scope.datas});
 	});
 	}
-	$scope.new = ()=>{
-		$scope.datas.unshift({name:'',id: 'NULL',product: '0',new:false});
-		$scope.user = new NgTableParams({}, { dataset: $scope.datas});
-	}
+	// $scope.new = ()=>{
+	// 	$scope.datas.unshift({name:'',id: 'NULL',product: '0',new:false});
+	// 	$scope.user = new NgTableParams({}, { dataset: $scope.datas});
+	// }
 	$scope.change = (data)=>{
-		if(data.new == false) {
-			 $http.post('admin/user',{
+		if(!data.show){
+			// console.log(data.id);
+			$http.post('admin/user_edit',{
 				_token: $scope.csrf,
-				name: data.name
-			},{header : {'Content-Type' : 'application/json; charset=UTF-8'}})
-			.then( (req) => {
-				console.log(req.data);
-				if( req.data ){
-					data.id = req.data.id;
-				}
+				id: data.id,
+				level: data.level_sl
+			}).then((req)=>{
+				data.level = req.data;
+				console.log(req.data,data);
 			})
-			data.new = true;
-		}else{
-			if(!data.show){
-				// console.log(data.id);
-				$http.post('admin/user_edit',{
-					_token: $scope.csrf,
-					id: data.id,
-					name: data.name
-				}).then((req)=>{
-					data.color = req.data.color;
-				})
-			}
-			data.show = !data.show;
 		}
-		
+		data.show = !data.show;
 	}
 	$scope.delete = (data)=>{
 		var index = $scope.datas.indexOf(data);
