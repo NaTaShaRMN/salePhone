@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use DB;
+
+use DB,Cart;
 
 class UserController extends Controller
 {
@@ -102,4 +103,14 @@ class UserController extends Controller
         ->get();
       return view('user/store',compact('product_asType','tyPe','type_CheckBox','topSelling_product'));
    }
+   // public function addToCart($id){
+   //       $product = DB::table('products')
+   //       ->join('images','products.id','=','images.product_id')
+   //       ->where('products.id','=',$id)->first();
+   //       Cart::add(['id'=>$product->id,'name'=>$product->name,'qty'=>1,'price'=>$product->price,
+   //       'options'=>['img'=>$product->link]]);
+         
+   //       return redirect()->back();
+   // }
+   
 }

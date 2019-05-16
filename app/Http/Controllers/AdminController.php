@@ -18,6 +18,7 @@ use App\Orderdetail;
 use App\Fk_color_product;
 use App\Comment;
 
+
 class AdminController extends Controller
 {
 	public function __construct()
@@ -196,7 +197,11 @@ class AdminController extends Controller
    	{
 		// $products =  DB::table('products');
 		// return Brand::find(1)->product()->get();
-		$brands = Brand::all();
+      $brands = Brand::all();
+      // ->join('products','brands.id','=','products.brand_id')
+      // ->select('brands.*',DB::raw('sum(products.quantity) as quantitys'))
+      // ->groupBy('brands.name')
+      // ->get();
 	      // foreach ($brands as $value) {
 	      //    $value['product'] = $value->product()->get()->count();
 	      //    }

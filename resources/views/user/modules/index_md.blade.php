@@ -63,7 +63,7 @@
 					<!-- section title -->
 					<div class="col-md-12">
 						<div class="section-title">
-							<h3 class="title">New Products</h3>
+							<h3 class="title">Sản phẩm mới</h3>
 							<div class="section-nav">
 								<ul class="section-tab-nav tab-nav">
 										<li class="active"><a data-toggle="tab" href="#tab2">Laptops</a></li>
@@ -109,7 +109,7 @@
 												</div>
 											</div>
 											<div class="add-to-cart">
-												<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
+											<a href=""><button class="add-to-cart-btn" ><i class="fa fa-shopping-cart"></i> Add to cart</button> </a>
 											</div>
 										</div>
 										<!-- /product -->
@@ -147,19 +147,19 @@
 								</li>
 								<li>
 									<div>
-										<h3>10</h3>
+										<h3 id="h">10</h3>
 										<span>Hours</span>
 									</div>
 								</li>
 								<li>
 									<div>
-										<h3>34</h3>
+										<h3 id="m">34</h3>
 										<span>Mins</span>
 									</div>
 								</li>
 								<li>
 									<div>
-										<h3>60</h3>
+										<h3 id="s">60</h3>
 										<span>Secs</span>
 									</div>
 								</li>
@@ -176,6 +176,7 @@
 		</div>
 		<!-- /HOT DEAL SECTION -->
 
+		
 		<!-- SECTION -->
 		<div class="section">
 			<!-- container -->
@@ -186,7 +187,7 @@
 					<!-- section title -->
 					<div class="col-md-12">
 						<div class="section-title">
-							<h3 class="title">Top selling</h3>
+							<h3 class="title">Giảm giá nhiều nhất</h3>
 							<div class="section-nav">
 								<ul class="section-tab-nav tab-nav">
 									<li class="active"><a data-toggle="tab" href="#tab2">Laptops</a></li>

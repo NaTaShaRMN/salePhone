@@ -44,6 +44,11 @@ Route::get('/logout',function(){
 	Auth::logout();
 	return redirect('/');
 });
+// them vao gio hang
+Route::get('cart/add-to-card/{id}','UserController@addToCart')->name('addtocard');
+	Route::get('cart/update-cart/{id}', 'UserController@updateCart')->name('updatecart');
+	Route::get('cart/remove/{id}', 'UserController@removeCart')->name('removecart');
+	Route::get('cart/delete', 'UserController@destroyCart')->name('destroycart');
 
 Route::group(['prefix'=>'admin','middleware'=>'admin'],
 	function(){
@@ -217,4 +222,6 @@ Route::group(['prefix'=>'admin','middleware'=>'admin'],
 		// image
 
 	}
+	// them vao gio hang
+	
 );
