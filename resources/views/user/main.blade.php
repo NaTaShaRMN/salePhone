@@ -53,6 +53,8 @@
 
 		@yield('checkout')
 
+		@yield('search')
+
 		@yield('account')
 		
 		<!-- NEWSLETTER -->

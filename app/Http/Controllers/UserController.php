@@ -112,5 +112,21 @@ class UserController extends Controller
          
    //       return redirect()->back();
    // }
-   
+   public function getSearch(Request $request){
+      $product = DB::table('products')
+      ->join('images','products.id','=','images.product_id')
+      ->where('products.name','like','%'.$request->search.'%')
+      ->orWhere('products.price',$request->search)
+      ->get();
+      
+      $type_CheckBox = DB::table('brands')->get();
+      $topSelling_product = DB::table('products')
+        ->join('images','products.id','=','images.product_id')
+        ->where('products.sale','=','1')
+        ->orderBy('products.price','DESC')
+        ->offset(0)
+        ->limit(5)
+        ->get();
+      return view('user/search',compact('product','type_CheckBox','topSelling_product'));
+   }
 }

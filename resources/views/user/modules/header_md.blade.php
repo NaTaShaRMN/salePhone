@@ -34,7 +34,7 @@
 						<!-- SEARCH BAR -->
 						<div class="col-md-6">
 							<div class="header-search">
-								<form>
+								<form action="{{route('search')}}" method="get" role="search" >
 									<!-- <select class="input-select">
 										<option value="0">All Categories</option>
 										<option value="1">Category 01</option>
