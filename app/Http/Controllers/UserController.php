@@ -117,7 +117,7 @@ class UserController extends Controller
       ->join('images','products.id','=','images.product_id')
       ->where('products.name','like','%'.$request->search.'%')
       ->orWhere('products.price',$request->search)
-      ->get();
+      ->paginate(6);
       
       $type_CheckBox = DB::table('brands')->get();
       $topSelling_product = DB::table('products')
