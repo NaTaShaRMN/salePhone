@@ -127,7 +127,12 @@
 									<div class="product-img">
 										<img src="./storage/{{$product->link}}" alt="">
 										<div class="product-label">
-											<span class="sale">-30%</span>
+											<?php
+												if ($product->sale==1)
+												echo '
+													<span class="sale">Sale</span>
+													';
+											?>
 											<span class="new">NEW</span>
 										</div>
 									</div>
@@ -160,10 +165,12 @@
 						<!-- /store products -->
 
 						<!-- store bottom filter -->
-						<div class="store-filter clearfix">
-							<span class="store-qty">Showing 9 products</span>
-							
-						</div>
+						<?php
+						if (count($product_asType)==0)
+                		echo '<div class="store-filter clearfix">
+                    	<span class="store-qty">Showing 0 products</span>"
+                    
+                		</div>' ?>
 						<!-- /store bottom filter -->
 					</div>
 					<!-- /STORE -->

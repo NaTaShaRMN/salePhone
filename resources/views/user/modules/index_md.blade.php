@@ -41,10 +41,9 @@
 							<h3 class="title">Sản phẩm mới</h3>
 							<div class="section-nav">
 								<ul class="section-tab-nav tab-nav">
-										<li class="active"><a data-toggle="tab" href="#tab2">Laptops</a></li>
-										<li><a data-toggle="tab" href="#tab2">Smartphones</a></li>
-										<li><a data-toggle="tab" href="#tab2">Cameras</a></li>
-										<li><a data-toggle="tab" href="#tab2">Accessories</a></li>
+									@foreach($brands as $brand)	
+								<li style="color:darkblue"><a  href="{{URL::to('store',$brand->id)}}">{{$brand->name}}</a></li>
+									@endforeach
 								</ul>
 							</div>
 						</div>
@@ -64,7 +63,15 @@
 										<div class="product">
 											<div class="product-img">
 												<img src="./storage/{{$product->link}}" alt="">
-												
+												<div class="product-label">
+													<?php
+														if ($product->sale==1)
+														echo '
+															<span class="sale">Sale</span>
+															';
+													?>
+													<span class="new">NEW</span>
+												</div>
 											</div>
 											<div class="product-body">
 												<p class="product-category">Điện thoại</p>
@@ -79,7 +86,7 @@
 												</div>
 												<div class="product-btns">
 													<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
-													<button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
+													
 													<button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
 												</div>
 											</div>
@@ -164,12 +171,7 @@
 						<div class="section-title">
 							<h3 class="title">Giảm giá nhiều nhất</h3>
 							<div class="section-nav">
-								<ul class="section-tab-nav tab-nav">
-									<li class="active"><a data-toggle="tab" href="#tab2">Laptops</a></li>
-									<li><a data-toggle="tab" href="#tab2">Smartphones</a></li>
-									<li><a data-toggle="tab" href="#tab2">Cameras</a></li>
-									<li><a data-toggle="tab" href="#tab2">Accessories</a></li>
-								</ul>
+								
 							</div>
 						</div>
 					</div>
@@ -188,7 +190,15 @@
 										<div class="product">
 											<div class="product-img">
 												<img src="./storage/{{$product->link}}" alt="">
-												
+												<div class="product-label">
+													<?php
+														if ($product->sale==1)
+														echo '
+															<span class="sale">Sale</span>
+															';
+													?>
+													<span class="new">NEW</span>
+												</div>
 											</div>
 											<div class="product-body">
 												<p class="product-category">Điện thoại</p>
@@ -203,7 +213,7 @@
 												</div>
 												<div class="product-btns">
 													<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
-													<button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
+													
 													<button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
 												</div>
 											</div>
