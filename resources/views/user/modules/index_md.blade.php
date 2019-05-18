@@ -88,7 +88,15 @@
 										<div class="product">
 											<div class="product-img">
 												<img src="./storage/{{$product->link}}" alt="">
-												
+												<div class="product-label">
+													<?php
+														if ($product->sale==1)
+														echo '
+															<span class="sale">Sale</span>
+															';
+													?>
+													<span class="new">NEW</span>
+												</div>
 											</div>
 											<div class="product-body">
 												<p class="product-category">Điện thoại</p>
@@ -103,7 +111,7 @@
 												</div>
 												<div class="product-btns">
 													<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
-													<button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
+													
 													<button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
 												</div>
 											</div>
@@ -207,7 +215,15 @@
 										<div class="product">
 											<div class="product-img">
 												<img src="./storage/{{$product->link}}" alt="">
-												
+												<div class="product-label">
+													<?php
+														if ($product->sale==1)
+														echo '
+															<span class="sale">Sale</span>
+															';
+													?>
+													<span class="new">NEW</span>
+												</div>
 											</div>
 											<div class="product-body">
 												<p class="product-category">Điện thoại</p>
@@ -222,7 +238,7 @@
 												</div>
 												<div class="product-btns">
 													<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
-													<button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
+													
 													<button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
 												</div>
 											</div>

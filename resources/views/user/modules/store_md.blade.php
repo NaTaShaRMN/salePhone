@@ -127,7 +127,12 @@
 									<div class="product-img">
 										<img src="./storage/{{$product->link}}" alt="">
 										<div class="product-label">
-											<span class="sale">-30%</span>
+											<?php
+												if ($product->sale==1)
+												echo '
+													<span class="sale">Sale</span>
+													';
+											?>
 											<span class="new">NEW</span>
 										</div>
 									</div>
