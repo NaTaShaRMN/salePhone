@@ -101,9 +101,11 @@ class UserController extends Controller
    //       return redirect()->back();
    // }
    public function getSearch(Request $request){
+    // if($request->has('brand'))
       $product = DB::table('products')
       ->join('images','products.id','=','images.product_id')
       ->where('products.name','like','%'.$request->search.'%')
+      ->where('products.brand_id','like','%'.$request->brand.'%')
       ->orWhere('products.price',$request->search)
       ->paginate(6);
       
