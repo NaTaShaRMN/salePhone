@@ -17,6 +17,7 @@ use App\User;
 use App\Orderdetail;
 use App\Fk_color_product;
 use App\Comment;
+use App\Ex;
 
 
 class AdminController extends Controller
@@ -492,4 +493,50 @@ class AdminController extends Controller
       }
 
       //comment
+
+      //ex
+      public function ex(Request $request)
+      {
+         $ex = new Ex();
+         $ex->text = $request->text;
+         $ex->link = $request->link;
+         $ex->type = $request->type;
+         if($request->file('imagefile')!== null){
+               $ex->image = $request->file('imagefile')->store('public');
+               $ex->image = str_replace('public/','',$ex->image);
+         }
+
+         $ex->save();
+         return $ex;
+      }
+
+      public function exInformation()
+      {
+         $ex = Ex::all();
+         return $ex;
+      }
+
+      public function exEdit(Request $request)
+      {
+         $ex = Ex::find($request->id);
+         // return $ex;
+         $ex->text = $request->text;
+         $ex->link = $request->link;
+         $ex->type = $request->type;
+         if($request->file('imagefile')!== null){
+               Storage::delete('public/'.$ex->image);
+               $ex->image = $request->file('imagefile')->store('public');
+               $ex->image = str_replace('public/','',$ex->image);
+         }
+         $ex->save();
+         return $ex;
+      }  
+
+      public function exDelete(Request $request)
+      {
+         $ex = Ex::find($request->id);
+         Storage::delete('public/'.$ex->image);
+         $ex->delete();
+         return 1;
+      }
 }
