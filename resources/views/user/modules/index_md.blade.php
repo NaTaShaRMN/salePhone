@@ -66,10 +66,9 @@
 							<h3 class="title">Sản phẩm mới</h3>
 							<div class="section-nav">
 								<ul class="section-tab-nav tab-nav">
-										<li class="active"><a data-toggle="tab" href="#tab2">Laptops</a></li>
-										<li><a data-toggle="tab" href="#tab2">Smartphones</a></li>
-										<li><a data-toggle="tab" href="#tab2">Cameras</a></li>
-										<li><a data-toggle="tab" href="#tab2">Accessories</a></li>
+									@foreach($brands as $brand)	
+								<li style="color:darkblue"><a  href="{{URL::to('store',$brand->id)}}">{{$brand->name}}</a></li>
+									@endforeach
 								</ul>
 							</div>
 						</div>
@@ -189,12 +188,7 @@
 						<div class="section-title">
 							<h3 class="title">Giảm giá nhiều nhất</h3>
 							<div class="section-nav">
-								<ul class="section-tab-nav tab-nav">
-									<li class="active"><a data-toggle="tab" href="#tab2">Laptops</a></li>
-									<li><a data-toggle="tab" href="#tab2">Smartphones</a></li>
-									<li><a data-toggle="tab" href="#tab2">Cameras</a></li>
-									<li><a data-toggle="tab" href="#tab2">Accessories</a></li>
-								</ul>
+								
 							</div>
 						</div>
 					</div>

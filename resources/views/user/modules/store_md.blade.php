@@ -160,10 +160,12 @@
 						<!-- /store products -->
 
 						<!-- store bottom filter -->
-						<div class="store-filter clearfix">
-							<span class="store-qty">Showing 9 products</span>
-							
-						</div>
+						<?php
+						if (count($product_asType)==0)
+                		echo '<div class="store-filter clearfix">
+                    	<span class="store-qty">Showing 0 products</span>"
+                    
+                		</div>' ?>
 						<!-- /store bottom filter -->
 					</div>
 					<!-- /STORE -->

@@ -70,7 +70,7 @@
 									<i class="fa fa-star"></i>
 									<i class="fa fa-star-o"></i>
 								</div>
-								<a class="review-link" href="#">10 Review(s) | Add your review</a>
+								<a class="review-link" href="#">10 Review(s)</a>
 							</div>
 							<div>
 								<h3 class="product-price">{{$product->price}}<del class="product-old-price"></del></h3>
@@ -79,12 +79,6 @@
 						<p>{{$product->description}}</p>
 
 							<div class="product-options">
-								<label>
-									Size
-									<select class="input-select">
-										<option value="0">X</option>
-									</select>
-								</label>
 								<label>
 									Color
 									<select class="input-select">
@@ -107,14 +101,10 @@
 
 							<ul class="product-btns">
 								<li><a href="#"><i class="fa fa-heart-o"></i> add to wishlist</a></li>
-								<li><a href="#"><i class="fa fa-exchange"></i> add to compare</a></li>
+								
 							</ul>
 
-							<ul class="product-links">
-								<li>Category:</li>
-								<li><a href="#">Headphones</a></li>
-								<li><a href="#">Accessories</a></li>
-							</ul>
+							
 
 							<!-- <ul class="product-links">
 								<li>Share:</li>
