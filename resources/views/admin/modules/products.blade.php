@@ -255,6 +255,7 @@ a {
           <!-- <button class="btn btn-default" ng-click="new()" style="float: right;"><i class="fa fa-plus-square-o" style="font-style: 15px"></i></button> -->
         </div>
         <div class="card-body">
+          
           <table id="table-product" ng-table='product' class="table table-striped table-bordered">
           <colgroup>
             <col width="3%" />
@@ -392,15 +393,15 @@ a {
                     <div  ng-hide="data.show" >
                         <input type="file" ng-files="setTheFiles($files)" class="form-control imagefile" multiple>
                     </div>
-<<<<<<< Updated upstream
+<!-- <<<<<<< Updated upstream
                 </td>
                 <td ><i ng-click="change(data)" style="cursor: pointer;font-size: 25px" class="menu-icon " ng-class="{'ti-save-alt':!(data.show ),'ti-pencil':data.show }"></i></td>
                 <td><i ng-click="delete(data)" style="cursor: pointer;font-size: 25px" class="menu-icon ti-trash"></i></td>
-=======
-                </td> -->
+======= -->
+                <!-- </td> --> 
                 <td style="color:darkblue"><i ng-click="change(data)" style="cursor: pointer;font-size: 30px" class="menu-icon " ng-class="{'ti-save-alt':!(data.show ),'ti-pencil':data.show }"></i></td>
                 <td style="color:darkblue"><i ng-click="delete(data)" style="cursor: pointer;font-size: 30px" class="menu-icon ti-trash"></i></td>
->>>>>>> Stashed changes
+<!-- >>>>>>> Stashed changes -->
               </tr>
             
           </table>

@@ -69,7 +69,11 @@
 												</div>
 												<div class="product-body">
 													<p class="product-category">{{$brand->name}}</p>
+<<<<<<< HEAD
 													<h3 class="product-name"><a href="{{route('product',$product->id)}}">{{$product->name}}</a></h3>
+=======
+													<h3 class="product-name"><a href="">{{$product->name}}</a></h3>
+>>>>>>> 3ed4d603476fd4f163c08659a0253a2d7a3bc62f
 													<h4 class="product-price">{{number_format($product->price*(1-$product->sale/100))}}<del class="product-old-price">{{number_format($product->price)}}</del></h4>
 													<div class="product-rating">
 														<i class="fa fa-star"></i>
@@ -106,7 +110,11 @@
 		<!-- /SECTION -->
 
 		<!-- HOT DEAL SECTION -->
+<<<<<<< HEAD
 		<div id="hot-deal" style="background-image: url('/storage/{{$silde->image}}');min-height: 350px; " class="section" >
+=======
+		<div id="hot-deal" style="background-image: url('/storage/{{$silde->image}}');min-height: 350px;" class="section">
+>>>>>>> 3ed4d603476fd4f163c08659a0253a2d7a3bc62f
 			<!-- container -->
 			<div class="container">
 				<!-- row -->
@@ -189,7 +197,11 @@
 											</div>
 											<div class="product-body">
 												<p class="product-category">Điện thoại</p>
+<<<<<<< HEAD
 											<h3 class="product-name"><a href="{{route('product',$product->id)}}">{{$product->name}}</a></h3>
+=======
+											<h3 class="product-name"><a href="asdasda">{{$product->name}}</a></h3>
+>>>>>>> 3ed4d603476fd4f163c08659a0253a2d7a3bc62f
 												<h4 class="product-price"> {{number_format($product->price*(1- $product->sale/100))}}<del class="product-old-price">{{number_format($product->price)}}</del></h4>
 												<!-- <div class="product-rating">
 													<i class="fa fa-star"></i>
@@ -234,7 +246,11 @@
 					@if ($loop->index < 4)
 					<div class="col-md-3 col-xs-6">
 						<div class="section-title">
+<<<<<<< HEAD
 							<h4 class="title">{{$brand->name}} Nổi Bật</h4>
+=======
+							<a href="/store?brand[]={{$brand->id}}"><h4 class="title">{{$brand->name}} Nổi Bật</h4></a>
+>>>>>>> 3ed4d603476fd4f163c08659a0253a2d7a3bc62f
 							<div class="section-nav">
 								<div id="slick-nav-3" class="products-slick-nav"></div>
 							</div>
@@ -246,14 +262,22 @@
 								@foreach($brand->products as $product)
 								<!-- product widget -->
 								<div class="product-widget">
+<<<<<<< HEAD
 									<a href="{{route('product',$product->id)}}">
+=======
+									<a href="">
+>>>>>>> 3ed4d603476fd4f163c08659a0253a2d7a3bc62f
 									<div class="product-img">
 									<img src="/storage/{{$product->link}}" alt="">
 									</div>
 									</a>
 									<div class="product-body">
 										<p class="product-category">Điện thoại</p>
+<<<<<<< HEAD
 									<h3 class="product-name"><a href="{{route('product',$product->id)}}">{{$product->name}}</a></h3>
+=======
+									<h3 class="product-name"><a href="">{{$product->name}}</a></h3>
+>>>>>>> 3ed4d603476fd4f163c08659a0253a2d7a3bc62f
 									<h4 class="product-price">{{number_format($product->price)}} VNĐ<del class="product-old-price"></del></h4>
 									</div>
 								</div>
