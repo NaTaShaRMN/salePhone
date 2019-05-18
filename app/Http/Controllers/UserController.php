@@ -5,8 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use DB,Cart;
-use Validator;
-use App\Comment;
+use App\Brand;
 
 class UserController extends Controller
 {
@@ -26,45 +25,31 @@ class UserController extends Controller
         ->get();
         //print_r($new_product);
         
-        $topSelling_product = DB::table('products')
-        ->join('images','products.id','=','images.product_id')
-        ->where('products.sale','=','1')
-        ->orderBy('products.price','DESC')
-        ->offset(0)
-        ->limit(5)
-        ->get();
-        //print_r($topSelling_product);
-        
         $brands = DB::table('brands')
         ->get();
         
-        $topSelling_bottom_iPhone = DB::table('products')
-        ->join('brands','products.brand_id','=','brands.id')
-        ->join('images','products.id','=','images.product_id')
-        ->where('brands.id','=','2')
-        ->offset(0)
-        ->limit(3)
-        ->get();
-        
-        $topSelling_bottom_Samsung = DB::table('products')
-        ->join('brands','products.brand_id','=','brands.id')
-        ->join('images','products.id','=','images.product_id')
-        ->where('brands.id','=','3')
-        ->offset(0)
-        ->limit(3)
-        ->get();
-        //print_r($brands);
-        
-        
-        $topSelling_bottom_Oppo = DB::table('products')
-        ->join('brands','products.brand_id','=','brands.id')
-        ->join('images','products.id','=','images.product_id')
-        ->where('brands.id','=','8')
-        ->offset(0)
-        ->limit(3)
-        ->get();
-        return view('user/index',compact('new_product','topSelling_product','brands',
-         'topSelling_bottom_iPhone','topSelling_bottom_Samsung','topSelling_bottom_Oppo'));
+        foreach ($brands as $brand) {
+            $product = DB::table('products')
+            ->join('images','products.id','=','images.product_id')
+            ->select('products.*','images.link')
+            ->where('products.brand_id',$brand->id)
+            ->orderBy('products.created_at', 'DESC')
+            ->offset(0)
+            ->limit(5)
+            ->get();
+
+            $brand->products = $product;
+        }
+
+        $topSell = DB::table('products')
+          ->join('images','products.id','=','images.product_id')
+          ->select('products.*','images.link')
+          ->orderBy('products.sale', 'DESC')
+          ->offset(0)
+          ->limit(5)
+          ->get();
+
+        return view('user/index',compact('new_product','brands','topSell'));
    }
 
    public function product($id)
@@ -80,14 +65,8 @@ class UserController extends Controller
       ->offset(0)
       ->limit(4)
       ->get();
-      $size_comment = DB::table('comments')->where('product_id',$product->id)->get();
-      $comments = DB::table('comments')
-      ->where('product_id',$product->id)
-      ->orderBy('created_at','DESC')
-      ->paginate(3);
       
-      
-      return view('user/product',compact('product','relate_product','brand','comments','size_comment'));
+      return view('user/product',compact('product','relate_product','brand'));
    }
 
    public function checkout()
@@ -137,42 +116,5 @@ class UserController extends Controller
         ->limit(5)
         ->get();
       return view('user/search',compact('product','type_CheckBox','topSelling_product'));
-   }
-   public function addComment(Request $req,$id){
-      
-      $product = DB::table('products')
-      ->join('images','products.id','=','images.product_id')
-      ->where('products.id','=',$id)->first();
-      
-      $messages = [
-         'required' => 'Trường :attribute bắt buộc nhập.',
-         'email'    => 'Trường :attribute phải có định dạng email'
-     ];
-     $validator = Validator::make($req->all(), [
-           'name'     => 'required|max:255',
-           'email'    => 'required|email',
-
-       ], $messages);
-       if ($validator->fails()) {
-         return redirect()->back()
-                 ->withErrors($validator)
-                 ->withInput();
-       } else {
-        // Lưu thông tin vào database, phần này sẽ giới thiệu ở bài về database
-        $name = $req->input('name');
-        $email = $req->input('email');
-        $id_product = $product->id;
-        $comments = $req->comment;
-        
-        $comment = new Comment();
-        $comment->product_id = $id_product;
-        $comment->comment = $comments;
-        $comment->email = $email;
-        $comment->name = $name;
-        $comment->save();
-        //DB::insert('insert into comments (product_id, comment, email, name) values (?, ?, ?, ?)', [$id_product, $comment, $email, $name]);
-        return redirect()->back()
-              ->with('message', 'Success !!!');
-     }
    }
 }
