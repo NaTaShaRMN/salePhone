@@ -48,6 +48,7 @@ Route::get('/search', [
 	'uses' =>'UserController@getSearch',
 	'as' => 'search'
 	]);
+Route::get('/comment/{id}', 'UserController@addComment')->name('comment');
 // them vao gio hang
 // Route::get('cart/add-to-card/{id}','UserController@addToCart')->name('addtocard');
 // Route::get('cart/update-cart/{id}', 'UserController@updateCart')->name('updatecart');

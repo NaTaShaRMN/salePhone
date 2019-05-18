@@ -74,7 +74,7 @@
 							</div>
 							<div>
 								<h3 class="product-price">{{$product->price}}<del class="product-old-price"></del></h3>
-								<span class="product-available">In Stock</span>
+							<span class="product-available"> {{$product->quantity}} in Stock</span>
 							</div>
 						<p>{{$product->description}}</p>
 
@@ -125,7 +125,7 @@
 							<ul class="tab-nav">
 								<li class="active"><a data-toggle="tab" href="#tab1">Description</a></li>
 								<li><a data-toggle="tab" href="#tab2">Details</a></li>
-								<li><a data-toggle="tab" href="#tab3">Reviews (3)</a></li>
+								<li><a data-toggle="tab" href="#tab3">Reviews <?php echo '('.sizeof($size_comment).')';?> </a></li>
 							</ul>
 							<!-- /product tab nav -->
 
@@ -242,10 +242,11 @@
 										<div class="col-md-6">
 											<div id="reviews">
 												<ul class="reviews">
+													@foreach($comments as $comment)
 													<li>
 														<div class="review-heading">
-															<h5 class="name">John</h5>
-															<p class="date">27 DEC 2018, 8:0 PM</p>
+															<h5 class="name">{{$comment->name}}</h5>
+															<p class="date">{{$comment->created_at}}</p>
 															<div class="review-rating">
 																<i class="fa fa-star"></i>
 																<i class="fa fa-star"></i>
@@ -255,49 +256,12 @@
 															</div>
 														</div>
 														<div class="review-body">
-															<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
+														<p>{{$comment->comment}}</p>
 														</div>
 													</li>
-													<li>
-														<div class="review-heading">
-															<h5 class="name">John</h5>
-															<p class="date">27 DEC 2018, 8:0 PM</p>
-															<div class="review-rating">
-																<i class="fa fa-star"></i>
-																<i class="fa fa-star"></i>
-																<i class="fa fa-star"></i>
-																<i class="fa fa-star"></i>
-																<i class="fa fa-star-o empty"></i>
-															</div>
-														</div>
-														<div class="review-body">
-															<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
-														</div>
-													</li>
-													<li>
-														<div class="review-heading">
-															<h5 class="name">John</h5>
-															<p class="date">27 DEC 2018, 8:0 PM</p>
-															<div class="review-rating">
-																<i class="fa fa-star"></i>
-																<i class="fa fa-star"></i>
-																<i class="fa fa-star"></i>
-																<i class="fa fa-star"></i>
-																<i class="fa fa-star-o empty"></i>
-															</div>
-														</div>
-														<div class="review-body">
-															<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
-														</div>
-													</li>
+													@endforeach
 												</ul>
-												<ul class="reviews-pagination">
-													<li class="active">1</li>
-													<li><a href="#">2</a></li>
-													<li><a href="#">3</a></li>
-													<li><a href="#">4</a></li>
-													<li><a href="#"><i class="fa fa-angle-right"></i></a></li>
-												</ul>
+												{{$comments->links()}}
 											</div>
 										</div>
 										<!-- /Reviews -->
@@ -305,10 +269,10 @@
 										<!-- Review Form -->
 										<div class="col-md-3">
 											<div id="review-form">
-												<form class="review-form">
-													<input class="input" type="text" placeholder="Your Name">
-													<input class="input" type="email" placeholder="Your Email">
-													<textarea class="input" placeholder="Your Review"></textarea>
+												<form class="review-form" action="{{route('comment',$product->id)}}">
+													<input class="input" type="text" placeholder="Your Name" name="name">
+													<input class="input" type="email" placeholder="Your Email" name="email">
+													<textarea class="input" placeholder="Your Review" name="comment"></textarea>
 													<div class="input-rating">
 														<span>Your Rating: </span>
 														<div class="stars">

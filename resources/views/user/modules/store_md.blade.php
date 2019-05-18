@@ -125,7 +125,7 @@
 							<div class="col-md-4 col-xs-6">
 								<div class="product">
 									<div class="product-img">
-										<img src="./storage/{{$product->link}}" alt="">
+										<img src="./storage/{{$product->link}}" alt="" width="262" height="262">
 										<div class="product-label">
 											<?php
 												if ($product->sale==1)

@@ -87,7 +87,7 @@
 										<!-- product -->
 										<div class="product">
 											<div class="product-img">
-												<img src="./storage/{{$product->link}}" alt="">
+												<img src="./storage/{{$product->link}}" alt="" >
 												<div class="product-label">
 													<?php
 														if ($product->sale==1)
