@@ -5,46 +5,21 @@
 				<!-- row -->
 				<div class="row">
 					<!-- shop -->
+					@foreach($col as $c)
 					<div class="col-md-4 col-xs-6">
-							<div class="shop">
-								<div class="shop-img">
-									<img src="./img/product07.png" alt="" width="360px" height="240px">
-								</div>
-								<div class="shop-body">
-									<h3>iPhone<br>Collection</h3>
-								<a href="{{URL::to('store',2)}}" class="cta-btn">Shop now <i class="fa fa-arrow-circle-right"></i></a>
-								</div>
+						<div class="shop">
+							<div class="shop-img">
+								<img src="/storage/{{$c->image}}" alt="" width="360px" height="240px">
+							</div>
+							<div class="shop-body">
+								<h3>{{$c->text}}</h3>
+							<a href="{{$c->link}}" class="cta-btn">Mua ngay <i class="fa fa-arrow-circle-right"></i></a>
 							</div>
 						</div>
+					</div>
 						<!-- /shop -->
-
+					@endforeach
 					<!-- shop -->
-					<div class="col-md-4 col-xs-6">
-						<div class="shop">
-							<div class="shop-img">
-								<img src="./img/samsung-galaxy-s10-plus-512gb-ceramic-black-600x600.jpg" alt="" width="360px" height="240px">
-							</div>
-							<div class="shop-body">
-								<h3>Samsung<br>Collection</h3>
-								<a href="{{URL::to('store',3)}}" class="cta-btn">Shop now <i class="fa fa-arrow-circle-right"></i></a>
-							</div>
-						</div>
-					</div>
-					<!-- /shop -->
-
-					<!-- shop -->
-					<div class="col-md-4 col-xs-6">
-						<div class="shop">
-							<div class="shop-img">
-								<img src="./img/oppo-f11-pro-ft-3-6.jpg" alt="" width="360px" height="240px">
-							</div>
-							<div class="shop-body">
-								<h3>Oppo<br>Collection</h3>
-								<a href="{{URL::to('store',8)}}" class="cta-btn">Shop now <i class="fa fa-arrow-circle-right"></i></a>
-							</div>
-						</div>
-					</div>
-					<!-- /shop -->
 					
 				</div>
 				<!-- /row -->

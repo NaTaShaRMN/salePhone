@@ -30,6 +30,7 @@ Route::get('/register', 'AccountController@getRegister');
 Route::post('/register', 'AccountController@postRegister')->name('register');
 
 Route::get('/forget_password','AccountController@getForgetPassword');
+
 Route::post('/forget_password','AccountController@postForgetPassword')->name('forget');
 
 Route::post('/password_reset','AccountController@postReset')->name('reset');
@@ -109,8 +110,8 @@ Route::group(['prefix'=>'admin','middleware'=>'admin'],
 			return view('admin.images');
 		});
 
-		Route::get('/slides',function(){
-			return view('admin.slides');
+		Route::get('/exs',function(){
+			return view('admin.exs');
 		});
 
 		// =========================================
@@ -225,6 +226,17 @@ Route::group(['prefix'=>'admin','middleware'=>'admin'],
 
 		Route::post('user_delete','AdminController@userDelete');
 		// image
+
+		// mở rộng
+		Route::post('ex','AdminController@ex');
+
+		Route::get('ex_information','AdminController@exInformation');
+
+		Route::post('ex_edit','AdminController@exEdit');
+
+		Route::post('ex_delete','AdminController@exDelete');
+		// end mở rộng
+
 
 	}
 	// them vao gio hang

@@ -5,11 +5,11 @@ Quản lý thông tin
 @endsection
 
 @section('title_content')
-Slide
+Ex
 @endsection
 
 @section('content')
-@include('admin/modules/slides')
+@include('admin/modules/exs')
 @endsection
 
 @section('script')

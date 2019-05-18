@@ -625,52 +625,76 @@ app.controller('imageController',['$scope','$http','NgTableParams', function ima
 	}
 }])
 
-app.controller('slideController',['$scope','$http','NgTableParams', function slideController($scope,$http,NgTableParams){
+app.controller('exController',['$scope','$http','NgTableParams', function exController($scope,$http,NgTableParams){
+	var formData = new FormData();
 	this.$onInit = function() {
-	$scope.datas= [];
-	$http.get('admin/slide_information').then((req) => {
-		$scope.datas = req.data;
-		$scope.brand = new NgTableParams({}, { dataset: $scope.datas});
-	});
+		$scope.datas= [];
+		$http.get('admin/ex_information').then((req) => {
+			$scope.datas = req.data;
+			$scope.ex = new NgTableParams({}, { dataset: $scope.datas});
+		});
 	}
 	$scope.new = ()=>{
-		$scope.datas.unshift({name:'',id: 'NULL',product: '0',new:false});
-		$scope.brand = new NgTableParams({}, { dataset: $scope.datas});
+		if( !($scope.text && $scope.type && $scope.link) ){
+			return;
+		}
+		// console.log(colorArray);
+		formData.append('_token',$scope.csrf);
+		formData.append('text',$scope.text);
+		formData.append('type',$scope.type);
+		formData.append('link',$scope.link);
+		var request = {
+	        method: 'POST',
+	        url: '/admin/ex',
+	        data: formData,
+	        headers: {
+	            'Content-Type': undefined
+	        }
+	    };
+	    $http(request).then( function success(res){
+	    	formData = new FormData();
+	    	$scope.text = '';
+	    	$scope.type = '';
+	    	$scope.link = '';
+	    	document.getElementsByClassName('imagefile').value = '';
+	    	$scope.datas.unshift(res.data);
+	    	$scope.ex = new NgTableParams({}, { dataset: $scope.datas});
+	    });
+		// $scope.datas.unshift({name:'',id: 'NULL',product: '0',new:false});
+		// $scope.brand = new NgTableParams({}, { dataset: $scope.datas});
 	}
+
 	$scope.change = (data)=>{
-		if(data.new == false) {
-			 $http.post('admin/slide',{
-				_token: $scope.csrf,
-				name: data.name
-			},{header : {'Content-Type' : 'application/json; charset=UTF-8'}})
-			.then( (req) => {
-				console.log(req.data);
-				if( req.data ){
-					data.id = req.data.id;
-				}
-			})
-			data.new = true;
-		}else{
 			if(!data.show){
-				// console.log(data.id);
-				$http.post('admin/slide_edit',{
-					_token: $scope.csrf,
-					id: data.id,
-					name: data.name
-				}).then((req)=>{
-					data.color = req.data.color;
-				})
+				formData.append('_token',$scope.csrf);
+				formData.append('text',data.text);
+				formData.append('type',data.type);
+				formData.append('link',data.link);
+				formData.append('id',data.id);
+
+				var request = {
+			        method: 'POST',
+			        url: '/admin/ex_edit',
+			        data: formData,
+			        headers: {
+			            'Content-Type': undefined
+			        }
+			    };
+			    $http(request).then( function success(res){
+			    	formData = new FormData();
+			    	data.image = res.data.image;
+	    			document.getElementsByClassName('imagefile').value = '';
+			    });
 			}
 			data.show = !data.show;
-		}
-		
 	}
 	$scope.delete = (data)=>{
 		var index = $scope.datas.indexOf(data);
+		console.log(index);
 		if(index >= 0 ){
 			$scope.datas.splice(index,1);
-			$scope.brand = new NgTableParams({}, { dataset: $scope.datas});
-			$http.post('admin/slide_delete',{
+			$scope.ex = new NgTableParams({}, { dataset: $scope.datas});
+			$http.post('admin/ex_delete',{
 				_token : $scope.csrf,
 				id: data.id
 			}).then((req)=>{
@@ -678,6 +702,11 @@ app.controller('slideController',['$scope','$http','NgTableParams', function sli
 			})
 		}
 	}
+	$scope.setTheFiles = function ($files) {
+        angular.forEach($files, function (value, key) {
+            formData.append('imagefile', value);
+        });
+    };
 }])
 
 app.directive('ngFiles', ['$parse', function ($parse) {
