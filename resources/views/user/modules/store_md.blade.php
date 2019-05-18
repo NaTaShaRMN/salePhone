@@ -1,4 +1,3 @@
-<!-- BREADCRUMB -->
 		<div id="breadcrumb" class="section">
 			<!-- container -->
 			<div class="container">
@@ -7,7 +6,7 @@
 					<div class="col-md-12">
 						<ul class="breadcrumb-tree">
 							<li><a href="{{URL::to('index')}}">Home</a></li>
-							<li class="active">{{$tyPe->name}}</li>
+							<li class="active"></li>
 						</ul>
 					</div>
 				</div>
@@ -18,6 +17,7 @@
 		<!-- /BREADCRUMB -->
 
 		<!-- SECTION -->
+		<form action="{{URL::to('store')}}" method="get">
 		<div class="section">
 			<!-- container -->
 			<div class="container">
@@ -29,12 +29,18 @@
 						<div class="aside">
 							<h3 class="aside-title">Nhãn hiệu nổi tiếng</h3>
 							<div class="checkbox-filter">
-								@foreach($type_CheckBox as $type)
-								<div class="input-checkbox">
-									<input type="checkbox" id="category-1">
-									<label for="category-1">
+								@foreach ($brand as $b)
+									<div class="input-checkbox">
+									<input type="checkbox" name="brand[]" 
+									@foreach ($brandSelected as $sl)
+										@if ($sl == $b->id )
+											checked
+										@endif
+									@endforeach
+									 value="{{$b->id}}" id="category-{{$b->id}}">
+									<label for="category-{{$b->id}}">
 										<span></span>
-										{{$type->name}}
+										{{$b->name}}
 										<small></small>
 									</label>
 								</div>
@@ -45,23 +51,23 @@
 						<!-- /aside Widget -->
 
 						<!-- aside Widget -->
-						<div class="aside">
+						<!-- <div class="aside">
 							<h3 class="aside-title">Price</h3>
 							<div class="price-filter">
 								<div id="price-slider"></div>
 								<div class="input-number price-min">
-									<input id="price-min" type="number">
+									<input name="priceMin" id="price-min" type="number">
 									<span class="qty-up">+</span>
 									<span class="qty-down">-</span>
 								</div>
 								<span>-</span>
 								<div class="input-number price-max">
-									<input id="price-max" type="number">
+									<input name="priceMax" id="price-max" type="number">
 									<span class="qty-up">+</span>
 									<span class="qty-down">-</span>
 								</div>
 							</div>
-						</div>
+						</div> -->
 						<!-- /aside Widget -->
 
 						
@@ -96,24 +102,23 @@
 							<div class="store-sort">
 								<label>
 									Sort By:
-									<select class="input-select">
-										<option value="0">Popular</option>
-										<option value="1">Position</option>
+									<select class="input-select" name="fil">
+										<option value="0">Phổ biến</option>
 									</select>
 								</label>
 
 								<label>
 									Show:
-									<select class="input-select">
-										<option value="0">20</option>
-										<option value="1">50</option>
+									<select class="input-select" name="pag">
+										<option value="9">9</option>
+										<option value="18">18</option>
+										<option value="36">36</option>
 									</select>
 								</label>
 							</div>
-							<ul class="store-grid">
-								<li class="active"><i class="fa fa-th"></i></li>
-								<li><a href="#"><i class="fa fa-th-list"></i></a></li>
-							</ul>
+							<div class="store-grid">
+								<button class="btn btn-default" type="submit">Lọc sản phẩm</button>
+							</div>
 						</div>
 						<!-- /store top filter -->
 
@@ -128,7 +133,7 @@
 										<img src="./storage/{{$product->link}}" alt="" width="262" height="262">
 										<div class="product-label">
 											<?php
-												if ($product->sale==1)
+												if ($product->sale > 0)
 												echo '
 													<span class="sale">Sale</span>
 													';
@@ -149,8 +154,6 @@
 										</div>
 										<div class="product-btns">
 											<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
-											<button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
-											<button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
 										</div>
 									</div>
 									<div class="add-to-cart">
@@ -180,3 +183,5 @@
 			<!-- /container -->
 		</div>
 		<!-- /SECTION -->
+
+</form>

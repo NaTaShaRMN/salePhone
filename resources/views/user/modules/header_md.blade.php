@@ -34,16 +34,18 @@
 						<!-- SEARCH BAR -->
 						<div class="col-md-6">
 							<div class="header-search">
-								<form action="{{route('search')}}" method="get" role="search" >
-									<!-- <select class="input-select">
-										<option value="0">All Categories</option>
-										<option value="1">Category 01</option>
-										<option value="1">Category 02</option>
-									</select> -->
-									<input class="input" placeholder="Search here" name="search">
-									<button class="search-btn">Search</button>
-								</form>
-							</div>
+							<form action="{{route('search')}}" method="get" role="search">
+								<select class="input-select" name="brand">
+									<option value="">Tất cả </option>
+									@foreach ($brand as $b)
+									<option value="{{$b->id}}">{{$b->name}}</option>
+									@endforeach 
+								</select>
+								<input class="input" placeholder="Search here" name="search">
+								<button class="search-btn">Search</button>
+							</form>
+						</div>
+							
 						</div>
 						<!-- /SEARCH BAR -->
 

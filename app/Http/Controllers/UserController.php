@@ -91,6 +91,45 @@ class UserController extends Controller
         ->get();
       return view('user/store',compact('product_asType','tyPe','type_CheckBox','topSelling_product'));
    }
+
+   public function storeAll(Request $request) {
+    // print_r(Request::all());
+    // return $request;
+    // $brandSelected = $request->brand;
+    if($request->has('brand')){
+      $brandSelected = $request->brand;
+
+    }else{
+      $brand = DB::table('brands')
+                      ->select('id')
+                      ->get();
+      $brandSelected = array();
+      foreach ($brand as $value) {
+        $brandSelected[] = $value->id;             
+      }           
+      
+    }
+
+    if($request->has('pag')){
+      if($request->pag) $pag = $request->pag;
+      else  $pag = 9;
+    }else{
+      $pag = 9;
+    }
+    $product_asType = DB::table('products')
+      ->join('images','products.id','=','images.product_id')
+      ->whereIn('brand_id',$brandSelected)
+      ->paginate($pag);
+      // $tyPe = DB::table('brands')->where('id','=',$type)->first();
+      $topSelling_product = DB::table('products')
+        ->join('images','products.id','=','images.product_id')
+        ->where('products.sale','=','1')
+        ->orderBy('products.price','DESC')
+        ->offset(0)
+        ->limit(5)
+        ->get();
+    return view('user/store',compact('product_asType','topSelling_product','brandSelected'));
+   }
    // public function addToCart($id){
    //       $product = DB::table('products')
    //       ->join('images','products.id','=','images.product_id')
