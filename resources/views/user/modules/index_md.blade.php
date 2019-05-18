@@ -1,4 +1,4 @@
-<!-- SECTION -->
+
 		<div class="section">
 			<!-- container -->
 			<div class="container">
@@ -27,7 +27,6 @@
 			<!-- /container -->
 		</div>
 		<!-- /SECTION -->
-
 		<!-- SECTION -->
 		<div class="section">
 			<!-- container -->
@@ -41,8 +40,8 @@
 							<h3 class="title">Sản phẩm mới</h3>
 							<div class="section-nav">
 								<ul class="section-tab-nav tab-nav">
-									@foreach($brands as $brand)	
-								<li style="color:darkblue"><a  href="{{URL::to('store',$brand->id)}}">{{$brand->name}}</a></li>
+									@foreach($brands as $brand)
+									<li class="@if ($loop->index === 0) active @endif"><a data-toggle="tab" href="#brand{{$brand->id}}">{{$brand->name}}</a></li>
 									@endforeach
 								</ul>
 							</div>
@@ -55,51 +54,45 @@
 						<div class="row">
 							<div class="products-tabs">
 								<!-- tab -->
-								<div id="tab1" class="tab-pane active">
+								@foreach($brands as $brand)
+								<div id="brand{{$brand->id}}" class="tab-pane @if ($loop->index === 0) active @endif">
 									<div class="products-slick" data-nav="#slick-nav-1">
-										
-										@foreach($new_product as $product)
 										<!-- product -->
-										<div class="product">
-											<div class="product-img">
-												<img src="./storage/{{$product->link}}" alt="" >
-												<div class="product-label">
-													<?php
-														if ($product->sale==1)
-														echo '
-															<span class="sale">Sale</span>
-															';
-													?>
-													<span class="new">NEW</span>
+										@foreach($brand->products as $product)
+											<div class="product">
+												<div class="product-img">
+													<img src="./storage/{{$product->link}}" alt="">
+													<div class="product-label">
+														<span class="sale">{{$product->sale}}%</span>
+														<span class="new">New</span>
+													</div>
+												</div>
+												<div class="product-body">
+													<p class="product-category">{{$brand->name}}</p>
+													<h3 class="product-name"><a href="{{route('product',$product->id)}}">{{$product->name}}</a></h3>
+													<h4 class="product-price">{{number_format($product->price*(1-$product->sale/100))}}<del class="product-old-price">{{number_format($product->price)}}</del></h4>
+													<div class="product-rating">
+														<i class="fa fa-star"></i>
+														<i class="fa fa-star"></i>
+														<i class="fa fa-star"></i>
+														<i class="fa fa-star"></i>
+														<i class="fa fa-star"></i>
+													</div>
+													<div class="product-btns">
+														<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
+													</div>
+												</div>
+												<div class="add-to-cart">
+													<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
 												</div>
 											</div>
-											<div class="product-body">
-												<p class="product-category">Điện thoại</p>
-											<h3 class="product-name"><a href="{{URL::to('product',$product->id)}}">{{$product->name}}</a></h3>
-												<h4 class="product-price">{{$product->price}}đ <del class="product-old-price"></del></h4>
-												<div class="product-rating">
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-												</div>
-												<div class="product-btns">
-													<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
-													
-													<button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
-												</div>
-											</div>
-											<div class="add-to-cart">
-											<a href=""><button class="add-to-cart-btn" ><i class="fa fa-shopping-cart"></i> Add to cart</button> </a>
-											</div>
-										</div>
-										<!-- /product -->
 										@endforeach
-										
+
+										<!-- /product -->
 									</div>
 									<div id="slick-nav-1" class="products-slick-nav"></div>
 								</div>
+								@endforeach
 								<!-- /tab -->
 							</div>
 						</div>
@@ -113,14 +106,14 @@
 		<!-- /SECTION -->
 
 		<!-- HOT DEAL SECTION -->
-		<div id="hot-deal" class="section">
+		<div id="hot-deal" style="background-image: url('/storage/{{$silde->image}}');min-height: 350px;" class="section">
 			<!-- container -->
 			<div class="container">
 				<!-- row -->
 				<div class="row">
 					<div class="col-md-12">
 						<div class="hot-deal">
-							<ul class="hot-deal-countdown">
+							<!-- <ul class="hot-deal-countdown">
 								<li>
 									<div>
 										<h3>02</h3>
@@ -145,10 +138,9 @@
 										<span>Secs</span>
 									</div>
 								</li>
-							</ul>
-							<h2 class="text-uppercase">hot deal this week</h2>
-							<p>New Collection Up to 50% OFF</p>
-							<a class="primary-btn cta-btn" href="{{URL::to('index')}}">Shop now</a>
+							</ul> -->
+							<h2 class="text-uppercase">{{$silde->text}}</h2>
+							<a class="primary-btn cta-btn" href="{{$silde->link}}">Shop now</a>
 						</div>
 					</div>
 				</div>
@@ -171,7 +163,6 @@
 						<div class="section-title">
 							<h3 class="title">Giảm giá nhiều nhất</h3>
 							<div class="section-nav">
-								
 							</div>
 						</div>
 					</div>
@@ -185,44 +176,38 @@
 								<div id="tab2" class="tab-pane fade in active">
 									<div class="products-slick" data-nav="#slick-nav-2">
 										
-										@foreach($topSelling_product as $product)
+										@foreach ($topSell as $product)
+										
 										<!-- product -->
 										<div class="product">
 											<div class="product-img">
-												<img src="./storage/{{$product->link}}" alt="">
+												<img src="/storage/{{$product->link}}" alt="">
 												<div class="product-label">
-													<?php
-														if ($product->sale==1)
-														echo '
-															<span class="sale">Sale</span>
-															';
-													?>
+													<span class="sale">Sale</span>
 													<span class="new">NEW</span>
 												</div>
 											</div>
 											<div class="product-body">
 												<p class="product-category">Điện thoại</p>
-											<h3 class="product-name"><a href="{{URL::to('product',$product->id)}}">{{$product->name}}</a></h3>
-												<h4 class="product-price">{{$product->price}}đ <del class="product-old-price"></del></h4>
-												<div class="product-rating">
+											<h3 class="product-name"><a href="{{route('product',$product->id)}}">{{$product->name}}</a></h3>
+												<h4 class="product-price"> {{number_format($product->price*(1- $product->sale/100))}}<del class="product-old-price">{{number_format($product->price)}}</del></h4>
+												<!-- <div class="product-rating">
 													<i class="fa fa-star"></i>
 													<i class="fa fa-star"></i>
 													<i class="fa fa-star"></i>
 													<i class="fa fa-star"></i>
 													<i class="fa fa-star"></i>
-												</div>
+												</div> -->
 												<div class="product-btns">
-													<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
-													
-													<button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
+													<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">Thêm vào yêu thích</span></button>
 												</div>
 											</div>
 											<div class="add-to-cart">
-												<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
+												<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ hàng</button>
 											</div>
 										</div>
 										<!-- /product -->
-											@endforeach
+										@endforeach
 										
 									</div>
 									<div id="slick-nav-2" class="products-slick-nav"></div>
@@ -245,106 +230,45 @@
 			<div class="container">
 				<!-- row -->
 				<div class="row">
-					<div class="col-md-4 col-xs-6">
+					@foreach($brands as $brand)
+					@if ($loop->index < 4)
+					<div class="col-md-3 col-xs-6">
 						<div class="section-title">
-							<h4 class="title">iPhone Nổi Bật</h4>
+							<h4 class="title">{{$brand->name}} Nổi Bật</h4>
 							<div class="section-nav">
 								<div id="slick-nav-3" class="products-slick-nav"></div>
 							</div>
 						</div>
 
 						<div class="products-widget-slick" data-nav="#slick-nav-3">
-							
-							
 							<div>
-									@foreach ($topSelling_bottom_iPhone as $iPhone)
-								<!-- product widget -->
-								<div class="product-widget">
-									<a href="{{URL::to('product',$product->id)}}">
-									<div class="product-img">
-									<img src="./storage/{{$iPhone->link}}" alt="">
-									</div>
-									</a>
-									<div class="product-body">
-										<p class="product-category">Điện thoại</p>
-									<h3 class="product-name"><a href="{{URL::to('product',$product->id)}}">{{$iPhone->name}}</a></h3>
-									<h4 class="product-price">{{$iPhone->price}}đ<del class="product-old-price"></del></h4>
-									</div>
-								</div>
-								<!-- /product widget -->
-								@endforeach
-							</div>
-							
-						</div>
-					</div>
-
-					<div class="col-md-4 col-xs-6">
-						<div class="section-title">
-							<h4 class="title">Samsung Nổi Bật</h4>
-							<div class="section-nav">
-								<div id="slick-nav-4" class="products-slick-nav"></div>
-							</div>
-						</div>
-
-						<div class="products-widget-slick" data-nav="#slick-nav-4">
-							<div>
-								@foreach($topSelling_bottom_Samsung as $samSung)
-								<!-- product widget -->
-								<div class="product-widget">
-									<a href="{{URL::to('product',$product->id)}}">
-									<div class="product-img">
-									<img src="./storage/{{$samSung->link}}" alt="">
-									</div>
-									</a>
-									<div class="product-body">
-										<p class="product-category">Điện thoại</p>
-										<h3 class="product-name"><a href="{{URL::to('product',$product->id)}}">{{$samSung->name}}</a></h3>
-										<h4 class="product-price">{{$samSung->price}}đ<del class="product-old-price"></del></h4>
-									</div>
-								</div>
-								<!-- /product widget -->
-								@endforeach
 								
-							</div>
-						</div>
-					</div>
-
-					<div class="clearfix visible-sm visible-xs"></div>
-
-					<div class="col-md-4 col-xs-6">
-						<div class="section-title">
-							<h4 class="title">Oppo Nổi Bật</h4>
-							<div class="section-nav">
-								<div id="slick-nav-5" class="products-slick-nav"></div>
-							</div>
-						</div>
-
-						<div class="products-widget-slick" data-nav="#slick-nav-5">
-							<div>
-								@foreach($topSelling_bottom_Oppo as $oppo)
+								@foreach($brand->products as $product)
 								<!-- product widget -->
 								<div class="product-widget">
-									<a href="{{URL::to('product',$product->id)}}">
+									<a href="{{route('product',$product->id)}}">
 									<div class="product-img">
-										<img src="./storage/{{$oppo->link}}" alt="">
+									<img src="/storage/{{$product->link}}" alt="">
 									</div>
 									</a>
 									<div class="product-body">
 										<p class="product-category">Điện thoại</p>
-									<h3 class="product-name"><a href="{{URL::to('product',$product->id)}}">{{$oppo->name}}</a></h3>
-										<h4 class="product-price">{{$oppo->price}}đ<del class="product-old-price"></del></h4>
+									<h3 class="product-name"><a href="{{route('product',$product->id)}}">{{$product->name}}</a></h3>
+									<h4 class="product-price">{{number_format($product->price)}} VNĐ<del class="product-old-price"></del></h4>
 									</div>
 								</div>
 								<!-- /product widget -->
 								@endforeach
-								
 							</div>
+							
 						</div>
 					</div>
+					@endif
+					@endforeach
 
 				</div>
 				<!-- /row -->
 			</div>
 			<!-- /container -->
 		</div>
-		<!-- /SECTION -->
+		<!-- /SECTION

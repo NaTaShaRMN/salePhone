@@ -6,7 +6,8 @@ use Illuminate\Http\Request;
 
 use DB,Cart;
 use App\Brand;
-
+use Validator;
+use App\Comment;
 class UserController extends Controller
 {
    public function __construct()
@@ -65,8 +66,13 @@ class UserController extends Controller
       ->offset(0)
       ->limit(4)
       ->get();
+      $size_comment = DB::table('comments')->where('product_id',$product->id)->get();
+      $comments = DB::table('comments')
+      ->where('product_id',$product->id)
+      ->orderBy('created_at','DESC')
+      ->paginate(3);
       
-      return view('user/product',compact('product','relate_product','brand'));
+      return view('user/product',compact('product','relate_product','brand','size_comment','comments'));
    }
 
    public function checkout()
@@ -118,5 +124,42 @@ class UserController extends Controller
         ->limit(5)
         ->get();
       return view('user/search',compact('product','type_CheckBox','topSelling_product'));
+   }
+   public function addComment(Request $req,$id){
+      
+      $product = DB::table('products')
+      ->join('images','products.id','=','images.product_id')
+      ->where('products.id','=',$id)->first();
+      
+      $messages = [
+         'required' => 'Trường :attribute bắt buộc nhập.',
+         'email'    => 'Trường :attribute phải có định dạng email'
+     ];
+     $validator = Validator::make($req->all(), [
+           'name'     => 'required|max:255',
+           'email'    => 'required|email',
+
+       ], $messages);
+       if ($validator->fails()) {
+         return redirect()->back()
+                 ->withErrors($validator)
+                 ->withInput();
+       } else {
+        // Lưu thông tin vào database,
+        $name = $req->input('name');
+        $email = $req->input('email');
+        $id_product = $product->id;
+        $comments = $req->comment;
+        
+        $comment = new Comment();
+        $comment->product_id = $id_product;
+        $comment->comment = $comments;
+        $comment->email = $email;
+        $comment->name = $name;
+        $comment->save();
+        //DB::insert('insert into comments (product_id, comment, email, name) values (?, ?, ?, ?)', [$id_product, $comment, $email, $name]);
+        return redirect()->back()
+              ->with('message', 'Success !!!');
+     }
    }
 }

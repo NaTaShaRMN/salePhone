@@ -17,7 +17,7 @@ Route::get('/index', 'UserController@index');
 
 Route::get('/store/{type}', 'UserController@store');
 
-Route::get('/product/{id}', 'UserController@product');
+Route::get('/product/{id}', 'UserController@product')->name('product');
 
 Route::get('/checkout', 'UserController@checkout');
 
@@ -239,6 +239,6 @@ Route::group(['prefix'=>'admin','middleware'=>'admin'],
 
 
 	}
-	// them vao gio hang
+	
 	
 );
