@@ -106,7 +106,7 @@
 		<!-- /SECTION -->
 
 		<!-- HOT DEAL SECTION -->
-		<div id="hot-deal" style="background-image: url('/storage/{{$silde->image}}');min-height: 350px;" class="section">
+		<div id="hot-deal" style="background-image: url('/storage/{{$silde->image}}');min-height: 350px; " class="section" >
 			<!-- container -->
 			<div class="container">
 				<!-- row -->
