@@ -17,13 +17,7 @@ Route::get('/index', 'UserController@index');
 
 Route::get('/store/{type}', 'UserController@store');
 
-<<<<<<< HEAD
 Route::get('/product/{id}', 'UserController@product')->name('product');
-=======
-Route::get('/store', 'UserController@storeAll');
-
-Route::get('/product/{id}', 'UserController@product');
->>>>>>> 3ed4d603476fd4f163c08659a0253a2d7a3bc62f
 
 Route::get('/checkout', 'UserController@checkout');
 
@@ -61,7 +55,7 @@ Route::get('/comment/{id}', 'UserController@addComment')->name('comment');
 // Route::get('cart/update-cart/{id}', 'UserController@updateCart')->name('updatecart');
 // Route::get('cart/remove/{id}', 'UserController@removeCart')->name('removecart');
 // Route::get('cart/delete', 'UserController@destroyCart')->name('destroycart');
-
+Route::get('/information', 'UserController@getUser');
 Route::group(['prefix'=>'admin','middleware'=>'admin'],
 	function(){
 		Route::get('/',function(){

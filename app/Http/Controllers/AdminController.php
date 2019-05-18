@@ -198,11 +198,15 @@ class AdminController extends Controller
    	{
 		// $products =  DB::table('products');
 		// return Brand::find(1)->product()->get();
+<<<<<<< Updated upstream
       $brands = Brand::all();
       // ->join('products','brands.id','=','products.brand_id')
       // ->select('brands.*',DB::raw('sum(products.quantity) as quantitys'))
       // ->groupBy('brands.name')
       // ->get();
+=======
+		$brands = Brand::all();
+>>>>>>> Stashed changes
 	      // foreach ($brands as $value) {
 	      //    $value['product'] = $value->product()->get()->count();
 	      //    }
