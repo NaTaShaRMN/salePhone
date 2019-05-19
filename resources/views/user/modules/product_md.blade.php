@@ -70,7 +70,7 @@
 									<i class="fa fa-star"></i>
 									<i class="fa fa-star-o"></i>
 								</div>
-								<a class="review-link" href="#">10 Review(s)</a>
+								<a class="review-link" href="#">{{count($size_comment)}} Review(s)</a>
 							</div>
 							<div>
 								<h3 class="product-price">{{$product->price}}<del class="product-old-price"></del></h3>
@@ -125,7 +125,7 @@
 							<ul class="tab-nav">
 								<li class="active"><a data-toggle="tab" href="#tab1">Description</a></li>
 								<li><a data-toggle="tab" href="#tab2">Details</a></li>
-								<li><a data-toggle="tab" href="#tab3">Reviews <?php echo '('.sizeof($size_comment).')';?> </a></li>
+								<li><a data-toggle="tab" href="#tab3">Reviews   </a></li>
 							</ul>
 							<!-- /product tab nav -->
 

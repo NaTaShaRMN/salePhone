@@ -73,6 +73,7 @@
 		@yield('search')
 
 		@yield('account')
+		@yield('user_info')
 		
 		<!-- NEWSLETTER -->
 		@yield('letter')

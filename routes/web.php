@@ -19,7 +19,7 @@ Route::get('/store/{type}', 'UserController@store');
 
 Route::get('/store', 'UserController@storeAll');
 
-Route::get('/product/{id}', 'UserController@product');
+Route::get('/product/{id}', 'UserController@product')->name('product');
 
 Route::get('/checkout', 'UserController@checkout');
 
@@ -56,11 +56,19 @@ Route::get('/search', [
 Route::get('/comment/{id}', 'UserController@addComment')->name('comment');
 
 // them vao gio hang
+
 Route::get('add-to-card','UserController@addToCart')->name('addtocard');
 
 Route::get('delete-cart', 'UserController@destroyCart')->name('destroycart');
 
 Route::post('/addorder','UserController@addOrder');
+
+
+// Route::get('cart/add-to-card/{id}','UserController@addToCart')->name('addtocard');
+// Route::get('cart/update-cart/{id}', 'UserController@updateCart')->name('updatecart');
+// Route::get('cart/remove/{id}', 'UserController@removeCart')->name('removecart');
+// Route::get('cart/delete', 'UserController@destroyCart')->name('destroycart');
+Route::get('/information', 'UserController@getUser');
 
 Route::group(['prefix'=>'admin','middleware'=>'admin'],
 	function(){
@@ -245,6 +253,6 @@ Route::group(['prefix'=>'admin','middleware'=>'admin'],
 
 
 	}
-	// them vao gio hang
+	
 	
 );

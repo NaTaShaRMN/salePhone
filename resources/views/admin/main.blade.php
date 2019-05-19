@@ -83,7 +83,7 @@
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-menu" aria-controls="main-menu" aria-expanded="false" aria-label="Toggle navigation">
                     <i class="fa fa-bars"></i>
                 </button>
-                <a class="navbar-brand" href="./">Nam The</a>
+                <a class="navbar-brand" href="./"> {{ Auth::user()->name }}</a>
                 <a class="navbar-brand hidden" href="./">N</a>
             </div>
 
@@ -187,7 +187,7 @@
                 <div class="col-sm-5">
                     <div class="user-area dropdown float-right">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Nam The
+                            {{ Auth::user()->name }}
                         </a>
 
                         <div class="user-menu dropdown-menu">

@@ -393,15 +393,8 @@ a {
                     <div  ng-hide="data.show" >
                         <input type="file" ng-files="setTheFiles($files)" class="form-control imagefile" multiple>
                     </div>
-<!-- <<<<<<< Updated upstream
-                </td>
-                <td ><i ng-click="change(data)" style="cursor: pointer;font-size: 25px" class="menu-icon " ng-class="{'ti-save-alt':!(data.show ),'ti-pencil':data.show }"></i></td>
-                <td><i ng-click="delete(data)" style="cursor: pointer;font-size: 25px" class="menu-icon ti-trash"></i></td>
-======= -->
-                <!-- </td> --> 
                 <td style="color:darkblue"><i ng-click="change(data)" style="cursor: pointer;font-size: 30px" class="menu-icon " ng-class="{'ti-save-alt':!(data.show ),'ti-pencil':data.show }"></i></td>
                 <td style="color:darkblue"><i ng-click="delete(data)" style="cursor: pointer;font-size: 30px" class="menu-icon ti-trash"></i></td>
-<!-- >>>>>>> Stashed changes -->
               </tr>
             
           </table>

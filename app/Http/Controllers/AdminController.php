@@ -203,6 +203,7 @@ class AdminController extends Controller
       // ->select('brands.*',DB::raw('sum(products.quantity) as quantitys'))
       // ->groupBy('brands.name')
       // ->get();
+
 	      // foreach ($brands as $value) {
 	      //    $value['product'] = $value->product()->get()->count();
 	      //    }
