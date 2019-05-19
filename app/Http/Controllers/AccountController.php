@@ -12,6 +12,7 @@ use App\Confirm;
 use Mail;
 use App\Mail\ConfirmUser;
 use App\Mail\RegisteredUser;
+use Cart;
 
 class AccountController extends Controller
 {
@@ -28,30 +29,32 @@ class AccountController extends Controller
     }
 
     public function postLogin(Request $request){
-    	// $rules = [
-    	// 	'email' => 'required|min:6',
-    	// 	'password' => 'required|min:6'
-    	// ];
+    	$rules = [
+    		'email' => 'required|min:6',
+    		'password' => 'required|min:6'
+    	];
 
-    	// $messages = [
-    	// 	'email.required'  => 'Email không được để trống',
-    	// 	'email.min'		 => 'Email chứa ít nhất 6 ký tự', 
-    	// 	'password.required' => 'Mật khẩu không được để trống',
-    	// 	'password.min'		=> 'Mật khẩu phải chứa ít nhất 6 ký tự'
-    	// ];
+    	$messages = [
+    		'email.required'  => 'Email không được để trống',
+    		'email.min'		 => 'Email chứa ít nhất 6 ký tự', 
+    		'password.required' => 'Mật khẩu không được để trống',
+    		'password.min'		=> 'Mật khẩu phải chứa ít nhất 6 ký tự'
+    	];
 
-    	// $validator = Validator::make($request->all(), $rules, $messages);
+    	$validator = Validator::make($request->all(), $rules, $messages);
 
-    	// if($validator->fails()){
-    	// 	return redirect()->back()->withErrors($validator);
-    	// }
+    	if($validator->fails()){
+    		return redirect()->back()->withErrors($validator);
+    	}
     	$email = $request->input('email');
     	$password = $request->input('password');
 
 
     	if(Auth::attempt(['email'=>$email,'password'=>$password,'level'=>2])){
+            Cart::instance('shopping')->restore(Auth::user()->id);
     		return redirect('/admin');
     	}else if(Auth::attempt(['email'=>$email,'password'=>$password,'level'=>1])){
+            Cart::instance('shopping')->restore(Auth::user()->id);
     		return redirect('/');
     	}else{
     		$errors = new MessageBag(['errorLogin' => 'Tên đăng nhập hoặc mật khẩu không chính xác']);

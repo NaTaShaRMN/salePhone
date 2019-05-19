@@ -8,7 +8,7 @@
 						<h3 class="breadcrumb-header">Kiểm tra đơn hàng</h3>
 						<ul class="breadcrumb-tree">
 							<li><a href="#">Home</a></li>
-							<li class="active">Checkout</li>
+							<li class="active">Thanh toán</li>
 						</ul>
 					</div>
 				</div>
@@ -19,6 +19,8 @@
 		<!-- /BREADCRUMB -->
 
 		<!-- SECTION -->
+		<form action="{{URL::to('addorder')}}" method="post" enctype="">
+			@csrf
 		<div class="section">
 			<!-- container -->
 			<div class="container">
@@ -31,29 +33,19 @@
 							<div class="section-title">
 								<h3 class="title">Hóa đơn</h3>
 							</div>
+							<input type="hidden" name="id" value="@if(isset(Auth::user()->name))
+							{{Auth::user()->id}}
+						@else
+							-1
+						@endif">
 							<div class="form-group">
-								<input class="input" type="text" name="first-name" placeholder="First Name">
+								<input class="input" type="text" name="name" placeholder="Tên" required>
 							</div>
 							<div class="form-group">
-								<input class="input" type="text" name="last-name" placeholder="Last Name">
+								<input class="input" type="text" name="address" placeholder="Địa chỉ" required>
 							</div>
 							<div class="form-group">
-								<input class="input" type="email" name="email" placeholder="Email">
-							</div>
-							<div class="form-group">
-								<input class="input" type="text" name="address" placeholder="Address">
-							</div>
-							<div class="form-group">
-								<input class="input" type="text" name="city" placeholder="City">
-							</div>
-							<div class="form-group">
-								<input class="input" type="text" name="country" placeholder="Country">
-							</div>
-							<div class="form-group">
-								<input class="input" type="text" name="zip-code" placeholder="ZIP Code">
-							</div>
-							<div class="form-group">
-								<input class="input" type="tel" name="tel" placeholder="Telephone">
+								<input class="input" type="tel" name="phone" placeholder="Số điện thoại" required>
 							</div>
 						</div>
 						<!-- /Billing Details -->
@@ -61,38 +53,23 @@
 						<!-- Shiping Details -->
 						<div class="shiping-details">
 							<div class="section-title">
-								<h3 class="title">Shiping address</h3>
+								<h3 class="title">Địa chỉ nhận hàng</h3>
 							</div>
 							<div class="input-checkbox">
-								<input type="checkbox" id="shiping-address">
+								<input type="checkbox" name="check" id="shiping-address">
 								<label for="shiping-address">
 									<span></span>
-									Ship to a diffrent address?
+									Nhận hàng ở địa chỉ khác
 								</label>
 								<div class="caption">
 									<div class="form-group">
-										<input class="input" type="text" name="first-name" placeholder="First Name">
+										<input class="input" type="text" name="nameN" placeholder="Tên">
 									</div>
 									<div class="form-group">
-										<input class="input" type="text" name="last-name" placeholder="Last Name">
+										<input class="input" type="text" name="addressN" placeholder="Địa chỉ">
 									</div>
 									<div class="form-group">
-										<input class="input" type="email" name="email" placeholder="Email">
-									</div>
-									<div class="form-group">
-										<input class="input" type="text" name="address" placeholder="Address">
-									</div>
-									<div class="form-group">
-										<input class="input" type="text" name="city" placeholder="City">
-									</div>
-									<div class="form-group">
-										<input class="input" type="text" name="country" placeholder="Country">
-									</div>
-									<div class="form-group">
-										<input class="input" type="text" name="zip-code" placeholder="ZIP Code">
-									</div>
-									<div class="form-group">
-										<input class="input" type="tel" name="tel" placeholder="Telephone">
+										<input class="input" type="tel" name="phoneN" placeholder="Số điện thoại">
 									</div>
 								</div>
 							</div>
@@ -100,8 +77,8 @@
 						<!-- /Shiping Details -->
 
 						<!-- Order notes -->
-						<div class="order-notes">
-							<textarea class="input" placeholder="Order Notes"></textarea>
+						<div class="order-notes" style="margin-bottom: 20px">
+							<textarea class="input" name="description" placeholder="Order Notes"></textarea>
 						</div>
 						<!-- /Order notes -->
 					</div>
@@ -109,32 +86,35 @@
 					<!-- Order Details -->
 					<div class="col-md-12 order-details">
 						<div class="section-title text-center">
-							<h3 class="title">Your Order</h3>
+							<h3 class="title">Đơn hàng của bạn</h3>
 						</div>
 						<div class="order-summary">
 							<div class="order-col">
-								<div><strong>PRODUCT</strong></div>
-								<div><strong>TOTAL</strong></div>
+								<div><strong>Sản phẩm</strong></div>
+								<div><strong>Giá</strong></div>
 							</div>
 							<div class="order-products">
+
+								
+								@if(Cart::content())
+								@foreach(Cart::instance('shopping')->content() as $product)
+								
 								<div class="order-col">
-									<div>1x Product Name Goes Here</div>
-									<div><img style="width: 100px;" src="./img/product05.png" alt=""></div>
-									<div>$980.00</div>
+									<div>{{$product->qty}}x {{$product->name}}</div>
+									<div><img style="width: 100px;" src="./storage/{{$product->options->img}}" alt=""></div>
+									<div>{{number_format($product->price*$product->qty)}}</div>
 								</div>
-								<div class="order-col">
-									<div>2x Product Name Goes Here</div>
-									<div><img style="width: 100px" src="./img/product05.png" alt=""></div>
-									<div>$980.00</div>
-								</div>
+								@endforeach
+								@endif
 							</div>
 							<div class="order-col">
 								<div>Shiping</div>
 								<div><strong>FREE</strong></div>
 							</div>
 							<div class="order-col">
-								<div><strong>TOTAL</strong></div>
-								<div><strong class="order-total">$2940.00</strong></div>
+								<div><strong>Tổng</strong></div>
+								<div><strong class="order-total">@if(Session('cart')){{ number_format(Cart::instance('shopping')->subtotal(0,'',''))}} @else
+										0 @endif</strong></div>
 							</div>
 						</div>
 						<div class="payment-method">
@@ -142,30 +122,10 @@
 								<input type="radio" name="payment" id="payment-1">
 								<label for="payment-1">
 									<span></span>
-									Direct Bank Transfer
+									Ship COD
 								</label>
 								<div class="caption">
-									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-								</div>
-							</div>
-							<div class="input-radio">
-								<input type="radio" name="payment" id="payment-2">
-								<label for="payment-2">
-									<span></span>
-									Cheque Payment
-								</label>
-								<div class="caption">
-									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-								</div>
-							</div>
-							<div class="input-radio">
-								<input type="radio" name="payment" id="payment-3">
-								<label for="payment-3">
-									<span></span>
-									Paypal System
-								</label>
-								<div class="caption">
-									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+									<p>Thanh toán khi nhận hàng.</p>
 								</div>
 							</div>
 						</div>
@@ -176,7 +136,12 @@
 								I've read and accept the <a href="#">terms & conditions</a>
 							</label>
 						</div> -->
-						<a href="#" class="primary-btn order-submit" style="width: 30%;margin: auto;">Place order</a>
+						@if(isset(Auth::user()->name))
+							<button type="submit" href="" class="primary-btn order-submit" style="width: 30%;margin: auto;">Đặt hàng</button>
+						@else
+							<a href="/login" class="primary-btn order-submit" style="width: 30%;margin: auto;">Đăng nhập</a>
+						@endif
+					
 					</div>
 					<!-- /Order Details -->
 
@@ -186,4 +151,5 @@
 			</div>
 			<!-- /container -->
 		</div>
+		</form>
 		<!-- /SECTION -->

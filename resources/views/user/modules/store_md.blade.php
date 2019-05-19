@@ -49,29 +49,53 @@
 							</div>
 						</div>
 						<!-- /aside Widget -->
-
-						<!-- aside Widget -->
-						<!-- <div class="aside">
-							<h3 class="aside-title">Price</h3>
-							<div class="price-filter">
-								<div id="price-slider"></div>
-								<div class="input-number price-min">
-									<input name="priceMin" id="price-min" type="number">
-									<span class="qty-up">+</span>
-									<span class="qty-down">-</span>
-								</div>
-								<span>-</span>
-								<div class="input-number price-max">
-									<input name="priceMax" id="price-max" type="number">
-									<span class="qty-up">+</span>
-									<span class="qty-down">-</span>
-								</div>
-							</div>
-						</div> -->
-						<!-- /aside Widget -->
-
 						
-
+						<div class="aside">
+							<h3 class="aside-title">Bộ nhớ</h3>
+							<div class="checkbox-filter">
+								@foreach ($storage as $b)
+									<div class="input-checkbox">
+									<input type="checkbox" name="storage[]" 
+									@foreach ($storageSelected as $sl)
+										@if ($sl == $b->id )
+											checked
+										@endif
+									@endforeach
+									 value="{{$b->id}}" id="storage-{{$b->id}}">
+									<label for="storage-{{$b->id}}">
+										<span></span>
+										{{$b->size}} G
+										<small></small>
+									</label>
+								</div>
+								@endforeach
+								
+							</div>
+						</div>
+							
+						<div class="aside">
+							<h3 class="aside-title">Hệ điều hành</h3>
+							<div class="checkbox-filter">
+								@foreach ($operating_system as $b)
+									<div class="input-checkbox">
+									<input type="checkbox" name="operating_system[]" 
+									@foreach ($operating_systemSelected as $sl)
+										@if ($sl == $b->id )
+											checked
+										@endif
+									@endforeach
+									 value="{{$b->id}}" id="operating_system-{{$b->id}}">
+									<label for="operating_system-{{$b->id}}">
+										<span></span>
+										{{$b->name}} 
+										<small></small>
+									</label>
+								</div>
+								@endforeach
+								
+							</div>
+						</div>
+						
 						<!-- aside Widget -->
 						<div class="aside">
 							<h3 class="aside-title">Top selling</h3>

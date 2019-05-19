@@ -69,7 +69,7 @@
 												</div>
 												<div class="product-body">
 													<p class="product-category">{{$brand->name}}</p>
-													<h3 class="product-name"><a href="">{{$product->name}}</a></h3>
+													<h3 class="product-name"><a href="/product/{{$product->id}}">{{$product->name}}</a></h3>
 													<h4 class="product-price">{{number_format($product->price*(1-$product->sale/100))}}<del class="product-old-price">{{number_format($product->price)}}</del></h4>
 													<div class="product-rating">
 														<i class="fa fa-star"></i>
@@ -78,12 +78,10 @@
 														<i class="fa fa-star"></i>
 														<i class="fa fa-star"></i>
 													</div>
-													<div class="product-btns">
-														<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
-													</div>
 												</div>
 												<div class="add-to-cart">
 													<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
+													<input type="hidden" value="{{$product->id}}">
 												</div>
 											</div>
 										@endforeach
@@ -204,6 +202,7 @@
 											</div>
 											<div class="add-to-cart">
 												<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ hàng</button>
+												<input type="hidden" value="{{$product->id}}">
 											</div>
 										</div>
 										<!-- /product -->

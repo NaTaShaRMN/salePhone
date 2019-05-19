@@ -8,7 +8,6 @@
 						<div class="col-md-3 col-xs-6">
 							<div class="footer">
 								<h3 class="footer-title">Liên lạc với chúng tôi</h3>
-								<p>Chủ tịch Nguyễn Anh Tuấn</p>
 								<ul class="footer-links">
 									<li><a href="https://www.youtube.com/watch?v=dGm6_u4ULss"><i class="fa fa-map-marker"></i>Đại học Công Nghệ (UET)</a></li>
 									<li><a href="https://www.youtube.com/watch?v=dGm6_u4ULss"><i class="fa fa-phone"></i>0987654321</a></li>

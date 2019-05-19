@@ -49,7 +49,8 @@
 					<ul class="main-nav nav navbar-nav">
 						<li><a href="/index">Trang chủ</a></li>
 						<li><a href="/store">Cửa hàng</a></li>
-						<li><a href="#">Thanh toán</a></li>
+						<li><a href="/checkout">Thanh toán</a></li>
+						<li><a href="/account">Người dùng</a></li>
 					</ul>
 					<!-- /NAV -->
 				</div>
@@ -86,8 +87,9 @@
 		<script src="js/bootstrap.min.js"></script>
 		<script src="js/slick.min.js"></script>
 		<script src="js/nouislider.min.js"></script>
-		<script src="js/jquery.zoom.min.js"></script>
+		<!-- <script src="js/jquery.zoom.min.js"></script> -->
 		<script src="js/main.js"></script>
+		<script src="js/myjquery.js"></script>
 
 	</body>
 </html>

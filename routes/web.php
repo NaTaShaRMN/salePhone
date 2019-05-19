@@ -44,7 +44,9 @@ Route::get('confirm', function(){
 Route::get('confirmuser/{code}', 'AccountController@confirmUser');
 
 Route::get('/logout',function(){
+	Cart::instance('shopping')->store(Auth::user()->id);
 	Auth::logout();
+	Cart::instance('shopping')->destroy();
 	return redirect('/');
 });
 Route::get('/search', [
@@ -52,11 +54,13 @@ Route::get('/search', [
 	'as' => 'search'
 	]);
 Route::get('/comment/{id}', 'UserController@addComment')->name('comment');
+
 // them vao gio hang
-// Route::get('cart/add-to-card/{id}','UserController@addToCart')->name('addtocard');
-// Route::get('cart/update-cart/{id}', 'UserController@updateCart')->name('updatecart');
-// Route::get('cart/remove/{id}', 'UserController@removeCart')->name('removecart');
-// Route::get('cart/delete', 'UserController@destroyCart')->name('destroycart');
+Route::get('add-to-card','UserController@addToCart')->name('addtocard');
+
+Route::get('delete-cart', 'UserController@destroyCart')->name('destroycart');
+
+Route::post('/addorder','UserController@addOrder');
 
 Route::group(['prefix'=>'admin','middleware'=>'admin'],
 	function(){

@@ -5,14 +5,14 @@
 				<div class="row">
 					<div class="col-md-12">
 						<div class="newsletter">
-							<p>Sign Up for the <strong style="color:red">NEWSLETTER</strong></p>
+							<p>Đăng ký để <strong style="color:red">Nhận thông báo</strong></p>
 							<form>
-								<input class="input" type="email" placeholder="Enter Your Email">
-								<button class="newsletter-btn"><i class="fa fa-envelope"></i> Subscribe</button>
+								<input class="input" type="email" placeholder="Nhập email">
+								<button class="newsletter-btn"><i class="fa fa-envelope"></i> Đăng ký</button>
 							</form>
 							<ul class="newsletter-follow">
 								<li>
-									<h4 style="color:red">Follow us : </h4>
+									<h4 style="color:red">Theo dõi : </h4>
 								</li>
 								<li>
 									<a href="https://www.facebook.com"><i class="fa fa-facebook"></i></a>

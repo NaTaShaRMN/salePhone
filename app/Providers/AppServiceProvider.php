@@ -7,7 +7,10 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\DB;
 use App\Brand;
+use App\StorageM;
+use App\Operating_system;
 use App\Ex;
+use Cart;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -30,6 +33,8 @@ class AppServiceProvider extends ServiceProvider
     {
         Schema::defaultStringLength(191);
         View::share('brand',Brand::all());
+        View::share('storage',StorageM::all());
+        View::share('operating_system',Operating_system::all());
         View::share('col',Ex::where('type','1')->take(3)->get());
         $silde = Ex::where('type','2')->get();
         if(count($silde)){
@@ -40,6 +45,11 @@ class AppServiceProvider extends ServiceProvider
             $silde->link = 'index';
             View::share('silde',$silde);    
         }
-        
+         if(Cart::content()) {
+            $cart = Cart::content();
+             View::share([
+                'cart'      => $cart,                    
+            ]);
+            }
     }
 }

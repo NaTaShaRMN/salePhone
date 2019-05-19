@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 
 use DB,Cart;
 use App\Brand;
+use App\StorageM;
+use App\Order;
+use App\Orderdetail;
 
 class UserController extends Controller
 {
@@ -57,8 +60,6 @@ class UserController extends Controller
       $product = DB::table('products')
       ->join('images','products.id','=','images.product_id')
       ->where('products.id','=',$id)->first();
-      $brand = DB::table('brands')
-      ->where('id','=',$product->brand_id)->first();
       $relate_product = DB::table('products')
       ->join('images','products.id','=','images.product_id')
       ->where('products.brand_id','=',$product->brand_id)
@@ -66,7 +67,7 @@ class UserController extends Controller
       ->limit(4)
       ->get();
       
-      return view('user/product',compact('product','relate_product','brand'));
+      return view('user/product',compact('product','relate_product'));
    }
 
    public function checkout()
@@ -93,11 +94,18 @@ class UserController extends Controller
    }
 
    public function storeAll(Request $request) {
-    // print_r(Request::all());
-    // return $request;
-    // $brandSelected = $request->brand;
+
     if($request->has('brand')){
-      $brandSelected = $request->brand;
+      if($request->brand) $brandSelected = $request->brand;
+      else{
+        $brand = DB::table('brands')
+                        ->select('id')
+                        ->get();
+        $brandSelected = array();
+        foreach ($brand as $value) {
+          $brandSelected[] = $value->id;             
+        } 
+      }
 
     }else{
       $brand = DB::table('brands')
@@ -110,6 +118,51 @@ class UserController extends Controller
       
     }
 
+    if($request->has('storage')){
+      if($request->storage) $storageSelected = $request->storage;
+      else{
+        $storage = DB::table('storages')
+                        ->select('id')
+                        ->get();
+        $storageSelected = array();
+        foreach ($storage as $value) {
+          $storageSelected[] = $value->id;             
+        } 
+      }
+
+    }else{
+      $storage = DB::table('storages')
+                      ->select('id')
+                      ->get();
+      $storageSelected = array();
+      foreach ($storage as $value) {
+        $storageSelected[] = $value->id;             
+      }           
+    }
+
+    if($request->has('operating_system')){
+      if($request->operating_system) $operating_systemSelected = $request->operating_system;
+      else{
+        $operating_system = DB::table('operating_systems')
+                        ->select('id')
+                        ->get();
+        $operating_systemSelected = array();
+        foreach ($operating_system as $value) {
+          $operating_systemSelected[] = $value->id;             
+        } 
+      }
+
+    }else{
+      $operating_system = DB::table('operating_systems')
+                      ->select('id')
+                      ->get();
+      $operating_systemSelected = array();
+      foreach ($operating_system as $value) {
+        $operating_systemSelected[] = $value->id;             
+      }           
+    }
+
+    $search = $request->search;
     if($request->has('pag')){
       if($request->pag) $pag = $request->pag;
       else  $pag = 9;
@@ -119,26 +172,44 @@ class UserController extends Controller
     $product_asType = DB::table('products')
       ->join('images','products.id','=','images.product_id')
       ->whereIn('brand_id',$brandSelected)
+      ->whereIn('storage_id',$storageSelected)
+      ->whereIn('operating_system_id',$operating_systemSelected)
       ->paginate($pag);
       // $tyPe = DB::table('brands')->where('id','=',$type)->first();
       $topSelling_product = DB::table('products')
         ->join('images','products.id','=','images.product_id')
         ->where('products.sale','=','1')
+        ->where('products.name','like','%'.$request->search.'%')
         ->orderBy('products.price','DESC')
         ->offset(0)
         ->limit(5)
         ->get();
-    return view('user/store',compact('product_asType','topSelling_product','brandSelected'));
+    return view('user/store',compact('product_asType','topSelling_product','brandSelected','search','storageSelected','operating_systemSelected'));
+
    }
-   // public function addToCart($id){
-   //       $product = DB::table('products')
-   //       ->join('images','products.id','=','images.product_id')
-   //       ->where('products.id','=',$id)->first();
-   //       Cart::add(['id'=>$product->id,'name'=>$product->name,'qty'=>1,'price'=>$product->price,
-   //       'options'=>['img'=>$product->link]]);
-         
-   //       return redirect()->back();
-   // }
+
+   public function addToCart(Request $request){
+          // return $request->id;
+         $product = DB::table('products')
+         ->join('images','products.id','=','images.product_id')
+         ->where('products.id','=',$request->id)->first();
+         // return json_encode($product);
+         Cart::instance('shopping')->add(['id'=>$request->id,
+                  'name'=>$product->name,
+                  'qty'=>1,
+                  'price'=>$product->price,
+                  'options'=>
+                    ['img'=>$product->link]
+                  ]);
+        return json_encode( ['cart' => Cart::instance('shopping')->content(),'total' => Cart::instance('shopping')->subtotal(0)]);
+        
+   }
+
+   public function destroyCart(Request $request){
+    Cart::instance('shopping')->remove($request->rowId);
+    return json_encode( ['count' => Cart::instance('shopping')->content()->count(),'total' => Cart::instance('shopping')->subtotal(0)]);
+   }
+
    public function getSearch(Request $request){
     // if($request->has('brand'))
       $product = DB::table('products')
@@ -157,5 +228,31 @@ class UserController extends Controller
         ->limit(5)
         ->get();
       return view('user/search',compact('product','type_CheckBox','topSelling_product'));
+   }
+
+
+   public function addOrder(Request $request){
+    
+    $or = new Order();
+
+    $or->user_id = $request->id;
+    $or->name = $request->name;
+    $or->address = $request->address;
+    $or->phone = $request->phone;
+    $or->status = 0;
+    $or->amount = Cart::instance('shopping')->subtotal(0,"","");
+
+    $or->save();
+
+    foreach (Cart::instance('shopping')->content() as $value) {
+     $o = new Orderdetail();
+     $o->order_id = $or->id;
+     $o->product_id = $value->id;
+     $o->priced = $value->price;
+     $o->quantity = $value->qty;
+     $o->save();
+    }
+    Cart::instance('shopping')->destroy();
+    return redirect()->back();
    }
 }
