@@ -196,9 +196,9 @@
 													<i class="fa fa-star"></i>
 													<i class="fa fa-star"></i>
 												</div> -->
-												<div class="product-btns">
+												<!-- <div class="product-btns">
 													<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">Thêm vào yêu thích</span></button>
-												</div>
+												</div> -->
 											</div>
 											<div class="add-to-cart">
 												<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ hàng</button>
