@@ -10,6 +10,8 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+use Illuminate\Support\Facades\DB;
+use App\Product;
 
 Route::get('/', 'UserController@index');
 
@@ -70,15 +72,12 @@ Route::post('/addorder','UserController@addOrder');
 // Route::get('cart/delete', 'UserController@destroyCart')->name('destroycart');
 Route::get('/information', 'UserController@getUser');
 
+Route::get('/account', 'UserController@getAccount');
+
 Route::group(['prefix'=>'admin','middleware'=>'admin'],
 	function(){
-		Route::get('/',function(){
-		return view('admin.index');
-		});
-		Route::get('/index',function(){
-			return view('admin.index');
-		});
-
+		Route::get('/','AdminController@index');
+		Route::get('/index','AdminController@index');
 		Route::get('information/colors',function(){
 			return view('admin.colors');
 		});
@@ -126,6 +125,68 @@ Route::group(['prefix'=>'admin','middleware'=>'admin'],
 
 		Route::get('/exs',function(){
 			return view('admin.exs');
+		});
+		// ==================chart==================
+		Route::get('/chartteam',function(){
+			$info=[];
+				for($i=12;$i>=0;$i--){
+					$date = date("m/d/Y",time()-2629743*$i);	
+					$arrayDate = explode('/',$date);
+					$count = DB::table('orders')
+					->whereYear('created_at', $arrayDate[2])
+					->whereMonth('created_at',$arrayDate[0])
+					->count();
+					// $info[$arrayDate[2].'-'.$arrayDate[0]]=$count;
+					$info['y'][]=$arrayDate[2].'-'.$arrayDate[0];
+					$info['a'][]=$count;
+				}
+				return $info;
+		});
+
+		Route::get('/bar',function(){
+			$info=[];
+				for($i=6;$i>=0;$i--){
+					$date = date("m/d/Y",time()-2629743*$i);	
+					$arrayDate = explode('/',$date);
+					$count = DB::table('users')
+					->whereYear('created_at', $arrayDate[2])
+					->whereMonth('created_at',$arrayDate[0])
+					->count();
+					// $info[$arrayDate[2].'-'.$arrayDate[0]]=$count;
+					$info['y'][]=$arrayDate[2].'-'.$arrayDate[0];
+					$info['a'][]=$count;
+				}
+				return $info;
+		});
+
+
+		Route::get('/haizz',function(){
+			$info=[];
+				for($i=6;$i>=0;$i--){
+					$date = date("m/d/Y",time()-2629743*$i);	
+					$arrayDate = explode('/',$date);
+					$count = DB::table('comments')
+					->whereYear('created_at', $arrayDate[2])
+					->whereMonth('created_at',$arrayDate[0])
+					->count();
+					// $info[$arrayDate[2].'-'.$arrayDate[0]]=$count;
+					$info['y'][]=$arrayDate[2].'-'.$arrayDate[0];
+					$info['a'][]=$count;
+				}
+				return $info;
+		});
+
+
+		Route::get('/product-pie',function(){
+			$info=[];
+			$brand = DB::table('brands')
+					->select('id','name')
+					->get();
+			foreach ($brand as $value) {
+				$info['y'][] = $value->name;
+				$info['a'][] = Product::where('brand_id',$value->id)->count();
+			}
+			return $info;
 		});
 
 		// =========================================

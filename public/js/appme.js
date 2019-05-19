@@ -1,9 +1,9 @@
-var app = angular.module('appme', ["ngTable","angularjs-dropdown-multiselect"] ,function($interpolateProvider) {
+var app = angular.module('appme', ["ngTable","angularjs-dropdown-multiselect",'ngMaterial'] ,function($interpolateProvider) {
 	$interpolateProvider.startSymbol('{%');
 	$interpolateProvider.endSymbol('%}');
 });
 
-app.controller('colorController',['$scope','$http','NgTableParams', function colorController($scope,$http,NgTableParams){
+app.controller('colorController',['$scope','$http','NgTableParams','$mdToast', function colorController($scope,$http,NgTableParams,$mdToast){
 	
 	this.$onInit = function() {
 		$scope.datas= [];
@@ -26,14 +26,21 @@ app.controller('colorController',['$scope','$http','NgTableParams', function col
 				color: data.color
 			},{header : {'Content-Type' : 'application/json; charset=UTF-8'}})
 			.then( (req) => {
+				$mdToast.show(
+			        $mdToast.simple()
+			        .textContent('Đã thêm')
+			        .position('top right')
+		        	.hideDelay(3000)
+		        )
 				console.log(req.data);
 				if( req.data ){
 					data.id = req.data.id;
 				}
 			})
 			data.new = true;
-		}else{
+
 			
+		}else{
 			if(!data.show){
 				// console.log(data.id);
 				$http.post('admin/color_edit',{
@@ -43,8 +50,14 @@ app.controller('colorController',['$scope','$http','NgTableParams', function col
 				}).then((req)=>{
 					data.color = req.data.color;
 				})
+				$mdToast.show(
+		        $mdToast.simple()
+		        .textContent('Đã thay đổi')
+		        .position('top right')
+		        .hideDelay(3000))
 			}
 			data.show = !data.show;
+			
 		}
 		
 	}
@@ -57,13 +70,18 @@ app.controller('colorController',['$scope','$http','NgTableParams', function col
 				_token : $scope.csrf,
 				id: data.id
 			}).then((req)=>{
+				$mdToast.show(
+		        $mdToast.simple()
+		        .textContent('Đã xóa')
+		        .position('top right')
+		        .hideDelay(3000))
 				console.log(req);
 			})
 		}
 	}
 }])
 
-app.controller('displayController',['$scope','$http','NgTableParams', function displayController($scope,$http,NgTableParams){
+app.controller('displayController',['$scope','$http','NgTableParams','$mdToast', function displayController($scope,$http,NgTableParams,$mdToast){
 	this.$onInit = function() {
 		$scope.datas= [];
 		$http.get('admin/display_information').then((req) => {
@@ -82,6 +100,12 @@ app.controller('displayController',['$scope','$http','NgTableParams', function d
 				size: data.size
 			},{header : {'Content-Type' : 'application/json; charset=UTF-8'}})
 			.then( (req) => {
+				$mdToast.show(
+			        $mdToast.simple()
+			        .textContent('Đã thêm')
+			        .position('top right')
+		        	.hideDelay(3000)
+		        )
 				console.log(req.data);
 				if( req.data ){
 					data.id = req.data.id;
@@ -96,6 +120,12 @@ app.controller('displayController',['$scope','$http','NgTableParams', function d
 					id: data.id,
 					size: data.size
 				}).then((req)=>{
+					$mdToast.show(
+			        $mdToast.simple()
+			        .textContent('Đã thay đổi')
+			        .position('top right')
+		        	.hideDelay(3000)
+		        )
 					data.color = req.data.color;
 				})
 			}
@@ -112,13 +142,19 @@ app.controller('displayController',['$scope','$http','NgTableParams', function d
 				_token : $scope.csrf,
 				id: data.id
 			}).then((req)=>{
+				$mdToast.show(
+			        $mdToast.simple()
+			        .textContent('Đã xóa')
+			        .position('top right')
+		        	.hideDelay(3000)
+		        )
 				console.log(req);
 			})
 		}
 	}
 }])
 
-app.controller('storageController',['$scope','$http','NgTableParams', function storageController($scope,$http,NgTableParams){
+app.controller('storageController',['$scope','$http','NgTableParams','$mdToast', function storageController($scope,$http,NgTableParams,$mdToast){
 	this.$onInit = function() {
 	$scope.datas= [];
 	$http.get('admin/storage_information').then((req) => {
@@ -141,6 +177,12 @@ app.controller('storageController',['$scope','$http','NgTableParams', function s
 				if( req.data ){
 					data.id = req.data.id;
 				}
+				$mdToast.show(
+			        $mdToast.simple()
+			        .textContent('Đã thêm')
+			        .position('top right')
+		        	.hideDelay(3000)
+		        )
 			})
 			data.new = true;
 		}else{
@@ -151,6 +193,12 @@ app.controller('storageController',['$scope','$http','NgTableParams', function s
 					id: data.id,
 					size: data.size
 				}).then((req)=>{
+					$mdToast.show(
+			        $mdToast.simple()
+			        .textContent('Đã thay đổi')
+			        .position('top right')
+		        	.hideDelay(3000)
+		        )
 					data.color = req.data.color;
 				})
 			}
@@ -167,13 +215,19 @@ app.controller('storageController',['$scope','$http','NgTableParams', function s
 				_token : $scope.csrf,
 				id: data.id
 			}).then((req)=>{
+				$mdToast.show(
+			        $mdToast.simple()
+			        .textContent('Đã xóa')
+			        .position('top right')
+		        	.hideDelay(3000)
+		        )
 				console.log(req);
 			})
 		}
 	}
 }])
 
-app.controller('operatingSystemController',['$scope','$http','NgTableParams', function operatingSystemController($scope,$http,NgTableParams){
+app.controller('operatingSystemController',['$scope','$http','NgTableParams','$mdToast', function operatingSystemController($scope,$http,NgTableParams,$mdToast){
 	this.$onInit = function() {
 	$scope.datas= [];
 	$http.get('admin/opoperating_systems_information').then((req) => {
@@ -196,6 +250,12 @@ app.controller('operatingSystemController',['$scope','$http','NgTableParams', fu
 				if( req.data ){
 					data.id = req.data.id;
 				}
+				$mdToast.show(
+			        $mdToast.simple()
+			        .textContent('Đã thêm')
+			        .position('top right')
+		        	.hideDelay(3000)
+		        )
 			})
 			data.new = true;
 		}else{
@@ -206,6 +266,12 @@ app.controller('operatingSystemController',['$scope','$http','NgTableParams', fu
 					id: data.id,
 					name: data.name
 				}).then((req)=>{
+					$mdToast.show(
+			        $mdToast.simple()
+			        .textContent('Đã thay đổi')
+			        .position('top right')
+		        	.hideDelay(3000)
+		        )
 					data.color = req.data.color;
 				})
 			}
@@ -222,13 +288,19 @@ app.controller('operatingSystemController',['$scope','$http','NgTableParams', fu
 				_token : $scope.csrf,
 				id: data.id
 			}).then((req)=>{
+				$mdToast.show(
+			        $mdToast.simple()
+			        .textContent('Đã xóa')
+			        .position('top right')
+		        	.hideDelay(3000)
+		        )
 				console.log(req);
 			})
 		}
 	}
 }])
 
-app.controller('brandController',['$scope','$http','NgTableParams', function brandController($scope,$http,NgTableParams){
+app.controller('brandController',['$scope','$http','NgTableParams','$mdToast', function brandController($scope,$http,NgTableParams,$mdToast){
 	this.$onInit = function() {
 	$scope.datas= [];
 	$http.get('admin/brand_information').then((req) => {
@@ -251,6 +323,12 @@ app.controller('brandController',['$scope','$http','NgTableParams', function bra
 				if( req.data ){
 					data.id = req.data.id;
 				}
+				$mdToast.show(
+			        $mdToast.simple()
+			        .textContent('Đã thêm')
+			        .position('top right')
+		        	.hideDelay(3000)
+		        )
 			})
 			data.new = true;
 		}else{
@@ -261,6 +339,12 @@ app.controller('brandController',['$scope','$http','NgTableParams', function bra
 					id: data.id,
 					name: data.name
 				}).then((req)=>{
+					$mdToast.show(
+				        $mdToast.simple()
+				        .textContent('Đã thay đổi')
+				        .position('top right')
+			        	.hideDelay(3000)
+			        )
 					data.color = req.data.color;
 				})
 			}
@@ -277,13 +361,19 @@ app.controller('brandController',['$scope','$http','NgTableParams', function bra
 				_token : $scope.csrf,
 				id: data.id
 			}).then((req)=>{
+				$mdToast.show(
+			        $mdToast.simple()
+			        .textContent('Đã xóa')
+			        .position('top right')
+		        	.hideDelay(3000)
+		        )
 				console.log(req);
 			})
 		}
 	}
 }])
 
-app.controller('productController',['$scope','$http','NgTableParams', function productController($scope,$http,NgTableParams){
+app.controller('productController',['$scope','$http','NgTableParams','$mdToast', function productController($scope,$http,NgTableParams,$mdToast){
 	var formData = new FormData();
 	this.$onInit = function() {
 		$scope.datas= [];
@@ -370,6 +460,12 @@ app.controller('productController',['$scope','$http','NgTableParams', function p
 	    	res.data.color_id = colorArray;
 	    	$scope.datas.unshift(res.data);
 	    	$scope.product = new NgTableParams({}, { dataset: $scope.datas});
+	    	$mdToast.show(
+			        $mdToast.simple()
+			        .textContent('Đã thêm')
+			        .position('top right')
+		        	.hideDelay(3000)
+		        )
 	    });
 		// $scope.datas.unshift({name:'',id: 'NULL',product: '0',new:false});
 		// $scope.brand = new NgTableParams({}, { dataset: $scope.datas});
@@ -420,6 +516,12 @@ app.controller('productController',['$scope','$http','NgTableParams', function p
 			    	data.links = res.data.links;
 			    	console.log(data);
 			    	console.log(res.data);
+			    	$mdToast.show(
+				        $mdToast.simple()
+				        .textContent('Đã thay đổi')
+				        .position('top right')
+			        	.hideDelay(3000)
+			        )
 			    });
 				// console.log(data.id);
 				// $http.post('admin/product_edit',{
@@ -442,6 +544,12 @@ app.controller('productController',['$scope','$http','NgTableParams', function p
 				_token : $scope.csrf,
 				id: data.id
 			}).then((req)=>{
+				$mdToast.show(
+			        $mdToast.simple()
+			        .textContent('Đã xóa')
+			        .position('top right')
+		        	.hideDelay(3000)
+		        )
 				console.log(req);
 			})
 		}
@@ -453,7 +561,7 @@ app.controller('productController',['$scope','$http','NgTableParams', function p
     };
 }]);
 
-app.controller('orderController',['$scope','$http','NgTableParams', function orderController($scope,$http,NgTableParams){
+app.controller('orderController',['$scope','$http','NgTableParams','$mdToast', function orderController($scope,$http,NgTableParams,$mdToast){
 	this.$onInit = function() {
 	$scope.datas= [];
 	$http.get('admin/order_information').then((req) => {
@@ -463,7 +571,7 @@ app.controller('orderController',['$scope','$http','NgTableParams', function ord
 	}
 }])
 
-app.controller('orderdetailController',['$scope','$http','NgTableParams', function orderdetailController($scope,$http,NgTableParams){
+app.controller('orderdetailController',['$scope','$http','NgTableParams','$mdToast', function orderdetailController($scope,$http,NgTableParams,$mdToast){
 	this.$onInit = function() {
 	$scope.datas= [];
 	$http.get('admin/orderdetail_information').then((req) => {
@@ -473,7 +581,7 @@ app.controller('orderdetailController',['$scope','$http','NgTableParams', functi
 	}
 }])
 
-app.controller('userController',['$scope','$http','NgTableParams', function userController($scope,$http,NgTableParams){
+app.controller('userController',['$scope','$http','NgTableParams','$mdToast', function userController($scope,$http,NgTableParams,$mdToast){
 	this.$onInit = function() {
 	$scope.datas= [];
 	$http.get('admin/user_information').then((req) => {
@@ -495,6 +603,12 @@ app.controller('userController',['$scope','$http','NgTableParams', function user
 			}).then((req)=>{
 				data.level = req.data;
 				console.log(req.data,data);
+				$mdToast.show(
+			        $mdToast.simple()
+			        .textContent('Đã thay đổi')
+			        .position('top right')
+		        	.hideDelay(3000)
+		        )
 			})
 		}
 		data.show = !data.show;
@@ -514,7 +628,7 @@ app.controller('userController',['$scope','$http','NgTableParams', function user
 	}
 }])
 
-app.controller('commentController',['$scope','$http','NgTableParams', function commentController($scope,$http,NgTableParams){
+app.controller('commentController',['$scope','$http','NgTableParams','$mdToast', function commentController($scope,$http,NgTableParams,$mdToast){
 	this.$onInit = function() {
 	$scope.datas= [];
 	$http.get('admin/comment_information').then((req) => {
@@ -563,14 +677,20 @@ app.controller('commentController',['$scope','$http','NgTableParams', function c
 				_token : $scope.csrf,
 				id: data.id
 			}).then((req)=>{
+				$mdToast.show(
+			        $mdToast.simple()
+			        .textContent('Đã xóa')
+			        .position('top right')
+		        	.hideDelay(3000)
+		        )
 				console.log(req);
 			})
 		}
 	}
 }])
 
-//chua xong
-app.controller('imageController',['$scope','$http','NgTableParams', function imageController($scope,$http,NgTableParams){
+
+app.controller('imageController',['$scope','$http','NgTableParams','$mdToast', function imageController($scope,$http,NgTableParams,$mdToast){
 	this.$onInit = function() {
 	$scope.datas= [];
 	$http.get('admin/image_information').then((req) => {
@@ -625,7 +745,7 @@ app.controller('imageController',['$scope','$http','NgTableParams', function ima
 	}
 }])
 
-app.controller('exController',['$scope','$http','NgTableParams', function exController($scope,$http,NgTableParams){
+app.controller('exController',['$scope','$http','NgTableParams','$mdToast', function exController($scope,$http,NgTableParams,$mdToast){
 	var formData = new FormData();
 	this.$onInit = function() {
 		$scope.datas= [];
@@ -659,6 +779,12 @@ app.controller('exController',['$scope','$http','NgTableParams', function exCont
 	    	document.getElementsByClassName('imagefile').value = '';
 	    	$scope.datas.unshift(res.data);
 	    	$scope.ex = new NgTableParams({}, { dataset: $scope.datas});
+	    	$mdToast.show(
+			        $mdToast.simple()
+			        .textContent('Đã thêm')
+			        .position('top right')
+		        	.hideDelay(3000)
+		        )
 	    });
 		// $scope.datas.unshift({name:'',id: 'NULL',product: '0',new:false});
 		// $scope.brand = new NgTableParams({}, { dataset: $scope.datas});
@@ -684,6 +810,12 @@ app.controller('exController',['$scope','$http','NgTableParams', function exCont
 			    	formData = new FormData();
 			    	data.image = res.data.image;
 	    			document.getElementsByClassName('imagefile').value = '';
+	    			$mdToast.show(
+			        $mdToast.simple()
+			        .textContent('Đã thay đổi')
+			        .position('top right')
+		        	.hideDelay(3000)
+		        )
 			    });
 			}
 			data.show = !data.show;
@@ -698,6 +830,12 @@ app.controller('exController',['$scope','$http','NgTableParams', function exCont
 				_token : $scope.csrf,
 				id: data.id
 			}).then((req)=>{
+				$mdToast.show(
+			        $mdToast.simple()
+			        .textContent('Đã xóa')
+			        .position('top right')
+		        	.hideDelay(3000)
+		        )
 				console.log(req);
 			})
 		}

@@ -1,4 +1,4 @@
-<!-- BREADCRUMB -->
+
 		<div id="breadcrumb" class="section">
 			<!-- container -->
 			<div class="container">
@@ -6,9 +6,8 @@
 				<div class="row">
 					<div class="col-md-12">
 						<ul class="breadcrumb-tree">
-							<li><a href="#">Home</a></li>
-							<li><a href="{{URL::to('store',$brand->id)}}">{{$brand->name}}</a></li>
-							<li class="active">{{$product->name}}</li>
+							<!-- <li><a href="#">Home</a></li> -->
+							<!-- <li class="active">{{$product->name}}</li> -->
 						</ul>
 					</div>
 				</div>
@@ -27,11 +26,12 @@
 					<!-- Product main img -->
 					<div class="col-md-5 col-md-push-2">
 						<div id="product-main-img">
-							<div class="product-preview">
-								<img src="./storage/{{$product->link}}" alt="">
-							</div>
+							@foreach($product->links as $link)
+								<div class="product-preview">
+									<img src="./storage/{{$link->link}}" alt="">
+								</div>
+								@endforeach
 
-							
 						</div>
 					</div>
 					<!-- /Product main img -->
@@ -39,21 +39,11 @@
 					<!-- Product thumb imgs -->
 					<div class="col-md-2  col-md-pull-5">
 						<div id="product-imgs">
-							<div class="product-preview">
-								<img src="./storage/{{$product->link}}" alt="">
-							</div>
-
-							<div class="product-preview">
-								<img src="./storage/{{$product->link}}" alt="">
-							</div>
-
-							<div class="product-preview">
-								<img src="./storage/{{$product->link}}" alt="">
-							</div>
-
-							<div class="product-preview">
-								<img src="./storage/{{$product->link}}" alt="">
-							</div>
+								@foreach($product->links as $link)
+								<div class="product-preview">
+									<img src="./storage/{{$link->link}}" alt="">
+								</div>
+								@endforeach
 						</div>
 					</div>
 					<!-- /Product thumb imgs -->
@@ -70,39 +60,32 @@
 									<i class="fa fa-star"></i>
 									<i class="fa fa-star-o"></i>
 								</div>
-								<a class="review-link" href="#">{{count($size_comment)}} Review(s)</a>
+								<a class="review-link" href="#">{{count($size_comment)}} Nhận xét(s)</a>
 							</div>
 							<div>
 								<h3 class="product-price">{{$product->price}}<del class="product-old-price"></del></h3>
-							<span class="product-available"> {{$product->quantity}} in Stock</span>
+							<span class="product-available"> {{$product->quantity}} Trong túi</span>
 							</div>
 						<p>{{$product->description}}</p>
 
-							<div class="product-options">
+							<!-- <div class="product-options">
 								<label>
 									Color
 									<select class="input-select">
 										<option value="0">Red</option>
 									</select>
 								</label>
-							</div>
+							</div> -->
 
 							<div class="add-to-cart">
-								<div class="qty-label">
-									Qty
-									<div class="input-number">
-										<input type="number" value="0" min-value='0'>
-										<span class="qty-up">+</span>
-										<span class="qty-down">-</span>
-									</div>
-								</div>
-								<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
+								<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> Thêm vào giỏ hàng</button>
+								<input type="hidden" value="{{$product->id}}">
 							</div>
 
-							<ul class="product-btns">
+							<!-- <ul class="product-btns">
 								<li><a href="#"><i class="fa fa-heart-o"></i> add to wishlist</a></li>
 								
-							</ul>
+							</ul> -->
 
 							
 
@@ -123,9 +106,9 @@
 						<div id="product-tab">
 							<!-- product tab nav -->
 							<ul class="tab-nav">
-								<li class="active"><a data-toggle="tab" href="#tab1">Description</a></li>
-								<li><a data-toggle="tab" href="#tab2">Details</a></li>
-								<li><a data-toggle="tab" href="#tab3">Reviews   </a></li>
+								<li class="active"><a data-toggle="tab" href="#tab1">Mô tả</a></li>
+								<li><a data-toggle="tab" href="#tab2">Chi tiết</a></li>
+								<li><a data-toggle="tab" href="#tab3">Nhận xét</a></li>
 							</ul>
 							<!-- /product tab nav -->
 
@@ -270,19 +253,9 @@
 										<div class="col-md-3">
 											<div id="review-form">
 												<form class="review-form" action="{{route('comment',$product->id)}}">
-													<input class="input" type="text" placeholder="Your Name" name="name">
-													<input class="input" type="email" placeholder="Your Email" name="email">
-													<textarea class="input" placeholder="Your Review" name="comment"></textarea>
-													<div class="input-rating">
-														<span>Your Rating: </span>
-														<div class="stars">
-															<input id="star5" name="rating" value="5" type="radio"><label for="star5"></label>
-															<input id="star4" name="rating" value="4" type="radio"><label for="star4"></label>
-															<input id="star3" name="rating" value="3" type="radio"><label for="star3"></label>
-															<input id="star2" name="rating" value="2" type="radio"><label for="star2"></label>
-															<input id="star1" name="rating" value="1" type="radio"><label for="star1"></label>
-														</div>
-													</div>
+													<input class="input" type="text" placeholder="Tên" name="name">
+													<input class="input" type="email" placeholder="Email" name="email">
+													<textarea class="input" placeholder="Nhận xét" name="comment" ></textarea>
 													<button class="primary-btn">Submit</button>
 												</form>
 											</div>
@@ -320,9 +293,9 @@
 					<div class="col-md-3 col-xs-6">
 						<div class="product">
 							<div class="product-img">
-								<img src="./storage/{{$product->link}}" alt="">
+								<img src="./storage/{{$product->links[0]->link}}" alt="">
 								<?php
-								if ($product->sale==1)
+								if ($product->sale > 0)
 								echo '<div class="product-label">
 									<span class="sale">Sale</span>
 								</div>';
@@ -335,9 +308,6 @@
 								<div class="product-rating">
 								</div>
 								<div class="product-btns">
-									<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
-									
-									<button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
 								</div>
 							</div>
 							<div class="add-to-cart">

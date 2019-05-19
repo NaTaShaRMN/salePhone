@@ -61,7 +61,7 @@
 										@foreach($brand->products as $product)
 											<div class="product">
 												<div class="product-img">
-													<img src="./storage/{{$product->link}}" alt="">
+													<img src="./storage/{{$product->links[0]->link}}" alt="">
 													<div class="product-label">
 														<span class="sale">{{$product->sale}}%</span>
 														<span class="new">New</span>
@@ -80,7 +80,7 @@
 													</div>
 												</div>
 												<div class="add-to-cart">
-													<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
+													<button class="add-to-cart-btn "><i class="fa fa-shopping-cart"></i> Thêm vào giỏ hàng</button>
 													<input type="hidden" value="{{$product->id}}">
 												</div>
 											</div>
@@ -179,7 +179,7 @@
 										<!-- product -->
 										<div class="product">
 											<div class="product-img">
-												<img src="/storage/{{$product->link}}" alt="">
+												<img src="/storage/{{$product->links[0]->link}}" alt="">
 												<div class="product-label">
 													<span class="sale">Sale</span>
 													<span class="new">NEW</span>
@@ -247,7 +247,7 @@
 								<div class="product-widget">
 									<a href="">
 									<div class="product-img">
-									<img src="/storage/{{$product->link}}" alt="">
+									<img src="/storage/{{$product->links[0]->link}}" alt="">
 									</div>
 									</a>
 									<div class="product-body">

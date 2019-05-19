@@ -15,6 +15,7 @@ $(document).ready(function() {
     	})
     	.success(function(data){
     		console.log(id);
+            swal('', "Đã thêm", "success");
     		$('#totall').text(data.total);
     	})
     	.always(function() {
@@ -34,6 +35,7 @@ $(document).ready(function() {
     	.success(function(data){
     		$('#qtytotal').text(data.count);
     		$('#totall').text(data.total);
+            swal('', "Đã xóa", "success");
     		console.log(data);
     	})
     	.always(function() {

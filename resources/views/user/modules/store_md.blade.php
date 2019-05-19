@@ -103,7 +103,7 @@
 							@foreach($topSelling_product as $product)
 							<div class="product-widget">
 							<a href="{{URL::to('product',$product->id)}}"><div class="product-img">
-									<img src="./storage/{{$product->link}}" alt="">
+									<img src="./storage/{{$product->links[0]->link}}" alt="">
 								</div>
 								<a>
 								<div class="product-body">
@@ -154,7 +154,7 @@
 							<div class="col-md-4 col-xs-6">
 								<div class="product">
 									<div class="product-img">
-										<img src="./storage/{{$product->link}}" alt="" width="262" height="262">
+										<img src="./storage/{{$product->links[0]->link}}" alt="" width="262" height="262">
 										<div class="product-label">
 											<?php
 												if ($product->sale > 0)
@@ -168,7 +168,7 @@
 									<div class="product-body">
 										<p class="product-category">Category</p>
 										<h3 class="product-name"><a href="{{URL::to('product',$product->id)}}">{{$product->name}}</a></h3>
-										<h4 class="product-price">{{$product->price}}đ<del class="product-old-price"></del></h4>
+										<h4 class="product-price">{{$product->price}} VNĐ<del class="product-old-price"></del></h4>
 										<div class="product-rating">
 											<i class="fa fa-star"></i>
 											<i class="fa fa-star"></i>
@@ -176,12 +176,12 @@
 											<i class="fa fa-star"></i>
 											<i class="fa fa-star"></i>
 										</div>
-										<div class="product-btns">
-											<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
-										</div>
 									</div>
 									<div class="add-to-cart">
-										<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
+										<button class="add-to-cart-btn" type="button">
+											<i class="fa fa-shopping-cart"></i> Thêm vào giỏ hàng
+										</button>
+										<input type="hidden" value="{{$product->id}}">
 									</div>
 								</div>
 							</div>
@@ -207,5 +207,4 @@
 			<!-- /container -->
 		</div>
 		<!-- /SECTION -->
-
 </form>

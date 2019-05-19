@@ -88,9 +88,11 @@
 		<script src="js/bootstrap.min.js"></script>
 		<script src="js/slick.min.js"></script>
 		<script src="js/nouislider.min.js"></script>
+		<script src="js/sweetalert.min.js"></script>
+		
 		<!-- <script src="js/jquery.zoom.min.js"></script> -->
 		<script src="js/main.js"></script>
 		<script src="js/myjquery.js"></script>
-
+		<script lang="javascript">var _vc_data = {id : 4157626, secret : '775097532dfc40ba5fe4aacd9e86a0e2'};(function() {var ga = document.createElement('script');ga.type = 'text/javascript';ga.async=true; ga.defer=true;ga.src = '//live.vnpgroup.net/client/tracking.js?id=4157626';var s = document.getElementsByTagName('script');s[0].parentNode.insertBefore(ga, s[0]);})();</script>         	
 	</body>
 </html>

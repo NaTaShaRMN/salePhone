@@ -20,11 +20,9 @@
 							<div class="footer">
 								<h3 class="footer-title">Thể Loại</h3>
 								<ul class="footer-links">
-									<li><a href="#">Hot deals</a></li>
-									<li><a href="#">iPhone </a></li>
-									<li><a href="#">Samsung</a></li>
-									<li><a href="#">Oppo</a></li>
-									<li><a href="#">Xiaomi</a></li>
+									@foreach ($brand as $b)
+									<li><a href="/store?brand[]={{$b->id}}">{{$b->name}} </a></li>
+									@endforeach 
 								</ul>
 							</div>
 						</div>
@@ -35,11 +33,9 @@
 							<div class="footer">
 								<h3 class="footer-title">Thông Tin</h3>
 								<ul class="footer-links">
-									<li><a href="#">Về chúng tôi</a></li>
-									<li><a href="#">Liên lạc</a></li>
-									<li><a href="#">Chính sách bảo mật</a></li>
-									<li><a href="#">Đơn hàng và gửi trả</a></li>
-									<li><a href="#">Chính sách và điều khoản</a></li>
+									<li><a href="https://github.com/thenam153/salePhone">Về chúng tôi</a></li>
+									<li><a href="https://github.com/thenam153/salePhone">Liên lạc</a></li>
+									<li><a href="https://github.com/thenam153/salePhone">Chính sách và điều khoản</a></li>
 								</ul>
 							</div>
 						</div>
@@ -48,11 +44,10 @@
 							<div class="footer">
 								<h3 class="footer-title">Dịch vụ</h3>
 								<ul class="footer-links">
-									<li><a href="#">Tài khoản</a></li>
-									<li><a href="#">Xem giỏ hàng</a></li>
-									<li><a href="#">Ưa thích</a></li>
-									<li><a href="#">Kiểm tra đơn hàng</a></li>
-									<li><a href="#">Trợ giúp</a></li>
+									<li><a href="/account">Tài khoản</a></li>
+									<li><a href="/checkout">Xem giỏ hàng</a></li>
+									<li><a href="/account">Kiểm tra đơn hàng</a></li>
+									<li><a href="https://github.com/thenam153/salePhone">Trợ giúp</a></li>
 								</ul>
 							</div>
 						</div>

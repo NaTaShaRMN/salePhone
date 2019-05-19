@@ -27,7 +27,8 @@
     <link href="assets/css/lib/vector-map/jqvmap.min.css" rel="stylesheet">
     
     <link rel="stylesheet" href="css/appme.css">
-    
+    <link rel="stylesheet" href="css/angular-material.min.css">
+   
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
     <!-- <link rel="stylesheet" href="css/dropzone.min.css"> -->
 <!--     <link rel="stylesheet" href="css/basic.min.css"> -->
@@ -67,16 +68,16 @@
   padding-top: 4px;
   padding-bottom: 4px;
 }
-    </style>
+</style>
         
     
 </head>
 <body>
-
+    
 
         <!-- Left Panel -->
 
-    <aside id="left-panel" class="left-panel">
+    <aside id="left-panel" class="left-panel" style=" ">
         <nav class="navbar navbar-expand-sm navbar-default">
 
             <div class="navbar-header">
@@ -84,17 +85,17 @@
                     <i class="fa fa-bars"></i>
                 </button>
                 <a class="navbar-brand" href="./"> {{ Auth::user()->name }}</a>
-                <a class="navbar-brand hidden" href="./">N</a>
+                <a class="navbar-brand hidden" href="./"></a>
             </div>
 
             <div id="main-menu" class="main-menu collapse navbar-collapse">
-                <ul class="nav navbar-nav">
+                <ul class="nav navbar-nav" >
                     <li class="active">
                         <a href="{{URL::to('admin/index')}}"> <i class="menu-icon fa fa-dashboard"></i>Trang chủ </a>
                     </li>
-                    <li class="menu-item-has-children dropdown">
+                    <li class="menu-item-has-children dropdown" ">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-laptop"></i>Thông số</a>
-                        <ul class="sub-menu children dropdown-menu">
+                        <ul class="sub-menu children dropdown-menu"  style="    overflow: hidden; font-weight: 400;">
                             <li><i class="fa fa-puzzle-piece"></i><a href="{{URL::to('admin/information/colors')}}">Màu sắc</a></li>
                             <li><i class="fa fa-id-badge"></i><a href="{{URL::to('admin/information/displays')}}">Màn hình</a></li>
                             <li><i class="fa fa-bars"></i><a href="{{URL::to('admin/information/storages')}}">Bộ nhớ</a></li>
@@ -127,11 +128,11 @@
                     </li>
 
                      <h3 class="menu-title">Quản lý website</h3><!-- /.menu-title -->
-                     <li>
+                     <!-- <li>
                         <a href="{{URL::to('admin/images')}}"> <i class="menu-icon ti-layout"></i>Quản lý hình ảnh </a>
-                    </li>
+                    </li> -->
                      <li>
-                        <a href="{{URL::to('admin/slides')}}"> <i class="menu-icon ti-layout"></i>Quản lý slide </a>
+                        <a href="{{URL::to('admin/exs')}}"> <i class="menu-icon ti-layout"></i>Quản lý tiện ích </a>
                     </li>
                 </ul>
             </div><!-- /.navbar-collapse -->
@@ -160,7 +161,7 @@
                             </form>
                         </div>
 
-                        <div class="dropdown for-notification">
+                        <!-- <div class="dropdown for-notification">
                           <button class="btn btn-secondary dropdown-toggle" type="button" id="notification" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="fa fa-bell"></i>
                             <span class="count bg-danger">5</span>
@@ -180,7 +181,7 @@
                                 <p>Server #3 overloaded.</p>
                             </a>
                           </div>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
 
@@ -191,9 +192,9 @@
                         </a>
 
                         <div class="user-menu dropdown-menu">
-                                <a class="nav-link" href="#"><i class="fa fa- user"></i>Trang cá nhân</a>
+                                <a class="nav-link" href="/account"><i class="fa fa- user"></i>Trang cá nhân</a>
 
-                                <a class="nav-link" href="#"><i class="fa fa -cog"></i>Cài đặt</a>
+                                <!-- <a class="nav-link" href="/"><i class="fa fa -cog"></i>Cài đặt</a> -->
 
                                 <a class="nav-link" href="/logout"><i class="fa fa-power -off"></i>Đăng xuất</a>
                         </div>
@@ -215,8 +216,131 @@
             </div>
         </div>
         
-       
+       <style>
+.dataTables_filter{
+  float: right;
+}
+.pull-right {
+    float: right!important;
+}
+.btn-group{
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+}
+.pagination {
+    /*display: inline-block;*/
+    padding-left: 0;
+    margin: 20px 0;
+    border-radius: 4px;
+}
+.pagination>li {
+    display: inline;
+}
 
+.pagination>li>a{
+    position: relative;
+    float: left;
+    padding: 6px 12px;
+    margin-left: -1px;
+    line-height: 1.428571429;
+    text-decoration: none;
+    background-color: #fff;
+    border: 1px solid #ddd;
+}
+
+.pagination>li:last-child>a{
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+}
+.pagination>li:first-child>a, .pagination>li:first-child>span {
+    margin-left: 0;
+    border-bottom-left-radius: 4px;
+    border-top-left-radius: 4px;
+}
+.btn-group>.btn:first-child:not(:last-child):not(.dropdown-toggle) {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+.btn-group>.btn-group:not(:last-child)>.btn, .btn-group>.btn:not(:last-child):not(.dropdown-toggle) {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+.btn-group>.btn:first-child {
+    margin-left: 0;
+}
+.btn:not([disabled]):not(.disabled).active, .btn:not([disabled]):not(.disabled):active {
+    background-image: none;
+}
+.btn {
+    display: inline-block;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 1.428571429;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    cursor: pointer;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+}
+.btn-default {
+    color: #333;
+    background-color: #fff;
+    border-color: #ccc;
+}
+.btn:not([disabled]):not(.disabled) {
+    cursor: pointer;
+}
+.btn-group>.btn, .btn-group-vertical>.btn {
+    position: relative;
+    float: left;
+}
+.btn-group .btn+.btn, .btn-group .btn+.btn-group, .btn-group .btn-group+.btn, .btn-group .btn-group+.btn-group {
+    margin-left: -1px;
+}
+.pagination>.active>a, .pagination>.active>span, .pagination>.active>a:hover, .pagination>.active>span:hover, .pagination>.active>a:focus, .pagination>.active>span:focus {
+    z-index: 2;
+    color: #fff;
+    cursor: default;
+    background-color: #428bca;
+    border-color: #428bca;
+}
+.pagination>li>a, .pagination>li>span {
+    position: relative;
+    float: left;
+    padding: 6px 12px;
+    margin-left: -1px;
+    line-height: 1.428571429;
+    text-decoration: none;
+    background-color: #fff;
+    border: 1px solid #ddd;
+}
+a {
+    color: #428bca;
+    text-decoration: none;
+}
+.btn-default:hover, .btn-default:focus, .btn-default:active, .btn-default.active, .open .dropdown-toggle.btn-default {
+    color: #333;
+    background-color: #ebebeb;
+    border-color: #adadad;
+}
+.btn:active, .btn.active {
+    background-image: none;
+    outline: 0;
+    -webkit-box-shadow: inset 0 3px 5px rgba(0,0,0,0.125);
+    box-shadow: inset 0 3px 5px rgba(0,0,0,0.125);
+}
+</style>
+    
         <div class="content mt-3">
                  @yield('content')
         </div> <!-- .content -->
@@ -277,6 +401,7 @@
     <script src="js/angular-messages.min.js"></script>
     <script src="js/angular-route.min.js"></script>
     <script src="js/angularjs-dropdown-multiselect.js"></script>
+    <script src="js/angular-material.min.js"></script>
     @yield('script')
     
 

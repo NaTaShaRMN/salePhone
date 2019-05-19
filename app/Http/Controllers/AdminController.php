@@ -28,6 +28,14 @@ class AdminController extends Controller
       date_default_timezone_set('Asia/Ho_Chi_Minh');
 	}
     //
+   public function index(){
+      $pro = Product::count();
+      $user = User::count();
+      $or = Order::count();
+      $cm = Comment::count();
+      return view('admin.index',compact('pro','user','or','cm'));
+   }
+
    	public function color(Request $request)
    	{
    		$color = new Color();
@@ -89,9 +97,9 @@ class AdminController extends Controller
    		if($request->size != '' && trim($request->size) != ''){
    			$display->size = $request->size;
    			$display->save();
-   			return $size;
+   			return $display;
    		}else {
-   			return $size;
+   			return $display;
    		}
    	}	
 
@@ -127,9 +135,9 @@ class AdminController extends Controller
    		if($request->size != '' && trim($request->size) != ''){
    			$storage->size = $request->size;
    			$storage->save();
-   			return $size;
+   			return $request->size;
    		}else {
-   			return $size;
+   			return $request->size;
    		}
    	}	
 
@@ -166,9 +174,9 @@ class AdminController extends Controller
    		if($request->name != '' && trim($request->name) != ''){
    			$op->name = $request->name;
    			$op->save();
-   			return $size;
+   			return $op;
    		}else {
-   			return $size;
+   			return $op;
    		}
    	}	
 
@@ -216,9 +224,9 @@ class AdminController extends Controller
    		if($request->name != '' && trim($request->name) != ''){
    			$brand->name = $request->name;
    			$brand->save();
-   			return $size;
+   			return $brand;
    		}else {
-   			return $size;
+   			return $brand;
    		}
    	}	
 
@@ -454,7 +462,7 @@ class AdminController extends Controller
       public function orderInformation(){
          $orders = Order::all();
          foreach ($orders as $value) {
-            $value->user_name = User::find($value->user_id)->username;
+            $value->user_name = User::find($value->user_id)->name;
          }
          return $orders;
       }
@@ -464,7 +472,7 @@ class AdminController extends Controller
       public function orderdetailInformation(){
          $orderdetails = Orderdetail::all();
          foreach ($orderdetails as $value) {
-            $value->product_name = Product::find($value->id)->name;
+            $value->product_name = Product::find($value->product_id)->name;
          }
          return $orderdetails;
       }
