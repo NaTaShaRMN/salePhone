@@ -138,7 +138,7 @@
 										0 @endif</h5>
 										</div>
 										<div class="cart-btns" style="margin: auto;">
-											<a href="#" style="    width: 100%;">Thanh toán  <i class="fa fa-arrow-circle-right"></i></a>
+											<a href="/checkout" style="    width: 100%;">Thanh toán  <i class="fa fa-arrow-circle-right"></i></a>
 										</div>
 									</div>
 								</div>

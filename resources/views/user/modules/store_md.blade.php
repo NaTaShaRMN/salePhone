@@ -168,7 +168,7 @@
 									<div class="product-body">
 										<p class="product-category">Category</p>
 										<h3 class="product-name"><a href="{{URL::to('product',$product->id)}}">{{$product->name}}</a></h3>
-										<h4 class="product-price">{{$product->price}} VNĐ<del class="product-old-price"></del></h4>
+										<h4 class="product-price">{{number_format($product->price)}} VNĐ<del class="product-old-price"></del></h4>
 										<div class="product-rating">
 											<i class="fa fa-star"></i>
 											<i class="fa fa-star"></i>

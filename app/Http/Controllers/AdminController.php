@@ -212,9 +212,9 @@ class AdminController extends Controller
       // ->groupBy('brands.name')
       // ->get();
 
-	      // foreach ($brands as $value) {
-	      //    $value['product'] = $value->product()->get()->count();
-	      //    }
+	      foreach ($brands as $value) {
+	         $value['product'] = $value->product()->get()->count();
+	         }
       return $brands;
    	}
 

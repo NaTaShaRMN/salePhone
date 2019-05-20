@@ -138,7 +138,7 @@
 								</li>
 							</ul> -->
 							<h2 class="text-uppercase">{{$silde->text}}</h2>
-							<a class="primary-btn cta-btn" href="{{$silde->link}}">Shop now</a>
+							<a class="primary-btn cta-btn" href="{{$silde->link}}">Mua nhanh hết giờ</a>
 						</div>
 					</div>
 				</div>
